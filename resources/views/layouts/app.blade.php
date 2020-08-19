@@ -18,6 +18,7 @@
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
         <link type="text/css" href="{{ mix('css/main/app.css') }}" rel="stylesheet">
+        @notifyCss
         <style>
             .main-content{
                 position: relative;
@@ -25,6 +26,9 @@
                 
             }
         </style>
+
+        @stack('css')
+
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -38,14 +42,15 @@
             @include('layouts.navbars.navbar')
             @yield('content')
         </div>
-
+        
         @guest()
             @include('layouts.footers.guest')
         @endguest
-
+        @include('notify::messages')
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        
+        @notifyJs
+
         @stack('js')
         
         <!-- Argon JS -->

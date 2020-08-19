@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,4 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
+
+Route::resource('/certidao-batismo','Painel\Certidoes\CertidaoBatismoController');
+Route::resource('/notificacao-certidao-batismo','Painel\Certidoes\NotificacaoCertidaoBatismoController');
+Route::get('/certidao/{certidao}/{id}/{finalidade?}','Painel\Certidoes\ActionsCertidao@emitir')->name('certidao.emitir');
 
