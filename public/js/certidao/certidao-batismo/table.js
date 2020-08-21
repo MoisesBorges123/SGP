@@ -51694,6 +51694,7 @@ __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jque
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 
+var finalidades = buscaFinalidade();
 var myTable = $('#certidoesTable').DataTable({
   "searching": true,
   "ordering": true,
@@ -51781,38 +51782,160 @@ $(document).on('click', '.btn-delete', /*#__PURE__*/_asyncToGenerator( /*#__PURE
   }, _callee, this);
 })));
 $(document).on('click', '.btn-emitir', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var emitir;
+  var obs, finalidade, emitir;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          obs = createTextarea('observacao', 'Observações', 'Informações adicionais', '');
+          _context2.next = 3;
+          return createSelect('finalidade', 'Finalidade', finalidades);
+
+        case 3:
+          finalidade = _context2.sent;
+          console.log(finalidade.input);
+          _context2.next = 7;
           return Swal.fire({
             title: 'Para qual é a finalidade desse certidão?',
             icon: 'question',
-            html: "<label>Finalidade:</label><input name='finalidade' id='id_finalidade' class='form-control'/>",
+            html: "<div class='row'>" + "<div class='col-12 text-left'>" + finalidade.label + finalidade.input + "</div>" + "<div class='col-12 text-left'>" + obs.label + obs.input + "</div>" + "</div>",
             confirmButtonText: 'Emitir!',
             cancelButtonText: 'Sair.',
-            showCancelButton: true
+            showCancelButton: true,
+            preConfirm: function preConfirm() {
+              if ($('#id_finalidade').val() == '') {
+                return false;
+              }
+            }
           });
 
-        case 2:
+        case 7:
           emitir = _context2.sent;
 
           if (emitir.value) {
-            window.open($(this).data('url') + "/" + $('#id_finalidade').val(), '_blank');
+            window.open($(this).data('url') + "/" + $('#id_finalidade').val() + "/" + $('#id_observacao').val(), '_blank');
           }
 
           return _context2.abrupt("return", false);
 
-        case 5:
+        case 10:
         case "end":
           return _context2.stop();
       }
     }
   }, _callee2, this);
 })));
-$('document').ready(function () {});
+
+function buscaFinalidade() {
+  return _buscaFinalidade.apply(this, arguments);
+}
+
+function _buscaFinalidade() {
+  _buscaFinalidade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var dados;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch($('meta[name="url-search-finalidades"]').attr('content'), {
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              method: 'GET',
+              credentials: 'same-origin'
+            }).then(function (result) {
+              if (result.ok) {
+                return result.json();
+              }
+            });
+
+          case 2:
+            dados = _context3.sent;
+            return _context3.abrupt("return", dados);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _buscaFinalidade.apply(this, arguments);
+}
+
+function createInput(name, label, type, required) {
+  var id = "id_" + name;
+  var input = "<input name='" + name + "' id='" + id + "' type='" + type + "' required='" + required + "' class='form-control'/>";
+  var lbl = "<label>" + label + "</label>";
+  var campo = {};
+  campo = {
+    label: lbl,
+    input: input
+  };
+  return campo;
+}
+
+function createTextarea(name, label, placeholder, classes) {
+  var id = "id_" + name;
+  var input = "<textarea max name='" + name + "' id='" + id + "' maxlength='80' class='form-control" + classes + "' rows='6' placeholder='" + placeholder + "'></textarea>";
+  var lbl = "<label> " + label + " </label>";
+  var campo = {};
+  campo = {
+    label: lbl,
+    input: input
+  };
+  return campo;
+}
+
+function createSelect(_x, _x2, _x3) {
+  return _createSelect.apply(this, arguments);
+}
+
+function _createSelect() {
+  _createSelect = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, label, dados) {
+    var classes,
+        id,
+        input,
+        select,
+        lbl,
+        campo,
+        _args4 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            classes = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : '';
+            id = "id_" + name;
+            input = "<select name='" + name + "' id='" + id + "' class='form-control " + classes + "'/>";
+            _context4.next = 5;
+            return dados.then(function (result) {
+              $.each(result, function (i, result) {
+                input = input + "<option value='" + result.value + "'>" + result.option + "</option>";
+              });
+              input = input + "</select>";
+              return input;
+            });
+
+          case 5:
+            select = _context4.sent;
+            lbl = "<label>" + label + "</label>";
+            campo = {};
+            campo = {
+              label: lbl,
+              input: select
+            };
+            return _context4.abrupt("return", campo);
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _createSelect.apply(this, arguments);
+}
 
 /***/ }),
 

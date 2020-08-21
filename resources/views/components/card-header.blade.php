@@ -3,7 +3,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-8">
-                <h5 class="card-title text-uppercase text-muted mb-0">{!! $headerText ?? ''!!}</h5>
+                <h5 class="card-title text-uppercase text-muted mb-0">
+                    <a href="{{$url ?? ''}}">
+                        {!! $headerText ?? ''!!}
+                    </a>
+                </h5>
                     <span class="h2 font-weight-bold mb-0">{{$headerNumber ?? ''}}</span>
                 </div>
                 <div class="col-4">

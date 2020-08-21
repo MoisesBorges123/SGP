@@ -12,7 +12,8 @@
                         color="{{  $card['color']  }}"   
                         footerNumber=""
                         footerIcon=""
-                        footerText="" >
+                        footerText="" 
+                        url="{{$card['url']}}">
                     </x-card-header>
                 @endforeach
             </div>

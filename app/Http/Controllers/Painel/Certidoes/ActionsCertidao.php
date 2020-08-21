@@ -21,9 +21,10 @@ class ActionsCertidao extends Controller
         date_default_timezone_set('America/Sao_Paulo');
         setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     }
-    public function emitir($certidao,$id,$finalidade = false){
+    public function emitir($certidao,$id,$fim_certidao,$obs){
         if($certidao = 'batizado'){
             $registro = DB::table('certidao_batismo')->where('id',$id)->first();
+            $finalidade = DB::table('finalidades_certidao')->where('id',$fim_certidao)->first();
             $crianca = PessoasController::show($registro->crianca);
             $pai = PessoasController::show($registro->pai);
             $mae = PessoasController::show($registro->mae);
@@ -51,10 +52,16 @@ class ActionsCertidao extends Controller
                 'livro'=>$registro->livro,
                 'folha'=>$registro->folha,
                 'numero'=>'-',
-                'obs'=>empty($finalidade) ? '-' : $finalidade
+                'finalidade'=>$finalidade->finalidade,
+                'obs'=>empty($obs) ? '' : $obs,
 
             );
-            
+            $notify = array(
+                'finalidade'=>$finalidade->id,
+                'certidao'=>$registro->id,
+                'created_at'=>date('Y-m-d H:i:s',time())
+            );
+            $this->notifCertBatismo($notify);
             $this->emitirCertBatismo2($dados);
         }
     }
@@ -120,6 +127,7 @@ class ActionsCertidao extends Controller
         $pdf = new Fpdf();       
         $pdf::AddPage('P','A4');
         $pdf::SetFont("Arial","B",12);
+        $pdf::SetTitle('Certidão Batismo - '.$dados['crianca'],true);
         $pdf::Image("images/certidao/certdao_batismo4.png",0,0,210);
         $pdf::SetXY(65,92.3);
         $pdf::Cell(28.7,20,$dados['livro'],0,1,'L');
@@ -160,27 +168,35 @@ class ActionsCertidao extends Controller
         $pdf::SetXY(132,193.4);
         $pdf::Cell(15,10,utf8_decode($dados['mes_atual']),0,1,'C');
         $pdf::SetXY(156,193.4);
-        $pdf::Cell(15,10,utf8_decode($dados['ano_atual']),0,1,'L');
-        if($dados['obs']){
-            $pdf::SetXY(40,162.55);
-            $pdf::Cell(15,10,utf8_decode($dados['obs']),0,1,'L');
-        }
-        $pdf::Output();
+        $pdf::Cell(15,10,utf8_decode($dados['ano_atual']),0,1,'L');        
+        $pdf::SetXY(40,162.55);
+        $pdf::Cell(15,10,utf8_decode($dados['finalidade']).'.',0,1,'L');
+        $pdf::SetFont("Arial","B",9.5);
+        $pdf::SetXY(30.93,167.5);                
+        $pdf::Cell(15,10,utf8_decode($dados['obs']).'.',0,1,'L');
+  
+        $pdf::Output('I','Certidão Batismo - '.$dados['crianca'],true);
         exit;
         
         
     }
-    private function nortifCertBatismo($notify){
-        $lastNotify = DB::table('notificacoes_batismo')
-        ->where('texto','like',$notify)
-        ->last();
-        $lastDate = date('Y-m-d',strtotime($lastNotify->create_at));
-        if($lastDate != date('Y-m-d',time())){
-            $dados = array(
-                
-            );
-            DB::table('notificacoes_batismo')->insert($dados);
+    private function notifCertBatismo($notify){
+        $lastNotify = DB::table('emissa_cert_batismo')
+        ->where('finalidade','like',$notify['finalidade'])
+        ->where('certidao','like',$notify['certidao'])
+        ->latest();
+        if(!empty($lastNotify->id)){
+            $lastDate = date('Y-m-d',strtotime($lastNotify->create_at));
+            if($lastDate != date('Y-m-d',time())){            
+                $operacao = DB::table('emissa_cert_batismo')->insert($notify);
+            }else{
+                $operacao = DB::table('emissa_cert_batismo')->update($notify);
+            }
+            
+        }else{
+            $operacao = DB::table('emissa_cert_batismo')->insert($notify);
         }
+        return $operacao;
     }
 
 }

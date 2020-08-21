@@ -27,6 +27,7 @@ class CertidaoBatismoController extends Controller
                 'headerNumber'=> $totalBatizados,
                 'bodyIcon'=>'<i class="fas fa-chart-bar"></i>',
                 'color'=>'bg-danger',
+                'url'=>route('certidao-batismo.filter',1)
                 
             ],
             [
@@ -34,18 +35,21 @@ class CertidaoBatismoController extends Controller
                 'headerNumber'=>$totalRegistros,
                 'bodyIcon'=>'<i class="fas fa-chart-pie"></i>',
                 'color'=>'bg-warning',
+                'url'=>''
             ],
             [
                 'headerText'=>'Livros Digitalizados',
                 'headerNumber'=>$totalLivrosDigitais,
                 'bodyIcon'=>'<i class="fas fa-users"></i>',
                 'color'=>'bg-yellow',
+                'url'=>''
             ],
             [
                 'headerText'=>'Registros Inconsistentes',
                 'headerNumber'=>$totalRegIncosistente,
                 'bodyIcon'=>'<i class="fas fa-percent"></i>',
                 'color'=>'bg-info',
+                'url'=>route('certidao-batismo.filter',2)
             ]           
             
         );
@@ -120,10 +124,43 @@ class CertidaoBatismoController extends Controller
         }     
         return view('certidoes.certidao-batismo.table',compact('dados','header'));
     }
+    public function filter($filter)
+    {        
+        $header=$this->header();
+        if($filter  == 1){
+            $certidoes=count($this->certidao->where('data_batizado','like',date('Y',time()).'-%')->orderBy('id','desc')->get())>0 ? $this->certidao->where('data_batizado','like',date('Y',time()).'-%')->orderBy('id','desc')->get() : null;
+            
+        }else if($filter==2){
+            $certidoes=count($this->certidao->where('duvidoso','=','1')->orderBy('id','desc')->get())>0 ? $this->certidao->where('duvidoso','=','1')->orderBy('id','desc')->get() : null;
+            
+        }else{
+            return redirect()->route('certidao-batismo.index');
+        }
 
+        if(!empty($certidoes)){
+            foreach($certidoes as $certidao){                    
+                $crianca=DB::table('pessoas')->where('id',$certidao->crianca)->first();
+                $pai=DB::table('pessoas')->where('id',$certidao->pai)->first();
+                $mae=DB::table('pessoas')->where('id',$certidao->mae)->first();
+                $madrinha=DB::table('pessoas')->where('id',$certidao->madrinha)->first();
+                $padrinho=DB::table('pessoas')->where('id',$certidao->padrinho)->first();
+                $dados[] =[
+                    'crianca'=>$crianca->nome,
+                    'pai'=>empty($pai->nome) ? 'Não possui' : $pai->nome,
+                    'mae'=>empty($mae->nome) ? 'Não possui' : $mae->nome,
+                    'padrinho'=>empty($padrinho->nome) ? 'Não possui' : $padrinho->nome,
+                    'madrinha'=>empty($madrinha->nome) ? 'Não possui' : $madrinha->nome,                    
+                    'id'=>$certidao->id
+                ];
+            }
+        }else{
+            $dados=null;
+        }     
+        return view('certidoes.certidao-batismo.table',compact('dados','header'));
+    }
     public function create()
     {
-        //
+        
         $header=$this->header();
         $certidoes=count($this->certidao->orderBy('id','desc')->take(10)->get())>0 ? $this->certidao->orderBy('id','desc')->take(10)->get() : null;
         $ultimos = false;

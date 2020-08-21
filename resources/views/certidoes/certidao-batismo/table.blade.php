@@ -9,7 +9,7 @@
             <div class="col">
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <div class="row align-items-center">
+                        <div class="row align-items-center ">
                             <div class="col-8">
                                 <h3 class="mb-0">Batizados Registrados</h3>
                                 
@@ -93,9 +93,10 @@
 	<script src="{{asset('admin/form-steps/js/jquery-ui.min.js')}}"></script>
 	<script src="{{asset('admin/form-steps/js/main.js')}}"></script>
 	<script src="{{asset('admin/form-steps/js/main.js')}}"></script>
-	<script src="{{mix('js/certidao/certidao-batismo/table.js')}}"></script>
+    <script src="{{mix('js/certidao/certidao-batismo/table.js')}}"></script>    
 @endpush
 @push('css')
+    <meta name="url-search-finalidades" content="{{ route('finalidades-certidao.index') }}">
     <!-- Font-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/opensans-font.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/roboto-font.css')}}">

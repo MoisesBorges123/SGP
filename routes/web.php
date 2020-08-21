@@ -31,7 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+Route::get('/dashboard/certidao-batismo/{filter}','Painel\Certidoes\CertidaoBatismoController@filter')->name('certidao-batismo.filter');
 Route::resource('/certidao-batismo','Painel\Certidoes\CertidaoBatismoController');
 Route::resource('/notificacao-certidao-batismo','Painel\Certidoes\NotificacaoCertidaoBatismoController');
-Route::get('/certidao/{certidao}/{id}/{finalidade?}','Painel\Certidoes\ActionsCertidao@emitir')->name('certidao.emitir');
+Route::resource('/finalidades-certidao','Painel\Certidoes\FinalidadesCertController');
+Route::get('/certidao/{certidao}/{id}/{finalidade?}/{obs?}','Painel\Certidoes\ActionsCertidao@emitir')->name('certidao.emitir');
 
