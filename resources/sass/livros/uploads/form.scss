@@ -1,0 +1,33 @@
+@import '~cropperjs/dist/cropper.css';
+@import '~lightbox2/dist/css/lightbox.css';
+#image-header{
+    
+  background-repeat: initial;
+  background-image: url(../img/system/wallpaper/header/old-book.jpg); 
+  background-size: 100%;
+  background-position: inherit;
+  background-position-y: center;
+}
+.label {
+    cursor: pointer;
+  }
+
+  .progress {
+    display: none;
+    margin-bottom: 1rem;
+  }
+
+  .alert {
+    display: none;
+  }
+
+  .img-container img {
+    max-width: 100%;
+  }
+  
+  .col-12 label{
+      opacity: 0.4;
+  }
+  .col-12 label:hover{
+      opacity: 1.0;
+  }

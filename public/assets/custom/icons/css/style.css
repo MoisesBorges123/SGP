@@ -1,0 +1,192 @@
+/*--------------------------------
+
+custom-icons Web Font
+Generated using nucleoapp.com
+
+-------------------------------- */
+@font-face {
+  font-family: 'custom-icons';
+  src: url('../fonts/custom-icons.eot');
+  src: url('../fonts/custom-icons.eot') format('embedded-opentype'), url('../fonts/custom-icons.woff2') format('woff2'), url('../fonts/custom-icons.woff') format('woff'), url('../fonts/custom-icons.ttf') format('truetype'), url('../fonts/custom-icons.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/*------------------------
+	base class definition
+-------------------------*/
+.icones {
+  display: inline-block;
+  font: normal normal normal 1em/1 'custom-icons';
+  /*speak: none;*/
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*------------------------
+  change icon size
+-------------------------*/
+/* relative units */
+.icones{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.icones-sm {
+  font-size: 0.8rem;
+}
+.icones-lg {
+  font-size: 1.2rem;
+}
+/* absolute units */
+.icones-16 {
+  font-size: 16px;
+}
+.icones-32 {
+  font-size: 32px;
+}
+/*----------------------------------
+  add a square/circle background
+-----------------------------------*/
+.icones-bg-square,
+.icones-bg-circle {
+  padding: 0.35em;
+  background-color: #eee;
+}
+.icones-bg-circle {
+  border-radius: 50%;
+}
+/*------------------------------------
+  use icons as list item markers
+-------------------------------------*/
+.icones-ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.icones-ul > li {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.icones-ul > li > .icones {
+  margin-right: 0.4em;
+  line-height: inherit;
+}
+/*------------------------
+  spinning icons
+-------------------------*/
+.icones-is-spinning {
+  -webkit-animation: icones-spin 2s infinite linear;
+  -moz-animation: icones-spin 2s infinite linear;
+  animation: icones-spin 2s infinite linear;
+}
+@-webkit-keyframes icones-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes icones-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@keyframes icones-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*------------------------
+  rotated/flipped icons
+-------------------------*/
+.icones-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.icones-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.icones-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.icones-flip-y {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.icones-flip-x {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+/*------------------------
+	icons
+-------------------------*/
+
+.icones-ic_delete_forever_48px::before {
+  content: "\ea05";
+}
+
+.icones-ic_backup_48px::before {
+  content: "\ea0b";
+}
+
+.icones-eye-19::before {
+  content: "\ea0c";
+}
+
+.icones-ic_local_see_48px::before {
+  content: "\ea0d";
+}
+
+.icones-pencil::before {
+  content: "\ea0e";
+}
+
+.icones-preferences::before {
+  content: "\ea0f";
+}
+
+.icones-settings-gear-63::before {
+  content: "\ea10";
+}
+
+.icones-archive-2::before {
+  content: "\ea11";
+}
+

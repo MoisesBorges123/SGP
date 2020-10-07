@@ -51878,7 +51878,7 @@ function createInput(name, label, type, required) {
 
 function createTextarea(name, label, placeholder, classes) {
   var id = "id_" + name;
-  var input = "<textarea max name='" + name + "' id='" + id + "' maxlength='80' class='form-control" + classes + "' rows='6' placeholder='" + placeholder + "'></textarea>";
+  var input = "<textarea max name='" + name + "' id='" + id + "' maxlength='80' class='form-control" + classes + "' rows='4' placeholder='" + placeholder + "'></textarea>";
   var lbl = "<label> " + label + " </label>";
   var campo = {};
   campo = {
@@ -51937,6 +51937,24 @@ function _createSelect() {
   return _createSelect.apply(this, arguments);
 }
 
+function fill_datatable() {
+  var filter_book = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var dataTable = $('#certidoesTable').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order": [],
+    "searching": false,
+    "ajax": {
+      url: $('meta[name="url-search-book"').attr('content'),
+      type: "POST",
+      data: {
+        _token: _token,
+        filter_book: filter_book
+      }
+    }
+  });
+}
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
@@ -51983,10 +52001,65 @@ function _createSelect() {
 
 /***/ }),
 
+/***/ "./resources/sass/livros/paginas/details.scss":
+/*!****************************************************!*\
+  !*** ./resources/sass/livros/paginas/details.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/livros/paginas/form.scss":
+/*!*************************************************!*\
+  !*** ./resources/sass/livros/paginas/form.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/livros/paginas/table.scss":
+/*!**************************************************!*\
+  !*** ./resources/sass/livros/paginas/table.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/livros/table.scss":
+/*!******************************************!*\
+  !*** ./resources/sass/livros/table.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/livros/uploads/form.scss":
+/*!*************************************************!*\
+  !*** ./resources/sass/livros/uploads/form.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/certidoes/certidao-batismo/table.js ./resources/sass/app.scss ./resources/sass/certidao/certidao-batismo/table.scss ./resources/sass/certidao/certidao-batismo/details.scss ./resources/sass/certidao/certidao-batismo/form.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/certidoes/certidao-batismo/table.js ./resources/sass/app.scss ./resources/sass/certidao/certidao-batismo/table.scss ./resources/sass/certidao/certidao-batismo/details.scss ./resources/sass/certidao/certidao-batismo/form.scss ./resources/sass/livros/table.scss ./resources/sass/livros/paginas/form.scss ./resources/sass/livros/paginas/table.scss ./resources/sass/livros/paginas/details.scss ./resources/sass/livros/uploads/form.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51994,7 +52067,12 @@ __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\certidoe
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-batismo\table.scss */"./resources/sass/certidao/certidao-batismo/table.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-batismo\details.scss */"./resources/sass/certidao/certidao-batismo/details.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-batismo\form.scss */"./resources/sass/certidao/certidao-batismo/form.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-batismo\form.scss */"./resources/sass/certidao/certidao-batismo/form.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\table.scss */"./resources/sass/livros/table.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\paginas\form.scss */"./resources/sass/livros/paginas/form.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\paginas\table.scss */"./resources/sass/livros/paginas/table.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\paginas\details.scss */"./resources/sass/livros/paginas/details.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\uploads\form.scss */"./resources/sass/livros/uploads/form.scss");
 
 
 /***/ })

@@ -1,12 +1,12 @@
 import PerfectScrollbar from 'perfect-scrollbar';
 
-
+/*
 const ps2 = new PerfectScrollbar('.navbar', {
     wheelSpeed: 2,
     wheelPropagation: true,
     minScrollbarLength: 20
 });
-
+*/
 async function notificacao_certidao(url,notificacao){
     var form = new FormData();
     form.append('texto',notificacao)

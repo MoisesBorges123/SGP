@@ -1,9 +1,19 @@
 {
-    "/js/certidao/certidao-batismo/table.js": "/js/certidao/certidao-batismo/table.js?id=e4765339581bda4ab9c8",
-    "/css/main/app.css": "/css/main/app.css?id=5118e45a4a8892320676",
+    "/admin/livros/js/table.js": "/admin/livros/js/table.js?id=1da7a0c74e95c478ecc0",
+    "/admin/livros/paginas/js/details.js": "/admin/livros/paginas/js/details.js?id=a283d64661a07a40695a",
+    "/admin/livros/paginas/js/form.js": "/admin/livros/paginas/js/form.js?id=83dbdd332c092b6fb2b2",
+    "/admin/livros/paginas/js/table.js": "/admin/livros/paginas/js/table.js?id=1fdab91e2c5c83f84bd8",
+    "/admin/livros/uploads/js/form.js": "/admin/livros/uploads/js/form.js?id=3d8b564dffee0d053e88",
+    "/js/certidao/certidao-batismo/table.js": "/js/certidao/certidao-batismo/table.js?id=a829e4d3e1897f3be051",
+    "/css/main/app.css": "/css/main/app.css?id=70f1c27ffebfbd9f8f57",
     "/admin/certidao-batismo/table.css": "/admin/certidao-batismo/table.css?id=fa11f75c89ecc55cc0ef",
     "/admin/certidao-batismo/details.css": "/admin/certidao-batismo/details.css?id=faefbcaed3bde1295202",
     "/admin/certidao-batismo/form.css": "/admin/certidao-batismo/form.css?id=a042c5d9f1c24e2cd4ca",
-    "/js/main/app.js": "/js/main/app.js?id=938fd1f3bd800640828f",
+    "/admin/livros/css/table.css": "/admin/livros/css/table.css?id=bcc35fc9b83adb94204d",
+    "/admin/livros/paginas/css/form.css": "/admin/livros/paginas/css/form.css?id=d41d8cd98f00b204e980",
+    "/admin/livros/paginas/css/table.css": "/admin/livros/paginas/css/table.css?id=bcc35fc9b83adb94204d",
+    "/admin/livros/paginas/css/details.css": "/admin/livros/paginas/css/details.css?id=d41d8cd98f00b204e980",
+    "/admin/livros/uploads/css/form.css": "/admin/livros/uploads/css/form.css?id=9f932527108bd9048d0d",
+    "/js/main/app.js": "/js/main/app.js?id=253a952882925af345cb",
     "/admin/certidao-batismo/form-styles.css": "/admin/certidao-batismo/form-styles.css?id=f298d73acfec8016fe63"
 }

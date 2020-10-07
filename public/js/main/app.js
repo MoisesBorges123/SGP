@@ -2230,11 +2230,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var ps2 = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__["default"]('.navbar', {
-  wheelSpeed: 2,
-  wheelPropagation: true,
-  minScrollbarLength: 20
+/*
+const ps2 = new PerfectScrollbar('.navbar', {
+    wheelSpeed: 2,
+    wheelPropagation: true,
+    minScrollbarLength: 20
 });
+*/
 
 function notificacao_certidao(_x, _x2) {
   return _notificacao_certidao.apply(this, arguments);

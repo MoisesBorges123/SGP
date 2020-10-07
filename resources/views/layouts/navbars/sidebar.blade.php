@@ -90,12 +90,12 @@
             <h6 class="navbar-heading text-muted">Registros</h6>
             <ul class="navbar-nav">     
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Certidões Batismo') }}</span>
+                    <a class="nav-link active text-default" href="#registros" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-archive-2"></i>
+                        <span class="nav-link-text text-primary">{{ __('Certidões Batismo') }}</span>
                     </a>
 
-                    <div class="collapse " id="navbar-examples">
+                    <div class="collapse " id="registros">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('certidao-batismo.create') }}">
@@ -107,6 +107,49 @@
                                     {{ __('Batizados Registrados') }}
                                 </a>
                             </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-default" href="#registros-crisma" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-archive-2"></i>
+                        <span class="nav-link-text text-primary">{{ __('Certidões Crisma') }}</span>
+                    </a>
+
+                    <div class="collapse " id="registros-crisma">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('certidao-crisma.create') }}">
+                                    {{ __('Registrar Crisma') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('certidao-crisma.index') }}">
+                                    {{ __('Crismas Registradas') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+
+            </ul>
+            
+            <ul class="navbar-nav">     
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#livros" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-books"></i>
+                        <span class="nav-link-text text-primary">{{ __('Livros') }}</span>
+                    </a>
+
+                    <div class="collapse " id="livros">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('livros.index') }}">
+                                    {{ __('Meus Livros') }}
+                                </a>
+                            </li>
+                           
                         </ul>
                     </div>
                 </li>
