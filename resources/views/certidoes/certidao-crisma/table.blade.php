@@ -4,7 +4,17 @@
     @include('layouts.headers.cards',["header"=>$header])
     
     <div class="container-fluid mt--7">
-     
+        <div class="row">
+            <div class="col-12">
+                @if(session('alert'))
+                    <div class="alert">
+                        <div class="alert-info">
+                            {{session('alert')}} 
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <div class="card shadow">
@@ -37,6 +47,7 @@
                             </thead>
                             <tbody>
                                 @foreach($dados as $dado)
+                           
                                     <tr>
                                         <th scope="row">                                           
                                         <span class="name mb-0 text-sm">{{$dado['crismando']}}</span>                                                
@@ -50,6 +61,9 @@
                                         <td>
                                             <span>{{$dado['padrinho']}}</span>                        
                                         </td>
+                                        <td>
+                                            <span>{{$dado['data_crisma']}}</span>                        
+                                        </td>
                                         
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -57,10 +71,12 @@
                                                   <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item"  href="{{route('certidao-crisma.show',$dado['id'])}}">Registro Completo</a>
-                                                <a class="dropdown-item btn-emitir" href="{{route('certidao-crisma.export',$dados['id'])}}">Emitir</a>                                                    
-                                                <a class="dropdown-item" href="{{route('certidao-crisma.edit',$dado['id'])}}">Editar</a>
-                                                <a class="dropdown-item btn-delete" data-url="{{route('certidao-crisma.destroy',$dado['id'])}}" href="#">Excluir</a>
+                                   
+                                                    <a class="dropdown-item"  href="{{route('certidao-crisma.show',$dado['id'])}}">Registro Completo</a>
+                                                    <a class="dropdown-item btn-emitir" href="{{route('certidao-crisma.export',$dado['id'])}}">Emitir</a>                                                    
+                                                    <a class="dropdown-item" href="{{route('certidao-crisma.edit',$dado['id'])}}">Editar</a>
+                                                    <a class="dropdown-item btn-delete" data-url="{{route('certidao-crisma.destroy',$dado['id'])}}" href="#">Excluir</a>
+                                                    -
                                                 </div>
                                             </div>
                                         </td>
@@ -79,30 +95,15 @@
         </div>
 
         @include('layouts.footers.auth')
-    </div>
+    </d>
 @endsection
 
 @push('js')
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-    <script src="{{asset('admin/form-steps/js/jquery-3.3.1.min.js')}}"></script>
-	<script src="{{asset('admin/form-steps/js/jquery.steps.js')}}"></script>
-	<script src="{{asset('admin/form-steps/js/jquery-ui.min.js')}}"></script>
-	<script src="{{asset('admin/form-steps/js/main.js')}}"></script>
-	<script src="{{asset('admin/form-steps/js/main.js')}}"></script>
-    <script src="{{mix('js/certidao/certidao-batismo/table.js')}}"></script>    
+       <script src="{{mix('js/certidao/certidao-crisma/table.js')}}"></script>    
 @endpush
 @push('css')
-    <meta name="url-search-finalidades" content="{{ route('finalidades-certidao.index') }}">
-    <!-- Font-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/opensans-font.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/roboto-font.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
-    <!-- datepicker -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/jquery-ui.min.css')}}">
-    <!-- Main Style Css -->
-    <link rel="stylesheet" href="{{asset('admin/form-steps/css/style.css')}}"/>
-    <link rel="stylesheet" href="{{mix('admin/certidao-batismo/table.css')}}"/>
+    <meta name="url-search-finalidades" content="{{ route('finalidades-certidao.index') }}">   
+    <link rel="stylesheet" href="{{mix('admin/certidao-crisma/table.css')}}"/>
 
     <style>
         .col-12{

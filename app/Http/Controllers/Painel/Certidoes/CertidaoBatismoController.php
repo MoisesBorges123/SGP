@@ -59,27 +59,32 @@ class CertidaoBatismoController extends Controller
     private function pessoaUpdate($pessoas,$certidao){
         $dados = [
             [
-                'data_nascimento'=>$pessoas['data_nascimento'],
+                'chave'=>'crianca',
                 'nome'=>$pessoas['crianca'],
                 'id'=>$certidao->crianca,                
             ],
             [
+                'chave'=>'pai',
                 'nome'=>$pessoas['pai'],
                 'id'=>$certidao->pai,
             ],
             [
+                'chave'=>'mae',
                 'nome'=>$pessoas['mae'],
                 'id'=>$certidao->mae,
             ],
             [
+                'chave'=>'madrinha',
                 'nome'=>$pessoas['madrinha'],
                 'id'=>$certidao->madrinha,
             ],
             [
+                'chave'=>'padrinho',
                 'nome'=>$pessoas['padrinho'],
                 'id'=>$certidao->padrinho
             ],
             [
+                'chave'=>'celebrante',
                 'nome'=>$pessoas['celebrante'],
                 'id'=>$certidao->celebrante
             ]
@@ -90,9 +95,10 @@ class CertidaoBatismoController extends Controller
             if(!empty($pessoa['nome']) && !empty($pessoa['id'])){
                 $fnPessoa->update($pessoa);
             }else{
-                $insert=$fnPessoa->store($pessoa);
-                //dd($insert['insert']->id);exit;                
-                DB::table('certidao_batismo')->where('id',$certidao->id)->update(['celebrante'=>$insert['insert']->id]);
+                if(!empty($pessoa['nome'])){
+                    $insert=$fnPessoa->store($pessoa);                   
+                    DB::table('certidao_batismo')->where('id',$certidao->id)->update(["'".$pessoa['chave']."'"=>$insert['insert']->id]);                    
+                }
             }
         }  
              
@@ -362,8 +368,7 @@ class CertidaoBatismoController extends Controller
         //
         $delete = $this->certidao->find($id)->delete();
        
-        if($delete){     
-            echo"Entrou!!!";
+        if($delete){                 
             return true;
         }else{
             return false;

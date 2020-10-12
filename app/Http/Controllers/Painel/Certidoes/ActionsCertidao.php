@@ -21,6 +21,9 @@ class ActionsCertidao extends Controller
         date_default_timezone_set('America/Sao_Paulo');
         setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     }
+    public function exportCrisma($id){
+
+    }    
     public function emitir($certidao,$id,$fim_certidao,$obs){
         if($certidao = 'batizado'){
             $registro = DB::table('certidao_batismo')->where('id',$id)->first();

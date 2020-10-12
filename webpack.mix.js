@@ -11,16 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/certidoes/certidao-batismo/table.js', 'public/js/certidao/certidao-batismo')
-    .js('resources/js/app.js', 'public/js/main')
-    .sass('resources/sass/app.scss', 'public/css/main')
-    /**
-     * SCRIPS QUE AFETAM A PARTE DO REGISTRO DE CERTIDÕES
-     */
-    .sass('resources/sass/certidao/certidao-batismo/table.scss', 'public/admin/certidao-batismo/')
-    .sass('resources/sass/certidao/certidao-batismo/details.scss', 'public/admin/certidao-batismo/')
-    .sass('resources/sass/certidao/certidao-batismo/form.scss', 'public/admin/certidao-batismo/')
-    .styles('resources/css/certidao-batismo/form-styles.css','public/admin/certidao-batismo/form-styles.css')
+mix
+.js('resources/js/app.js', 'public/js/main')
+.sass('resources/sass/app.scss', 'public/css/main')
+/**
+ * SCRIPS QUE AFETAM A PARTE DO REGISTRO DE CERTIDÕES
+ */
+//BATISMA
+.sass('resources/sass/certidao/certidao-batismo/table.scss', 'public/admin/certidao-batismo/')
+.sass('resources/sass/certidao/certidao-batismo/details.scss', 'public/admin/certidao-batismo/')
+.sass('resources/sass/certidao/certidao-batismo/form.scss', 'public/admin/certidao-batismo/')
+.styles('resources/css/certidao-batismo/form-styles.css','public/admin/certidao-batismo/form-styles.css')
+.js('resources/js/certidoes/certidao-batismo/table.js', 'public/js/certidao/certidao-batismo')
+//CRISMA
+.sass('resources/sass/certidao/certidao-crisma/table.scss', 'public/admin/certidao-crisma/')
+.sass('resources/sass/certidao/certidao-crisma/details.scss', 'public/admin/certidao-crisma/')
+.sass('resources/sass/certidao/certidao-crisma/form.scss', 'public/admin/certidao-crisma/')
+.styles('resources/css/certidao-crisma/form-styles.css','public/admin/certidao-crisma/form-styles.css')
+.js('resources/js/certidoes/certidao-crisma/table.js', 'public/js/certidao/certidao-crisma')
     /**
      * SCRIPS PARA MANIPULAR LIVROS DE REGISTRO DE SACRAMENTOS
      */

@@ -48,3 +48,4 @@ Route::resource('/livros','Painel\Livros\LivrosController');
 
 //Rotas para crição e emissão de registros de crisma
 Route::resource('/certidao-crisma','Painel\Certidoes\CertidaoCrismaController');
+Route::get('/certidao-crisma/export/{id}','Painel\Certidoes\ActionsCertidao@emitirCertCrisma')->name('certidao-crisma.export');

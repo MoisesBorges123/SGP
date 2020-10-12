@@ -23,6 +23,9 @@ const myTable = $('#certidoesTable').DataTable({
         },
         //"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json",
     },
+    /**
+     * CÓDIGO PARA EMBELAZAR A BARRA DE ROLAGEM VERTICAL     *
+      
     scrollY: "500px",        
           
     scrollCollapse: !0,
@@ -34,6 +37,7 @@ const myTable = $('#certidoesTable').DataTable({
     "fnDrawCallback": function (oSettings) {        
         const ps = new PerfectScrollbar('.dataTables_scrollBody');
     },
+   */
   
 });
 $(document).on('click','.btn-delete', async function(){

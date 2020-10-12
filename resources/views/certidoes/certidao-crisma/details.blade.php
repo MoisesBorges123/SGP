@@ -3,8 +3,8 @@
 
 @section('content')
 @include('layouts.headers.header', [
-    'title' => __('Meu Batismo') . ' ',
-    'description' => 'Batizado de '.$dados['crianca'],
+    'title' => __('Minha Crisma') . ' ',
+    'description' => 'Crisma de '.$dados['crismando'],
     'class' => 'col-lg-7'
 ])
     
@@ -20,7 +20,7 @@
                                 
                             </div>
                             <div class="col-3 text-right">
-                            <a href="{{route('certidao-batismo.index')}}" class="btn btn-sm btn-primary"> 
+                            <a href="{{route('certidao-crisma.index')}}" class="btn btn-sm btn-primary"> 
                                 <i class="ni ni-bold-left"></i> Voltar
                              </a>
                             </div>
@@ -32,24 +32,20 @@
                                 <div class='row' id="dados">                            
                                     <div class="col-md-12">
                                         <label>Nome:</label>
-                                        <span>{{$dados['crianca']}}</span>
-                                    </div>
+                                        <span>{{$dados['crismando']}}</span>
+                                    </div>                                   
                                     <div class="col-md-4 col-sm-6">
-                                        <label>Nasceu em:</label>
-                                        <span>{{$dados['nascimento']}}</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <label>Batizou em:</label>
-                                        <span>{{$dados['batizado']}}</span>
+                                        <label>Crismou em:</label>
+                                        <span>{{$dados['data_crisma']}}</span>
                                     </div>
                                     <div class="col-md-12"></div>
                                     <div class="col-md-4 col-sm-6">
                                         <label>Livro:</label>
-                                        <span>{{$dados['batizado']}}</span>
+                                        <span>{{$dados['livro']}}</span>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <label>Pagina:</label>
-                                        <span>{{$dados['batizado']}}</span>
+                                        <span>{{$dados['pagina']}}</span>
                                     </div>
                                     <div class='col-md-12 subtitle'>
                                         <h4>Filho(a) de:</h4>
@@ -61,22 +57,15 @@
                                     <div class='col-12'>
                                         <label>Mãe:</label>
                                         <span>{{$dados['mae']}}</span>
-                                    </div>
-                                    <div class='col-md-12 subtitle'>
-                                        <h4>Foram padrinhos:</h4>
-                                    </div>
+                                    </div>                                   
                                     <div class="col-md-12">
                                         <label>Padrinho:</label>
                                         <span>{{$dados['padrinho']}}</span>                        
-                                    </div>
-                                    <div class='col-md-12'>
-                                        <label>Madrinha</label>
-                                        <span>{{$dados['madrinha']}}</span>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div class="col-md-4">                                
-                                <img src="{{asset('img/system/vetor_baptism.png')}}" alt="">                                
+                                <img src="{{asset('img/system/vetor_crisma.png')}}" alt="">                                
                             </div>
                         </div>
                     </div>
@@ -112,5 +101,5 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/form-steps/css/jquery-ui.min.css')}}">
     <!-- Main Style Css -->
     <link rel="stylesheet" href="{{asset('admin/form-steps/css/style.css')}}"/>
-    <link rel="stylesheet" href="{{mix('admin/certidao-batismo/details.css')}}"/>
+    <link rel="stylesheet" href="{{mix('admin/certidao-crisma/details.css')}}"/>
 @endpush

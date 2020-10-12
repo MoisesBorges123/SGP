@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dc364211a49066adab6bddb3e8a6b1b",
+    "content-hash": "5be9f46a7519316e8028f2885ec3681e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1437,20 +1437,20 @@
         },
         {
             "name": "mckenziearts/laravel-notify",
-            "version": "v1.1.2",
+            "version": "v2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mckenziearts/laravel-notify.git",
-                "reference": "aa66ae440f5b2b9a8aa35def9a9cafe498264d6f"
+                "reference": "1511bb97cf9ce4c3562caf6f3785eb55bad822a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mckenziearts/laravel-notify/zipball/aa66ae440f5b2b9a8aa35def9a9cafe498264d6f",
-                "reference": "aa66ae440f5b2b9a8aa35def9a9cafe498264d6f",
+                "url": "https://api.github.com/repos/mckenziearts/laravel-notify/zipball/1511bb97cf9ce4c3562caf6f3785eb55bad822a6",
+                "reference": "1511bb97cf9ce4c3562caf6f3785eb55bad822a6",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0|~6.0|~7.0",
+                "illuminate/support": "^7.0|^8.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -1484,7 +1484,7 @@
                 {
                     "name": "Arthur Monney",
                     "email": "monneylobe@gmail.com",
-                    "homepage": "https://arthurmonney.com",
+                    "homepage": "https://twitter.com/MonneyArthur",
                     "role": "Developer"
                 }
             ],
@@ -1492,9 +1492,10 @@
             "homepage": "https://github.com/mckenziearts/laravel-notify",
             "keywords": [
                 "laravel",
-                "laravel-notify"
+                "laravel-notify",
+                "notification"
             ],
-            "time": "2020-02-22T00:53:36+00:00"
+            "time": "2020-09-12T06:14:18+00:00"
         },
         {
             "name": "monolog/monolog",
