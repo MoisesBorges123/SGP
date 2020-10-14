@@ -29,6 +29,12 @@ mix
 .sass('resources/sass/certidao/certidao-crisma/form.scss', 'public/admin/certidao-crisma/')
 .styles('resources/css/certidao-crisma/form-styles.css','public/admin/certidao-crisma/form-styles.css')
 .js('resources/js/certidoes/certidao-crisma/table.js', 'public/js/certidao/certidao-crisma')
+//CASAMENTO
+.sass('resources/sass/certidao/certidao-casamento/table.scss', 'public/admin/certidao-casamento/')
+.sass('resources/sass/certidao/certidao-casamento/details.scss', 'public/admin/certidao-casamento/')
+.sass('resources/sass/certidao/certidao-casamento/form.scss', 'public/admin/certidao-casamento/')
+.styles('resources/css/certidao-casamento/form-styles.css','public/admin/certidao-casamento/form-styles.css')
+.js('resources/js/certidoes/certidao-casamento/table.js', 'public/js/certidao/certidao-casamento')
     /**
      * SCRIPS PARA MANIPULAR LIVROS DE REGISTRO DE SACRAMENTOS
      */

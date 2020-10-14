@@ -15,10 +15,10 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel-frontend-presets/argon": "^1.1",
         "laravel/framework": "^7.22.2",
-        "laravel/socialite": "^4.4",
+        "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "mckenziearts/laravel-notify": "^2.1",
+        "mckenziearts/laravel-notify": "1.*",
         "orangehill/iseed": "^2.6"
     },
     "require-dev": {

@@ -45,9 +45,11 @@ class PessoasController extends Controller
             }else{
                 $insert = $existe;
             }
-            return array('validated'=>'ok','insert'=>$insert);
+           // return array('validated'=>'ok','insert'=>$insert);
+           return $insert;
         }else{
-            return array('validated'=>false,'errors'=>$validated);
+            return $validated;
+            //return array('validated'=>false,'errors'=>$validated);
         }
     }
 

@@ -2336,6 +2336,39 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 /***/ }),
 
+/***/ "./resources/sass/certidao/certidao-casamento/details.scss":
+/*!*****************************************************************!*\
+  !*** ./resources/sass/certidao/certidao-casamento/details.scss ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/certidao/certidao-casamento/form.scss":
+/*!**************************************************************!*\
+  !*** ./resources/sass/certidao/certidao-casamento/form.scss ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/certidao/certidao-casamento/table.scss":
+/*!***************************************************************!*\
+  !*** ./resources/sass/certidao/certidao-casamento/table.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/certidao/certidao-crisma/details.scss":
 /*!**************************************************************!*\
   !*** ./resources/sass/certidao/certidao-crisma/details.scss ***!
@@ -2425,9 +2458,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/certidao/certidao-batismo/table.scss ./resources/sass/certidao/certidao-batismo/details.scss ./resources/sass/certidao/certidao-batismo/form.scss ./resources/sass/certidao/certidao-crisma/table.scss ./resources/sass/certidao/certidao-crisma/details.scss ./resources/sass/certidao/certidao-crisma/form.scss ./resources/sass/livros/table.scss ./resources/sass/livros/paginas/form.scss ./resources/sass/livros/paginas/table.scss ./resources/sass/livros/paginas/details.scss ./resources/sass/livros/uploads/form.scss ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/certidao/certidao-batismo/table.scss ./resources/sass/certidao/certidao-batismo/details.scss ./resources/sass/certidao/certidao-batismo/form.scss ./resources/sass/certidao/certidao-crisma/table.scss ./resources/sass/certidao/certidao-crisma/details.scss ./resources/sass/certidao/certidao-crisma/form.scss ./resources/sass/certidao/certidao-casamento/table.scss ./resources/sass/certidao/certidao-casamento/details.scss ./resources/sass/certidao/certidao-casamento/form.scss ./resources/sass/livros/table.scss ./resources/sass/livros/paginas/form.scss ./resources/sass/livros/paginas/table.scss ./resources/sass/livros/paginas/details.scss ./resources/sass/livros/uploads/form.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2439,6 +2472,9 @@ __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certid
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-crisma\table.scss */"./resources/sass/certidao/certidao-crisma/table.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-crisma\details.scss */"./resources/sass/certidao/certidao-crisma/details.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-crisma\form.scss */"./resources/sass/certidao/certidao-crisma/form.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-casamento\table.scss */"./resources/sass/certidao/certidao-casamento/table.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-casamento\details.scss */"./resources/sass/certidao/certidao-casamento/details.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\certidao\certidao-casamento\form.scss */"./resources/sass/certidao/certidao-casamento/form.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\table.scss */"./resources/sass/livros/table.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\paginas\form.scss */"./resources/sass/livros/paginas/form.scss");
 __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\sass\livros\paginas\table.scss */"./resources/sass/livros/paginas/table.scss");

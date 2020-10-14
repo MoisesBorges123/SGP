@@ -115,20 +115,23 @@ class CertidaoCrismaController extends Controller
         $padrinho = !empty($r_padrinho) ? $pessoa->store($r_padrinho) : null;
 
         $dados = array(
-            'crismando'=>$crismando['insert']->id,
-            'pai'=>!empty($pai['insert']->id) ? $pai['insert']->id : null,
-            'mae'=>!empty($mae['insert']->id) ? $mae['insert']->id : null,
-            'padrinho'=>!empty($padrinho['insert']->id) ? $padrinho['insert']->id : null,
+            'crismando'=>$crismando->id,
+            'pai'=>!empty($pai->id) ? $pai->id : null,
+            'mae'=>!empty($mae->id) ? $mae->id : null,
+            'padrinho'=>!empty($padrinho->id) ? $padrinho->id : null,
             'livro'=>$request->input('livro'),
             'folha'=>$request->input('folha'),
             'data_crisma'=>$request->input('data_crisma'),
+            'duvidoso'=> empty($request->input('duvidoso')) ? false : $request->input('duvidoso')
         );
 
         $insert = $this->certidaoCrisma->create($dados);
         if($insert){
-            return redirect()->route('certidao-crisma.index')->with('alert','Registro salvo com sucesso!!');
+            notify()->success('Registro salvo com sucesso!!');
+            return redirect()->route('certidao-crisma.index');
         }else{
-            return redirect()->route('certidao-crisma.create')->with('alert','Registro salvo com sucesso!!');
+            notify()->error('Ocorreu um erro ao salvar os dados.');
+            return redirect()->route('certidao-crisma.create');
 
         }
     }
@@ -204,7 +207,8 @@ class CertidaoCrismaController extends Controller
             return false;
         }
     }
-    private function pessoaUpdate($pessoas,$certidao){
+    private function pessoaUpdate($pessoas,$certidao)
+    {
         $dados = [
             [
                 'chave'=>'crismando',
@@ -235,7 +239,7 @@ class CertidaoCrismaController extends Controller
             }else{
                 if(!empty($pessoa['nome'])){
                     $insert=$fnPessoa->store($pessoa);                   
-                    DB::table('certidao_crisma')->where('id',$certidao->id)->update(["'".$pessoa['chave']."'"=>$insert['insert']->id]);                    
+                    DB::table('certidao_crisma')->where('id',$certidao->id)->update(["'".$pessoa['chave']."'"=>$insert->id]);                    
                 }
             }
         }  

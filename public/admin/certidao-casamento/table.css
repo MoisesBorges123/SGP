@@ -1,0 +1,42 @@
+.dataTables_filter {
+  margin-bottom: 3rem;
+  margin-right: 1.5rem;
+}
+
+.thead-light th {
+  color: var(--default) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+}
+
+.dataTables_filter label {
+  display: flex !important;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  width: 100%;
+  margin-right: 1.5rem;
+}
+
+.dataTables_filter label i {
+  margin: auto;
+  padding-bottom: 0.8rem;
+  margin-right: 0.2rem;
+  font-size: 1.5rem;
+}
+
+.dataTables_filter label i,
+.dataTables_filter label span {
+  padding-bottom: 0.5rem;
+}
+
+.dataTables_filter label input {
+  margin: auto;
+  margin-left: 1rem;
+  margin-right: auto;
+  border-radius: 1rem;
+  border: 2px solid;
+  color: var(--dark);
+  border-color: var(--primary);
+}
+

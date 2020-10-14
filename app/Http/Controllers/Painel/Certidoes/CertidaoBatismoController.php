@@ -97,7 +97,7 @@ class CertidaoBatismoController extends Controller
             }else{
                 if(!empty($pessoa['nome'])){
                     $insert=$fnPessoa->store($pessoa);                   
-                    DB::table('certidao_batismo')->where('id',$certidao->id)->update(["'".$pessoa['chave']."'"=>$insert['insert']->id]);                    
+                    DB::table('certidao_batismo')->where('id',$certidao->id)->update(["'".$pessoa['chave']."'"=>$insert->id]);                    
                 }
             }
         }  
@@ -219,26 +219,22 @@ class CertidaoBatismoController extends Controller
     
              $pessoas = array(
                  'crianca' =>$pessoa->store($crianca),
-                 'pai'=>!empty($pai['nome']) ? $pessoa->store($pai) : ['insert'=>'N'],
-                 'mae'=>!empty($mae['nome']) ? $pessoa->store($mae) : ['insert'=>'N'],
-                 'madrinha'=>!empty($madrinha['nome']) ? $pessoa->store($madrinha) : ['insert'=>'N'],
-                 'padrinho'=>!empty($padrinho['nome']) ? $pessoa->store($padrinho) : ['insert'=>'N'],
-                 'celebrante'=>!empty($celebrante['nome']) ? $pessoa->store($celebrante) : ['insert'=>'N'],
+                 'pai'=>!empty($pai['nome']) ? $pessoa->store($pai) :null,
+                 'mae'=>!empty($mae['nome']) ? $pessoa->store($mae) : null,
+                 'madrinha'=>!empty($madrinha['nome']) ? $pessoa->store($madrinha) : null,
+                 'padrinho'=>!empty($padrinho['nome']) ? $pessoa->store($padrinho) : null,
+                 'celebrante'=>!empty($celebrante['nome']) ? $pessoa->store($celebrante) : null,
              );
              //dd($pessoas);exit();
-             foreach($pessoas as $cadastro){
-                 if(empty($cadastro['insert'])){                    
-                     return redirect()->back()->withErrors($cadastro['errors'])->withInput();
-                 }
-             }           
-             
+                       
+             //extract($pessoas);
              $dados  =  array(
-                 'crianca'=>$pessoas['crianca']['insert']->id,
-                 'mae'=>$pessoas['mae']['insert']!='N' ? $pessoas['mae']['insert']->id : null,
-                 'pai'=>$pessoas['pai']['insert']!='N' ? $pessoas['pai']['insert']->id : null,
-                 'padrinho'=>$pessoas['padrinho']['insert']!='N' ? $pessoas['padrinho']['insert']->id : null,
-                 'madrinha'=>$pessoas['madrinha']['insert']!='N' ? $pessoas['madrinha']['insert']->id : null,
-                 'celebrante'=>$pessoas['celebrante']['insert']!='N' ? $pessoas['celebrante']['insert']->id : null,
+                 'crianca'=>$pessoas['crianca']->id,
+                 'mae'=>!empty($pessoas['mae']->id) ? $pessoas['mae']->id : null,
+                 'pai'=>!empty($pessoas['pai']->id) ? $pessoas['pai']->id : null,
+                 'padrinho'=>!empty($pessoas['padrinho']->id)  ? $pessoas['padrinho']->id : null,
+                 'madrinha'=>!empty($pessoas['madrinha']->id)  ? $pessoas['madrinha']->id : null,
+                 'celebrante'=>!empty($pessoas['celebrante']->id) ? $pessoas['celebrante']->id : null,
                  'livro'=>$request->input('livro'),
                  'folha'=>$request->input('folha'),
                  'data_batizado'=>$request->input('data_batizado'),
@@ -249,8 +245,9 @@ class CertidaoBatismoController extends Controller
              $insert = $this->certidao->create($dados);
              if($insert){
                  notify()->success('Registro salvo com sucesso');
-                 return redirect()->back();
+                 return redirect()->route('certidao-batismo.index');
              }else{
+                notify()->error('Ocorreu um erro ao salvar este registro.');
                  return redirect()->back()->withInput();
  
              }

@@ -92,7 +92,7 @@
                 <li class="nav-item">
                     <a class="nav-link active text-default" href="#registros" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                         <i class="ni ni-archive-2"></i>
-                        <span class="nav-link-text text-primary">{{ __('Certidões Batismo') }}</span>
+                        <span class="nav-link-text text-primary">{{ __('Batismo') }}</span>
                     </a>
 
                     <div class="collapse " id="registros">
@@ -113,7 +113,7 @@
                 <li class="nav-item">
                     <a class="nav-link active text-default" href="#registros-crisma" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                         <i class="ni ni-archive-2"></i>
-                        <span class="nav-link-text text-primary">{{ __('Certidões Crisma') }}</span>
+                        <span class="nav-link-text text-primary">{{ __('Crisma') }}</span>
                     </a>
 
                     <div class="collapse " id="registros-crisma">
@@ -126,6 +126,27 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('certidao-crisma.index') }}">
                                     {{ __('Crismas Registradas') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-default" href="#registros-casamento" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-archive-2"></i>
+                        <span class="nav-link-text text-primary">{{ __('Casamento') }}</span>
+                    </a>
+
+                    <div class="collapse " id="registros-casamento">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('certidao-casamento.create') }}">
+                                    {{ __('Registrar Casamento') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('certidao-casamento.index') }}">
+                                    {{ __('Casamentos Registrados') }}
                                 </a>
                             </li>
                         </ul>

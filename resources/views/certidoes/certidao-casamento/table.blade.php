@@ -10,11 +10,11 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center ">
                             <div class="col-8">
-                                <h3 class="mb-0">Crismas Registradas</h3>
+                                <h3 class="mb-0">Casamentos Registradas</h3>
                                 
                             </div>
                             <div class="col-4 text-right">
-                            <a href="{{route('certidao-crisma.create')}}" class="btn btn-sm btn-primary">Registrar Crisma</a>
+                            <a href="{{route('certidao-casamento.create')}}" class="btn btn-sm btn-primary">Registrar Crisma</a>
                             </div>
                         </div>
                     </div>
@@ -26,11 +26,10 @@
                         <table class="table align-items-center table-flush" id='certidoesTable'>
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Crismando</th>
-                                    <th scope="col">Pai</th>
-                                    <th scope="col">Mãe</th>
-                                    <th scope="col">Padrinho / Madrinha</th>                                    
-                                    <th scope="col">Data Crisma</th>                                    
+                                    <th scope="col">Noivo</th>
+                                    <th scope="col">Noiva</th>
+                                    <th scope="col">Data do Casamento</th>
+                                    <th scope="col">Celebrante</th>                                                                        
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -39,20 +38,17 @@
                            
                                     <tr>
                                         <th scope="row">                                           
-                                        <span class="name mb-0 text-sm">{{$dado['crismando']}}</span>                                                
+                                        <span class="name mb-0 text-sm">{{$dado['noivo']}}</span>                                                
                                         </th>
                                         <td class="budget">
-                                            <span>{{$dado['pai']}}</span>
+                                            <span>{{$dado['noiva']}}</span>
                                         </td>
                                         <td>
-                                            <span>{{$dado['mae']}}</span>
+                                            <span>{{$dado['data_casamento']}}</span>
                                         </td>
                                         <td>
-                                            <span>{{$dado['padrinho']}}</span>                        
-                                        </td>
-                                        <td>
-                                            <span>{{$dado['data_crisma']}}</span>                        
-                                        </td>
+                                            <span>{{$dado['celebrante']}}</span>                        
+                                        </td>                                       
                                         
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -61,10 +57,10 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                    
-                                                    <a class="dropdown-item"  href="{{route('certidao-crisma.show',$dado['id'])}}">Registro Completo</a>
-                                                    <a class="dropdown-item btn-emitir" href="{{route('certidao-crisma.export',$dado['id'])}}">Emitir</a>                                                    
-                                                    <a class="dropdown-item" href="{{route('certidao-crisma.edit',$dado['id'])}}">Editar</a>
-                                                    <a class="dropdown-item btn-delete" data-url="{{route('certidao-crisma.destroy',$dado['id'])}}" href="#">Excluir</a>
+                                                    <a class="dropdown-item"  href="{{route('certidao-casamento.show',$dado['id'])}}">Registro Completo</a>
+                                                    <a class="dropdown-item btn-emitir" href="{{route('certidao-casamento.export',$dado['id'])}}">Emitir</a>                                                    
+                                                    <a class="dropdown-item" href="{{route('certidao-casamento.edit',$dado['id'])}}">Editar</a>
+                                                    <a class="dropdown-item btn-delete" data-url="{{route('certidao-casamento.destroy',$dado['id'])}}" href="#">Excluir</a>
                                                     -
                                                 </div>
                                             </div>
@@ -88,11 +84,11 @@
 @endsection
 
 @push('js')
-       <script src="{{mix('js/certidao/certidao-crisma/table.js')}}"></script>    
+       <script src="{{mix('js/certidao/certidao-casamento/table.js')}}"></script>    
 @endpush
 @push('css')
     <meta name="url-search-finalidades" content="{{ route('finalidades-certidao.index') }}">   
-    <link rel="stylesheet" href="{{mix('admin/certidao-crisma/table.css')}}"/>
+    <link rel="stylesheet" href="{{mix('admin/certidao-casamento/table.css')}}"/>
 
     <style>
         .col-12{

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -51665,10 +51665,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/livros/table.js":
-/*!**************************************!*\
-  !*** ./resources/js/livros/table.js ***!
-  \**************************************/
+/***/ "./resources/js/certidoes/certidao-casamento/table.js":
+/*!************************************************************!*\
+  !*** ./resources/js/certidoes/certidao-casamento/table.js ***!
+  \************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -51683,9 +51683,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var _require = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js"),
-    Swal = _require["default"];
-
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
@@ -51694,20 +51691,13 @@ __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4
 
 __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
 
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
-var sacramentos = [{
-  value: '1',
-  option: 'Batizado'
-}, {
-  value: '2',
-  option: 'Crisma'
-}, {
-  value: '3',
-  option: 'Casamento'
-}];
-var myTable = $('#bookTable2').DataTable({
+
+var finalidades = buscaFinalidade();
+var myTable = $('#certidoesTable').DataTable({
   "searching": true,
-  "ordering": false,
+  "ordering": true,
   'paging': true,
   "info": false,
   "language": {
@@ -51719,202 +51709,170 @@ var myTable = $('#bookTable2').DataTable({
       next: "<i class='fas fa-angle-right'>"
     } //"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json",
 
-  },
-  scrollY: "500px",
+  }
+  /**
+   * CÓDIGO PARA EMBELAZAR A BARRA DE ROLAGEM VERTICAL     *
+    
+  scrollY: "500px",        
+        
   scrollCollapse: !0,
   pageLength: 50,
   scroller: !0,
-  "fnInitComplete": function fnInitComplete() {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__["default"]('.dataTables_scrollBody');
+  "fnInitComplete": function () {        
+      const ps = new PerfectScrollbar('.dataTables_scrollBody');
+  },     
+  "fnDrawCallback": function (oSettings) {        
+      const ps = new PerfectScrollbar('.dataTables_scrollBody');
   },
-  "fnDrawCallback": function fnDrawCallback(oSettings) {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__["default"]('.dataTables_scrollBody');
-  }
+  */
+
 });
-$(document).on('click', '.btn-excluir', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-  var excluir, excluido;
+$(document).on('click', '.btn-delete', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  var destroy, destroied;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
           return Swal.fire({
-            title: 'Excluir este livro??',
-            text: 'Tem certeza de deseja excluir o livro ' + $(this).data('numerolivro'),
+            title: 'Excluir registro?',
+            text: 'Tem certeza que deseja excluir esse registro?',
             icon: 'question',
+            showCancelButton: true,
             confirmButtonText: 'Excluir!',
-            cancelButtonText: 'Cancelar.',
-            showCancelButton: true
+            cancelButtonText: 'Cancelar.'
           });
 
         case 2:
-          excluir = _context.sent;
+          destroy = _context.sent;
 
-          if (!excluir.value) {
-            _context.next = 14;
+          if (!destroy.value) {
+            _context.next = 12;
             break;
           }
 
-          _context.next = 6;
-          return fetch($(this).data('url'), {
-            credentials: 'same-origin',
+          destroied = fetch($(this).data('url'), {
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            method: 'delete'
+            method: 'DELETE'
           }).then(function (result) {
             if (result.ok) {
               return result.json();
             } else {
-              Swal.fire('OPS!!', 'Algo deu errado...', 'error');
+              return false;
             }
           });
 
-        case 6:
-          excluido = _context.sent;
-
-          if (!excluido.excluir) {
-            _context.next = 13;
+          if (destroied) {
+            _context.next = 9;
             break;
           }
 
-          _context.next = 10;
-          return Swal.fire('Excluido!!', 'O livro foi excluido.', 'success');
-
-        case 10:
-          location.reload();
-          _context.next = 14;
+          Swal.fire('Algo deu Errado!', 'Erro ao excluir esse registro.', 'error');
+          _context.next = 12;
           break;
 
-        case 13:
-          Swal.fire('OPS!!', 'Ocorreu um erro inesperado ao excluir este livro.', 'error');
+        case 9:
+          _context.next = 11;
+          return Swal.fire('Excluido!', 'Registro excluido com sucesso.', 'success');
 
-        case 14:
+        case 11:
+          window.location.reload();
+
+        case 12:
         case "end":
           return _context.stop();
       }
     }
   }, _callee, this);
 })));
-$(document).on('change input', '.form-control', function () {
-  Swal.resetValidationMessage();
-});
-$(document).on('click', '#btn-add-book', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var numLivro, qtdePaginas, dataInicio, dataFim, sacramento, observacoes, cadastrar, form, create;
+$(document).on('click', '.btn-emitir', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+  var obs, finalidade, emitir;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          numLivro = createInput('numero', '*Numeração do Livro', 'number', true);
-          qtdePaginas = createInput('paginas', '*Total de Páginas', 'number', true);
-          dataInicio = createInput('data_inicio', 'Data de Inicio', 'date');
-          dataFim = createInput('data_fim', 'Data de Término', 'date', true);
-          sacramento = createSelect('sacramento', '*Livro de:', sacramentos);
-          observacoes = createTextarea('observacao', 'Observações', 'Insira aqui algum comentário ou observações sobre esse livro');
-          _context2.next = 8;
+          obs = createTextarea('observacao', 'Observações', 'Informações adicionais', '');
+          _context2.next = 3;
+          return createSelect('finalidade', 'Finalidade', finalidades);
+
+        case 3:
+          finalidade = _context2.sent;
+          console.log(finalidade.input);
+          _context2.next = 7;
           return Swal.fire({
-            title: "Novo Livro",
-            html: "<div class='row'>" + "<div class='col-12 text-left'>" + numLivro.label + numLivro.input + "</div>" + "<div class='col-12 text-left'>" + qtdePaginas.label + qtdePaginas.input + "</div>" + "<div class='col-12 text-left'>" + sacramento.label + sacramento.input + "</div>" + "<div class='col-6 text-left'>" + dataInicio.label + dataInicio.input + "</div>" + "<div class='col-6 text-left'>" + dataFim.label + dataFim.input + "</div>" + "<div class='col-12 text-left'>" + observacoes.label + observacoes.input + "</div>" + "</div>",
+            title: 'Para qual é a finalidade desse certidão?',
+            icon: 'question',
+            html: "<div class='row'>" + "<div class='col-12 text-left'>" + finalidade.label + finalidade.input + "</div>" + "<div class='col-12 text-left'>" + obs.label + obs.input + "</div>" + "</div>",
+            confirmButtonText: 'Emitir!',
+            cancelButtonText: 'Sair.',
             showCancelButton: true,
-            confirmButtonText: "Cadastrar!",
-            cancelButtonText: "Cancelar.",
             preConfirm: function preConfirm() {
-              if ($('#id_numero').val() == '' || $('#id_paginas').val() == '') {
-                Swal.showValidationMessage('Os campos com "*" são obrigatórios.');
-                return false;
-              }
-
-              if ($('#id_numero').val().length >= 5) {
-                Swal.showValidationMessage('Não é possivel cadastrar um livro com numeração acima de 9999.');
-                return false;
-              }
-
-              if ($('#id_paginas').val() > 1001) {
-                Swal.showValidationMessage('Não é possivel cadastrar um livro que tenha mais de 1000 páginas.');
-                return false;
-              }
-
-              if ($('#id_data_fim').val() < $('#id_data_inicio').val()) {
-                Swal.showValidationMessage('A data término insirida é invalida.');
-                return false;
-              }
-
-              if ($('#id_paginas').val() < 0) {
-                Swal.showValidationMessage('A quantidade de paginas deve ser superior a "0".');
-                return false;
-              }
-
-              if ($('#id_numero').val() < 0) {
-                Swal.showValidationMessage('A numerção do livro deve ser superior a "0".');
+              if ($('#id_finalidade').val() == '') {
                 return false;
               }
             }
           });
 
-        case 8:
-          cadastrar = _context2.sent;
+        case 7:
+          emitir = _context2.sent;
 
-          if (!cadastrar.value) {
-            _context2.next = 26;
-            break;
+          if (emitir.value) {
+            window.open($(this).data('url') + "/" + $('#id_finalidade').val() + "/" + $('#id_observacao').val(), '_blank');
           }
 
-          form = new FormData();
-          form.append('numero', $('#id_numero').val());
-          form.append('qtdePaginas', $('#id_paginas').val());
-          form.append('sacramento', $('#id_sacramento').val());
-          form.append('data_inicio', $('#id_data_inicio').val());
-          form.append('data_fim', $('#id_data_fim').val());
-          _context2.next = 18;
-          return fetch($('meta[name="url-store-book"]').attr('content'), {
-            method: 'POST',
-            credentials: 'same-origin',
-            body: form,
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          }).then(function (result) {
-            if (result.ok) {
-              return result.json();
-            } else {
-              Swal.fire('Ops!!', 'Aconteceu um erro...<br><p>Código: ' + result.status + '</p><br><p>' + result.statusText + '</p>', 'error');
-            }
-          });
+          return _context2.abrupt("return", false);
 
-        case 18:
-          create = _context2.sent;
-
-          if (!create.insert) {
-            _context2.next = 25;
-            break;
-          }
-
-          _context2.next = 22;
-          return Swal.fire('Muito Bem!!', 'Esse livro foi cadastrado com sucesso', 'success');
-
-        case 22:
-          location.reload();
-          _context2.next = 26;
-          break;
-
-        case 25:
-          if (create.duplicate) {
-            Swal.fire('Livro Repitido!!', 'Esse livro já foi cadastrado', 'warning');
-          } else {
-            Swal.fire('Ops!!', 'Algo deu errado...', 'error');
-          }
-
-        case 26:
+        case 10:
         case "end":
           return _context2.stop();
       }
     }
-  }, _callee2);
+  }, _callee2, this);
 })));
+
+function buscaFinalidade() {
+  return _buscaFinalidade.apply(this, arguments);
+}
+
+function _buscaFinalidade() {
+  _buscaFinalidade = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var dados;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch($('meta[name="url-search-finalidades"]').attr('content'), {
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              method: 'GET',
+              credentials: 'same-origin'
+            }).then(function (result) {
+              if (result.ok) {
+                return result.json();
+              }
+            });
+
+          case 2:
+            dados = _context3.sent;
+            return _context3.abrupt("return", dados);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _buscaFinalidade.apply(this, arguments);
+}
 
 function createInput(name, label, type, required) {
   var id = "id_" + name;
-  var input = "<input name='" + name + "' id='" + id + "' type='" + type + "'  required='" + required + "' class='form-control'/>";
+  var input = "<input name='" + name + "' id='" + id + "' type='" + type + "' required='" + required + "' class='form-control'/>";
   var lbl = "<label>" + label + "</label>";
   var campo = {};
   campo = {
@@ -51924,26 +51882,9 @@ function createInput(name, label, type, required) {
   return campo;
 }
 
-function createSelect(name, label, dados) {
+function createTextarea(name, label, placeholder, classes) {
   var id = "id_" + name;
-  var input = "<select name='" + name + "' id='" + id + "' class='form-control'/>";
-  $.each(dados, function (i, result) {
-    input = input + "<option value='" + result.value + "'>" + result.option + "</option>";
-  });
-  input = input + "</select>";
-  var lbl = "<label>" + label + "</label>";
-  var campo = {};
-  campo = {
-    label: lbl,
-    input: input
-  };
-  return campo;
-}
-
-function createTextarea(name, label, placeholder) {
-  var classes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  var id = "id_" + name;
-  var input = "<textarea max name='" + name + "' id='" + id + "' class='form-control" + classes + "' rows='3' placeholder='" + placeholder + "'></textarea>";
+  var input = "<textarea max name='" + name + "' id='" + id + "' maxlength='80' class='form-control" + classes + "' rows='4' placeholder='" + placeholder + "'></textarea>";
   var lbl = "<label> " + label + " </label>";
   var campo = {};
   campo = {
@@ -51953,16 +51894,83 @@ function createTextarea(name, label, placeholder) {
   return campo;
 }
 
+function createSelect(_x, _x2, _x3) {
+  return _createSelect.apply(this, arguments);
+}
+
+function _createSelect() {
+  _createSelect = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(name, label, dados) {
+    var classes,
+        id,
+        input,
+        select,
+        lbl,
+        campo,
+        _args4 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            classes = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : '';
+            id = "id_" + name;
+            input = "<select name='" + name + "' id='" + id + "' class='form-control " + classes + "'/>";
+            _context4.next = 5;
+            return dados.then(function (result) {
+              $.each(result, function (i, result) {
+                input = input + "<option value='" + result.value + "'>" + result.option + "</option>";
+              });
+              input = input + "</select>";
+              return input;
+            });
+
+          case 5:
+            select = _context4.sent;
+            lbl = "<label>" + label + "</label>";
+            campo = {};
+            campo = {
+              label: lbl,
+              input: select
+            };
+            return _context4.abrupt("return", campo);
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _createSelect.apply(this, arguments);
+}
+
+function fill_datatable() {
+  var filter_book = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var dataTable = $('#certidoesTable').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order": [],
+    "searching": false,
+    "ajax": {
+      url: $('meta[name="url-search-book"').attr('content'),
+      type: "POST",
+      data: {
+        _token: _token,
+        filter_book: filter_book
+      }
+    }
+  });
+}
+
 /***/ }),
 
-/***/ 4:
-/*!********************************************!*\
-  !*** multi ./resources/js/livros/table.js ***!
-  \********************************************/
+/***/ 3:
+/*!******************************************************************!*\
+  !*** multi ./resources/js/certidoes/certidao-casamento/table.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\livros\table.js */"./resources/js/livros/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\certidoes\certidao-casamento\table.js */"./resources/js/certidoes/certidao-casamento/table.js");
 
 
 /***/ })
