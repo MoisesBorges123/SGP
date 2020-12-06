@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(CertidaoBatismoTableSeeder::class);
         //$this->call(FinalliCert::class);
         //$this->call(SacramentosSeeder::class);
+        $this->call(GroupIntentionsSeeder::class);
+        $this->call(ClassesIntentionsSeeder::class);
     }
 }

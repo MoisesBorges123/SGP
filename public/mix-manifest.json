@@ -1,4 +1,6 @@
 {
+    "/admin/intentions/form.js": "/admin/intentions/form.js?id=6bff69223db7e716ad45",
+    "/admin/intentions/table.js": "/admin/intentions/table.js?id=85db520f42e99ca2d894",
     "/admin/livros/js/table.js": "/admin/livros/js/table.js?id=f8dc944862c3fe32a012",
     "/admin/livros/paginas/js/details.js": "/admin/livros/paginas/js/details.js?id=8443e156aab1f83ace15",
     "/admin/livros/paginas/js/form.js": "/admin/livros/paginas/js/form.js?id=a530c93809f4d40b4d6a",
@@ -7,8 +9,8 @@
     "/js/certidao/certidao-batismo/table.js": "/js/certidao/certidao-batismo/table.js?id=10b11af2f93dd5c7959d",
     "/js/certidao/certidao-casamento/table.js": "/js/certidao/certidao-casamento/table.js?id=42cb5913c573f2687592",
     "/js/certidao/certidao-crisma/table.js": "/js/certidao/certidao-crisma/table.js?id=fd7ec9797d8301a32a46",
-    "/js/main/app.js": "/js/main/app.js?id=f92919fbf26e7c7135ed",
-    "/css/main/app.css": "/css/main/app.css?id=70f1c27ffebfbd9f8f57",
+    "/js/main/app.js": "/js/main/app.js?id=f36b9c3ca8e637dbdd1f",
+    "/css/main/app.css": "/css/main/app.css?id=015550d504597900569d",
     "/admin/certidao-batismo/table.css": "/admin/certidao-batismo/table.css?id=fa11f75c89ecc55cc0ef",
     "/admin/certidao-batismo/details.css": "/admin/certidao-batismo/details.css?id=faefbcaed3bde1295202",
     "/admin/certidao-batismo/form.css": "/admin/certidao-batismo/form.css?id=a042c5d9f1c24e2cd4ca",
@@ -23,6 +25,7 @@
     "/admin/livros/paginas/css/table.css": "/admin/livros/paginas/css/table.css?id=bcc35fc9b83adb94204d",
     "/admin/livros/paginas/css/details.css": "/admin/livros/paginas/css/details.css?id=d41d8cd98f00b204e980",
     "/admin/livros/uploads/css/form.css": "/admin/livros/uploads/css/form.css?id=9f932527108bd9048d0d",
+    "/admin/intentions/form.css": "/admin/intentions/form.css?id=2f927da40e0f8ee78cdb",
     "/admin/certidao-batismo/form-styles.css": "/admin/certidao-batismo/form-styles.css?id=f298d73acfec8016fe63",
     "/admin/certidao-crisma/form-styles.css": "/admin/certidao-crisma/form-styles.css?id=f298d73acfec8016fe63",
     "/admin/certidao-casamento/form-styles.css": "/admin/certidao-casamento/form-styles.css?id=f298d73acfec8016fe63"

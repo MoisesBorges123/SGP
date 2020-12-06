@@ -88,6 +88,7 @@
             <hr class="my-3">
             <!-- Heading -->
             <h6 class="navbar-heading text-muted">Registros</h6>
+            
             <ul class="navbar-nav">     
                 <li class="nav-item">
                     <a class="nav-link active text-default" href="#registros" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
@@ -154,8 +155,7 @@
                 </li>
                 
 
-            </ul>
-            
+            </ul>            
             <ul class="navbar-nav">     
                 <li class="nav-item">
                     <a class="nav-link text-default" href="#livros" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
@@ -177,7 +177,33 @@
                 
 
             </ul>
-            
+            <h6 class="navbar-heading text-muted">Missas</h6>
+            <ul class="navbar-nav">     
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#intentions" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-books"></i>
+                        <span class="nav-link-text text-primary">{{ __('Intenções') }}</span>
+                    </a>
+
+                    <div class="collapse " id="intentions">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('intentions.create') }}">
+                                    {{ __('Nova Intenção') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('intentions.index') }}">
+                                    {{ __('Ver Intenções') }}
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                
+
+            </ul>
         </div>
     </div>
 </nav>

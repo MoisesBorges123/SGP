@@ -52,3 +52,7 @@ Route::get('/certidao-crisma/export/{id}','Painel\Certidoes\ActionsCertidao@emit
 //Rotas para crição e emissão de registros de casamento
 Route::resource('/certidao-casamento','Painel\Certidoes\CertidaoCasamentoController');
 Route::get('/certidao-casamento/export/{id}','Painel\Certidoes\ActionsCertidao@emitirCertCasamento')->name('certidao-casamento.export');
+
+//Rotas Inteçoes
+Route::get('/intentions/print','Painel\Celebracoes\IntencaoController@printer')->name('intentions.print');
+Route::resource('/intentions','Painel\Celebracoes\IntencaoController');

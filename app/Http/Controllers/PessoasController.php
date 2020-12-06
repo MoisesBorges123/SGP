@@ -6,6 +6,7 @@ use App\Models\Painel\Pessoa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Painel\TelefoneController;
 class PessoasController extends Controller
 {
     /**
@@ -45,7 +46,14 @@ class PessoasController extends Controller
             }else{
                 $insert = $existe;
             }
-           // return array('validated'=>'ok','insert'=>$insert);
+           if(!empty($dados['telefone'])){
+               $dadosTelefone = array(
+                   'pessoa'=>$insert->id,
+                   'telefone'=>$dados['telefone']
+               );
+               $fn_telefone = new  TelefoneController;                
+               $fn_telefone->store($dadosTelefone);
+           }
            return $insert;
         }else{
             return $validated;

@@ -105,6 +105,7 @@ class CertidaoBatismoController extends Controller
     }
     public function index()
     {
+        
         $header=$this->header();
         $certidoes=count($this->certidao->orderBy('id','desc')->get())>0 ? $this->certidao->orderBy('id','desc')->get() : null;
         
@@ -244,6 +245,7 @@ class CertidaoBatismoController extends Controller
              
              $insert = $this->certidao->create($dados);
              if($insert){
+                 drakify('success');
                  notify()->success('Registro salvo com sucesso');
                  return redirect()->route('certidao-batismo.index');
              }else{

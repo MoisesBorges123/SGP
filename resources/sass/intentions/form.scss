@@ -1,0 +1,36 @@
+@import '~timepicki/css/timepicki.css';
+#thanksGiven-tab {
+    border-radius: 20px 0 0 20px;
+}
+
+#intentions-tabs {
+    color: var(--secondary);
+    padding-top: 25px;
+}
+
+#health-tab {
+    border-radius: 0px 20px 20px 0px;
+}
+
+#intentions-tabs .col-4{
+    height: 2.5rem;
+    cursor: pointer;
+}
+#intentions-tabs .col-4 span{
+    vertical-align: -webkit-baseline-middle;
+}
+#tempo_falecimento input{
+    margin-top: 13%;
+    margin-left: 0px;    
+}
+.box-time{
+    background: #6772e5 !important;
+    border: none !important;
+}
+.box-time .prev, .next{
+    border:none !important;
+}
+.box-time input .timepicki-input{
+    box-shadow: 3px 3px 10px #383838 !important;
+    border: 1px solid #e0e0e0 !important;
+}

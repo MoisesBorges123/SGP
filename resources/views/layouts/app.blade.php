@@ -34,29 +34,30 @@
 <body class="{{ $class ?? '' }}">
     
     @auth()
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-            </form>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
             @include('layouts.navbars.sidebar')
-        @endauth
+    @endauth
+    
         
         <div class="main-content">
             @include('layouts.navbars.navbar')
+            @include('notify::messages')
             @yield('content')
         </div>
         
         @guest()
             @include('layouts.footers.guest')
         @endguest
-        @include('notify::messages')
+        
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        @notifyJs
-
-        @stack('js')
         
+        @stack('js')        
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
         <script src="{{ mix('js/main/app.js') }}"></script>
+        @notifyJs
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CertidaoBatismoTableSeeder extends Seeder
 {
 
@@ -14,9 +14,9 @@ class CertidaoBatismoTableSeeder extends Seeder
     {
         
 
-        \DB::table('certidao_batismo')->delete();
+        DB::table('certidao_batismo')->delete();
         
-        \DB::table('certidao_batismo')->insert(array (
+        DB::table('certidao_batismo')->insert(array (
             0 => 
             array (
                 'id' => 1,

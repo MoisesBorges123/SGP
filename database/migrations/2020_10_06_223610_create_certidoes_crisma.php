@@ -24,6 +24,7 @@ class CreateCertidoesCrisma extends Migration
             $table->string('folha')->nullable();
             $table->boolean('duvidoso')->nullable();
             $table->timestamps();
+            $table->foreign('livro')->references('id')->on('livros');
         });
     }
 

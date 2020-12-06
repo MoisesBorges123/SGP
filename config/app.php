@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,7 @@ return [
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */
