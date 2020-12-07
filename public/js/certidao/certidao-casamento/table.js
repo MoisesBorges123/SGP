@@ -51709,23 +51709,21 @@ var myTable = $('#certidoesTable').DataTable({
       next: "<i class='fas fa-angle-right'>"
     } //"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json",
 
-  }
+  },
+
   /**
    * CÓDIGO PARA EMBELAZAR A BARRA DE ROLAGEM VERTICAL     *
-    
-  scrollY: "500px",        
-        
+  */
+  scrollX: "500px",
   scrollCollapse: !0,
   pageLength: 50,
   scroller: !0,
-  "fnInitComplete": function () {        
-      const ps = new PerfectScrollbar('.dataTables_scrollBody');
-  },     
-  "fnDrawCallback": function (oSettings) {        
-      const ps = new PerfectScrollbar('.dataTables_scrollBody');
+  "fnInitComplete": function fnInitComplete() {
+    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__["default"]('.dataTables_scrollBody');
   },
-  */
-
+  "fnDrawCallback": function fnDrawCallback(oSettings) {
+    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_1__["default"]('.dataTables_scrollBody');
+  }
 });
 $(document).on('click', '.btn-delete', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
   var destroy, destroied;

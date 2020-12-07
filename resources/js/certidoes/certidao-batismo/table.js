@@ -23,7 +23,8 @@ const myTable = $('#certidoesTable').DataTable({
         },
         //"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json",
     },
-    scrollY: "500px",        
+    
+    scrollX: "500px",        
           
     scrollCollapse: !0,
     pageLength: 50,
@@ -34,6 +35,7 @@ const myTable = $('#certidoesTable').DataTable({
     "fnDrawCallback": function (oSettings) {        
         const ps = new PerfectScrollbar('.dataTables_scrollBody');
     },
+    
   
 });
 $(document).on('click','.btn-delete', async function(){

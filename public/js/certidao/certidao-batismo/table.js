@@ -51710,7 +51710,7 @@ var myTable = $('#certidoesTable').DataTable({
     } //"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json",
 
   },
-  scrollY: "500px",
+  scrollX: "500px",
   scrollCollapse: !0,
   pageLength: 50,
   scroller: !0,

@@ -19,11 +19,8 @@
                             </div>
                         </div>
                     </div>
-                    
+                <div class="row">                    
                     <div class="col-12">
-                    </div>
-    
-                    <div>
                         <table class="table align-items-center table-flush" id='certidoesTable'>
                             <thead class="thead-light">
                                 <tr>
@@ -72,6 +69,7 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
                             
