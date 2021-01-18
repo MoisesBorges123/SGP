@@ -31,7 +31,7 @@ class CreateCertidoesBatismo extends Migration
             $table->foreign('crianca')->references('id')->on('pessoas');
             $table->foreign('mae')->references('id')->on('pessoas');
             $table->foreign('pai')->references('id')->on('pessoas');
-            $table->foreign('padre')->references('id')->on('pessoas');
+            $table->foreign('celebrante')->references('id')->on('pessoas');
             $table->foreign('padrinho')->references('id')->on('pessoas');
             $table->foreign('madrinha')->references('id')->on('pessoas');
         });

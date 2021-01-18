@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Painel\TelefoneController;
+use App\Http\Controllers\Painel\Endereco\EnderecoController;
 class PessoasController extends Controller
 {
     /**
@@ -29,31 +30,31 @@ class PessoasController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store($dados)
     {
+        
         $validated = $this->validation($dados);
         if(!$validated->fails()){
             $pessoa = new Pessoa;
             $existe=DB::table('pessoas')->where('nome',$dados['nome'])->first();
             if(!$existe){
-                $insert=$pessoa->create($dados);                
+                $insert=$pessoa->create($dados);   
+                $dados['pessoa'] = $insert->id;
+            if(!empty($dados['cep'])){                
+                EnderecoController::store($dados);
+            }
+            if(!empty($dados['telefone'])){
+                $dadosTelefone = array(
+                    'pessoa'=>$insert->id,
+                    'telefone'=>$dados['telefone']
+                );
+                TelefoneController::store($dadosTelefone);               
+                
+            }             
             }else{
                 $insert = $existe;
             }
-           if(!empty($dados['telefone'])){
-               $dadosTelefone = array(
-                   'pessoa'=>$insert->id,
-                   'telefone'=>$dados['telefone']
-               );
-               $fn_telefone = new  TelefoneController;                
-               $fn_telefone->store($dadosTelefone);
-           }
+            
            return $insert;
         }else{
             return $validated;
@@ -74,9 +75,15 @@ class PessoasController extends Controller
         if(!$validated->fails()){
             $pessoa = new Pessoa;
             $selectedPeople=$pessoa->find($dados['id']);
-            $selectedPeople->update($dados);
-            return 'ok';
+            $updatePerson = $selectedPeople->update($dados);
         }
+        if($dados['cep']){
+            $updateAdress = EnderecoController::update($dados);
+        }
+        if($dados['telefone']){
+            $updatePhone = TelefoneController::update($dados);
+        }
+        return array('pessoa'=>$updatePerson,'endereco'=>$updateAdress,'telefone'=>$updatePhone);
     }
     public function destroy(Pessoa $pessoa)
     {

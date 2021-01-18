@@ -13,6 +13,7 @@ class Pessoa extends Model
         'data_nascimento',
         'cpf',
         'ctps',
-        'titulo_eleitoral'
+        'titulo_eleitoral',
+        'email'
     ];
 }

@@ -5,82 +5,124 @@ namespace App\Http\Controllers\Painel\Endereco;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Endereco\Logradouro;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class LogradouroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public static function store($dados)
     {
-        //
-    }
+        //dd($dados);
+        if(!empty($dados['cep'] && $dados['rua'])){ 
+            $logradouro = LogradouroController::show($dados['cep']);
+            if(empty($logradouro['id'])){
+                if(is_string($dados['estado'])){
+                    $estado = DB::table('estados')->where('nome',$dados['estado'])->first();
+                    $dados['estado']= $estado->id;
+                }       
+                return Logradouro::create($dados);                
+            }else{
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Painel\Endereco\Logradouro  $logradouro
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Logradouro $logradouro)
+            }
+        }else{
+            return false;
+        }
+    }
+    public function search_cep (Request $request)
     {
-        //
+        if(!empty($request->cep)){
+            return LogradouroController::show($request->cep);
+        }else{
+            return false;
+        }
     }
+    public static function show($cep)
+    {      
+        
+        $localidade = LogradouroController::internalSearch($cep);
+        if($localidade==false){ // Se não achar no banco de dados local faça uma pesquisa online
+            $localidade=LogradouroController::externalSearch($cep);              
+            if(!empty($localidade)){
+                $estado = DB::table('estados')                   
+                        ->where('sigla',$localidade['uf'])
+                        ->first();  
+                
+                $endereco = array( 
+                    'resposta'=>true,
+                    'cep'=>$localidade['cep'],                    
+                    'logradouro'=>$localidade['logradouro'],
+                    'bairro'=>$localidade['bairro'],
+                    'cidade'=>$localidade['localidade'],
+                    'estado'=>$estado->id,
+                    'nome_estado'=>$estado->nome,
+                    'complemento'=>$localidade['complemento'],
+                    'dd_local'=>$localidade['ddd'],
+                    'ibge'=>$localidade['ibge'],
+                    );                 
+            }else{
+                $endereco = array('resposta'=>false);
+            }
+        }else{ // Caso foi encontrado no banco de dados o endereço carregue os dados para um array
+           
+            $estado = DB::table('estados')->where('id',$localidade->estado)->first();
+            $endereco = array(
+                'id'=>$localidade->id,
+                'resposta'=>true,
+                'cep'=>$localidade->cep,                
+                'logradouro'=>$localidade->rua,
+                'bairro'=>$localidade->bairro,
+                'cidade'=>$localidade->cidade,
+                'estado'=>$localidade->estado,
+                'nome_estado'=>$estado->nome,
+                'complemento'=>$localidade->complemento,
+                'dd_local'=>$localidade->dd_local,
+                'ibge'=>$localidade->ibge,
+            );
+        }
+        
+        return $endereco;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Painel\Endereco\Logradouro  $logradouro
-     * @return \Illuminate\Http\Response
-     */
+        
+    }  
     public function edit(Logradouro $logradouro)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Painel\Endereco\Logradouro  $logradouro
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Logradouro $logradouro)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Painel\Endereco\Logradouro  $logradouro
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Logradouro $logradouro)
     {
         //
     }
+    private static function externalSearch($cep){
+        $cep = preg_replace("/[^0-9]/", "", $cep);
+        //$cep= substr($cep, 0,5).'-'.substr($cep, 5,3);
+        $url = "http://viacep.com.br/ws/$cep/xml/";
+        $xml = simplexml_load_file($url);   
+        $array = json_decode(json_encode((array) $xml), 1);     
+        
+        return $array;
+    }
+    private static function internalSearch($dado){      
+           
+        $logradouro = DB::table('logradouros')->where('cep',$dado)->first();
+        if(empty($logradouro)){
+            return false;
+        }else{
+            return $logradouro;
+        }
+        
+      
+     
+    }//PROCURAR ENDERÇOS (JÁ CADASTRADOS)
 }

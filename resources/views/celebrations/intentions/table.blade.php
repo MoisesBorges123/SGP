@@ -1,6 +1,7 @@
 @extends("layouts.app")
 
 @section('content')
+    
     @include('layouts.headers.cards',["header"=>$header])
     
     <div class="container-fluid mt--7">
@@ -33,7 +34,7 @@
                     </div>
     
                     <div>
-                        <table class="table align-items-center table-flush" id='certidoesTable'>
+                        <table class="table align-items-center table-flush table-full tables" id='certidoesTable'>
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Tipo</th>                                    
@@ -46,14 +47,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 @foreach($dados as $dado)
                                     <tr>
                                         <td class="budget">
                                             <span>{{$dado['typeIntention']}}</span>
                                         </td>
-                                        <th scope="row">                                           
-                                        <span class="name mb-0 text-sm">{{$dado['intention']}}</span>                                                
-                                        </th>
+                                        <td class="budget text-center">                                           
+                                        <span class="name mb-0 text-sm ">{!! str_replace(' e ',' e ',$dado['intention']) !!}</span>                                                
+                                        </td>
                                         <td class="budget">
                                             <span>{{$dado['data']}}</span>
                                         </td>
@@ -72,11 +74,8 @@
                                                   <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item"  href="{{route('certidao-batismo.show',$dado['id'])}}">Registro Completo</a>
-                                                    <a class="dropdown-item btn-emitir" data-url_notitfy="{{route('notificacao-certidao-batismo.store')}}"  data-url="{{route('certidao.emitir',['batizado',$dado['id']])}}">Emitir</a>
-                                                    <a class="dropdown-item" href="#">Registrar Notificação</a>
-                                                <a class="dropdown-item" href="{{route('certidao-batismo.edit',$dado['id'])}}">Editar</a>
-                                                <a class="dropdown-item btn-delete" data-url="{{route('certidao-batismo.destroy',$dado['id'])}}" href="#">Excluir</a>
+                                                     <!-- <a class="dropdown-item"  href="{{route('intentions.edit',$dado['id'])}}">Editar</a> -->
+                                                    <button class="dropdown-item" id='btn-excluir' data-link="{{route('intentions.destroy',$dado['id'])}}" >Excluir</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -102,10 +101,10 @@
     <script src="{{mix('admin/intentions/table.js')}}"></script>    
 @endpush
 @push('css')
-    <meta name="url-search-finalidades" content="{{ route('finalidades-certidao.index') }}">  
+    <meta name="fetch-notice" content="{{ route('notice-intentions.index') }}">  
    
     <!-- Main Style Css -->    
-    <link rel="stylesheet" href="{{mix('admin/certidao-batismo/table.css')}}"/>
+    <link rel="stylesheet" href="{{mix('admin/intentions/table.css')}}"/>
 
     <style>
         .col-12{

@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SacramentosSeeder::class);
         $this->call(GroupIntentionsSeeder::class);
         $this->call(ClassesIntentionsSeeder::class);
+        $this->call(EstadosTableSeeder::class);
     }
 }

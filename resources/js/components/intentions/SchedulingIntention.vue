@@ -14,27 +14,38 @@
         </div>
         <div class="col-6" >
             <label for="telefone" class="form-control-label">Telefone</label>
-            <input class="form-control" type="text" placeholder="Fone do Requerente" id="Telefone" name="telefone[]" :value='telefone'>
+            <input class="form-control" v-mask="['(##) ####-####', '(##) #####-####']" type="text" placeholder="Fone do Requerente" id="Telefone" name="telefone[]" :value='telefone'>
         </div>
    </div>     
 </template>
 <script>
-    
-   
+    import {mask} from 'vue-the-mask'
+
     export default {
         mounted(){
-            $("#hora_agendamento").timepicki({
-		show_meridian:false,
-        custom_classes:"box-time",
-		min_hour_value:0,
-		max_hour_value:23,
-		step_size_minutes:30,
-		overflow_minutes:true,
-		increase_direction:'up',
-		disable_keyboard_mobile: true});
-        },
+          
+        $("#hora_agendamento").timepicki({
+            show_meridian:false,
+            custom_classes:"box-time",
+            min_hour_value:5,
+            max_hour_value:22,
+            step_size_minutes:30,
+            overflow_minutes:true,
+            increase_direction:'up',
+            disable_keyboard_mobile: true,
+            start_time: ["19", "00"]
+            });
+            
+
+            
+        },//FIM MOUNTED
+
+
+
+        directives: {mask},
         name:'sheduling',
         props:['data_agendamento','hora_agendamento','agendado_por','telefone'],
 
+       
     }
 </script>

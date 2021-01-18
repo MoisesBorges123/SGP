@@ -80,7 +80,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Início') }}
                     </a>
                 </li>
             </ul>
@@ -181,7 +181,7 @@
             <ul class="navbar-nav">     
                 <li class="nav-item">
                     <a class="nav-link text-default" href="#intentions" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="ni ni-books"></i>
+                        <i class="ni ni-single-copy-04"></i>
                         <span class="nav-link-text text-primary">{{ __('Intenções') }}</span>
                     </a>
 
@@ -204,6 +204,37 @@
                 
 
             </ul>
+            <h6 class="navbar-heading text-muted">Dízimo</h6>
+            <ul class="navbar-nav">     
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#tither" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-single-02"></i>
+                        <span class="nav-link-text text-primary">{{ __('Dizimista') }}</span>
+                    </a>
+
+                    <div class="collapse " id="tither">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tither.create') }}">
+                                    {{ __('Novo Dizimista') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tither.index') }}">
+                                    {{ __('Meus Dizimistas') }}
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('devolution.index') }}">
+                        <i class="ni ni-favourite-28 text-danger"></i> <b class='text-danger'>{{ __('Devolver') }}</b>
+                    </a>
+                </li>
+            </ul>
+            
         </div>
     </div>
 </nav>

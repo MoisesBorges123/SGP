@@ -17,9 +17,9 @@ class CreateEnderecos extends Migration
             $table->id();
             $table->unsignedBigInteger('logradouro');
             $table->unsignedBigInteger('pessoa');
-            $table->string('numero');
-            $table->string('apartamento');
-            $table->string('complemento');
+            $table->string('numero')->nullable();
+            $table->string('apartamento')->nullable();
+            $table->string('complemento')->nullable(); //Ponto de referência para chegar até a casa           
             $table->timestamps();
 
             $table->foreign('logradouro')->references('id')->on('logradouros');

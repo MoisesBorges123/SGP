@@ -128,27 +128,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
-  props: ['falecido', 'data_agendamento', 'hora_agendamento', 'agendado_por', 'observacao', 'telefone'],
+  mounted: function mounted() {
+    this.intencao = this.find_type_intention(this.type);
+  },
+  props: ["falecido", "data_agendamento", "hora_agendamento", "agendado_por", "observacao", "telefone", "type"],
   data: function data() {
     return {
-      intencao: '',
+      intencao: "",
       typesIntentions: [{
         id: 1,
-        nome: '7º dia'
+        nome: "7º dia"
       }, {
         id: 2,
-        nome: '30º dia'
+        nome: "30º dia"
       }, {
         id: 3,
-        nome: 'Falecidos'
+        nome: "Falecidos"
       }]
     };
   },
   components: {
     Scheduling: _SchedulingIntention_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    find_type_intention: function find_type_intention(type) {
+      var intencao;
+      Array.from(this.typesIntentions).forEach(function (value) {
+        if (value.nome == type) {
+          intencao = value.id;
+        }
+      });
+      return intencao;
+    }
   }
 });
 
@@ -222,17 +266,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.selectIntentions(this.intencao);
+
+    if (this.intencao != "") {
+      this.show = false;
+    }
+  },
   data: function data() {
     return {
-      intention: ''
+      intention: "",
+      show: true
     };
   },
+  props: ["intencao"],
   methods: {
     selectIntentions: function selectIntentions(titulo) {
       this.intention = titulo;
-      this.$emit('select_intentions', this.intention);
+      this.$emit("select_intentions", this.intention);
     }
   }
 });
@@ -248,6 +308,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -268,18 +330,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     $("#hora_agendamento").timepicki({
       show_meridian: false,
       custom_classes: "box-time",
-      min_hour_value: 0,
-      max_hour_value: 23,
+      min_hour_value: 5,
+      max_hour_value: 22,
       step_size_minutes: 30,
       overflow_minutes: true,
       increase_direction: 'up',
-      disable_keyboard_mobile: true
+      disable_keyboard_mobile: true,
+      start_time: ["19", "00"]
     });
+  },
+  //FIM MOUNTED
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
   },
   name: 'sheduling',
   props: ['data_agendamento', 'hora_agendamento', 'agendado_por', 'telefone']
@@ -345,30 +413,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
-  props: ['pessoa', 'data_agendamento', 'hora_agendamento', 'agendado_por', 'observacao', 'esposo', 'esposa', 'curso', 'telefone'],
+  mounted: function mounted() {
+    this.intencao = this.find_type_intention(this.type);
+  },
+  props: ["pessoa", "data_agendamento", "hora_agendamento", "agendado_por", "observacao", "esposo", "esposa", "curso", "telefone", "type", "anos"],
   data: function data() {
     return {
-      intencao: '',
+      intencao: "",
       typesIntentions: [{
-        id: '5',
-        nome: 'Pelo aniversário'
+        id: "5",
+        nome: "Pelo aniversário"
       }, {
-        id: '6',
-        nome: 'Pelo casamento'
+        id: "6",
+        nome: "Pelo casamento"
       }, {
-        id: '7',
-        nome: 'Pela graduação'
+        id: "7",
+        nome: "Pela graduação"
       }, {
-        id: '8',
-        nome: 'Pela graça alcançada'
+        id: "8",
+        nome: "Pela graça alcançada"
       }]
     };
   },
   components: {
     Scheduling: _SchedulingIntention_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    find_type_intention: function find_type_intention(type) {
+      var intencao;
+      Array.from(this.typesIntentions).forEach(function (value) {
+        if (value.nome == type) {
+          intencao = value.id;
+        }
+      });
+      return intencao;
+    }
   }
 });
 
@@ -1312,7 +1454,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "Falecido",
@@ -1330,7 +1472,7 @@ var render = function() {
           { staticClass: "col-9", attrs: { id: "tempo_falecimento" } },
           [
             _c("input", {
-              staticClass: "form-control ",
+              staticClass: "form-control",
               attrs: {
                 type: "text",
                 placeholder: "Tempo de falecimento",
@@ -1370,14 +1512,6 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.observacao,
-                  expression: "observacao"
-                }
-              ],
               staticClass: "form-control",
               attrs: {
                 name: "observacao",
@@ -1386,15 +1520,7 @@ var render = function() {
                 cols: "30",
                 rows: "10"
               },
-              domProps: { value: _vm.observacao },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.observacao = $event.target.value
-                }
-              }
+              domProps: { value: _vm.observacao }
             })
           ])
         ])
@@ -1482,57 +1608,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "row align-items-center text-center",
-      attrs: { id: "intentions-tabs" }
-    },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
+  return this.show == true
+    ? _c(
         "div",
         {
-          staticClass: "col-4 bg-warning",
-          attrs: { id: "thanksGiven-tab" },
-          on: {
-            click: function($event) {
-              return _vm.selectIntentions("Ação de Graças")
-            }
-          }
+          staticClass: "row align-items-center text-center",
+          attrs: { id: "intentions-tabs" }
         },
-        [_c("span", [_vm._v("Ação de Graças")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-4 bg-default",
-          on: {
-            click: function($event) {
-              return _vm.selectIntentions("Falecimento")
-            }
-          }
-        },
-        [_c("span", [_vm._v("Falecimento")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-4 bg-primary",
-          attrs: { id: "health-tab" },
-          on: {
-            click: function($event) {
-              return _vm.selectIntentions("Saúde")
-            }
-          }
-        },
-        [_c("span", [_vm._v("Saúde")])]
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-4 bg-warning",
+              attrs: { id: "thanksGiven-tab" },
+              on: {
+                click: function($event) {
+                  return _vm.selectIntentions("Ação de Graças")
+                }
+              }
+            },
+            [_c("span", [_vm._v("Ação de Graças")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-4 bg-default",
+              on: {
+                click: function($event) {
+                  return _vm.selectIntentions("Falecimento")
+                }
+              }
+            },
+            [_c("span", [_vm._v("Falecimento")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-4 bg-primary",
+              attrs: { id: "health-tab" },
+              on: {
+                click: function($event) {
+                  return _vm.selectIntentions("Saúde")
+                }
+              }
+            },
+            [_c("span", [_vm._v("Saúde")])]
+          )
+        ]
       )
-    ]
-  )
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -1636,6 +1764,14 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("input", {
+        directives: [
+          {
+            name: "mask",
+            rawName: "v-mask",
+            value: ["(##) ####-####", "(##) #####-####"],
+            expression: "['(##) ####-####', '(##) #####-####']"
+          }
+        ],
         staticClass: "form-control",
         attrs: {
           type: "text",
@@ -1725,7 +1861,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "Nome do esposo",
@@ -1746,7 +1882,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "Nome do esposa",
@@ -1767,7 +1903,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "Nome",
@@ -1788,7 +1924,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "number",
               placeholder: "Idade",
@@ -1812,14 +1948,14 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "number",
               placeholder: "Tempo que o casal está junto (anos)",
               name: "married_time",
               id: "married_time"
             },
-            domProps: { value: _vm.esposa }
+            domProps: { value: _vm.anos }
           })
         ])
       : _vm._e(),
@@ -1833,7 +1969,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control ",
+            staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "Nome do curso dos formandos",
@@ -1870,37 +2006,21 @@ var render = function() {
               "label",
               {
                 staticClass: "form-control-label",
-                attrs: { for: "observacao" }
+                attrs: { for: "observations" }
               },
               [_vm._v("Observações")]
             ),
             _vm._v(" "),
             _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.observacao,
-                  expression: "observacao"
-                }
-              ],
               staticClass: "form-control",
               attrs: {
                 name: "observacao",
                 placeholder: "Insira algum aviso para repassar para a sacristã",
                 id: "observacao",
                 cols: "30",
-                rows: "10"
+                rows: "5"
               },
-              domProps: { value: _vm.observacao },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.observacao = $event.target.value
-                }
-              }
+              domProps: { value: _vm.observacao }
             })
           ])
         ])
@@ -2023,6 +2143,17 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-the-mask/dist/vue-the-mask.js":
+/*!********************************************************!*\
+  !*** ./node_modules/vue-the-mask/dist/vue-the-mask.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(e,t){ true?module.exports=t():undefined})(this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var a=n[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,t),a.l=!0,a.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p=".",t(t.s=10)}([function(e,t){e.exports={"#":{pattern:/\d/},X:{pattern:/[0-9a-zA-Z]/},S:{pattern:/[a-zA-Z]/},A:{pattern:/[a-zA-Z]/,transform:function(e){return e.toLocaleUpperCase()}},a:{pattern:/[a-zA-Z]/,transform:function(e){return e.toLocaleLowerCase()}},"!":{escape:!0}}},function(e,t,n){"use strict";function r(e){var t=document.createEvent("Event");return t.initEvent(e,!0,!0),t}var a=n(2),o=n(0),i=n.n(o);t.a=function(e,t){var o=t.value;if((Array.isArray(o)||"string"==typeof o)&&(o={mask:o,tokens:i.a}),"INPUT"!==e.tagName.toLocaleUpperCase()){var u=e.getElementsByTagName("input");if(1!==u.length)throw new Error("v-mask directive requires 1 input, found "+u.length);e=u[0]}e.oninput=function(t){if(t.isTrusted){var i=e.selectionEnd,u=e.value[i-1];for(e.value=n.i(a.a)(e.value,o.mask,!0,o.tokens);i<e.value.length&&e.value.charAt(i-1)!==u;)i++;e===document.activeElement&&(e.setSelectionRange(i,i),setTimeout(function(){e.setSelectionRange(i,i)},0)),e.dispatchEvent(r("input"))}};var s=n.i(a.a)(e.value,o.mask,!0,o.tokens);s!==e.value&&(e.value=s,e.dispatchEvent(r("input")))}},function(e,t,n){"use strict";var r=n(6),a=n(5);t.a=function(e,t){var o=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],i=arguments[3];return Array.isArray(t)?n.i(a.a)(r.a,t,i)(e,t,o,i):n.i(r.a)(e,t,o,i)}},function(e,t,n){"use strict";function r(e){e.component(s.a.name,s.a),e.directive("mask",i.a)}Object.defineProperty(t,"__esModule",{value:!0});var a=n(0),o=n.n(a),i=n(1),u=n(7),s=n.n(u);n.d(t,"TheMask",function(){return s.a}),n.d(t,"mask",function(){return i.a}),n.d(t,"tokens",function(){return o.a}),n.d(t,"version",function(){return c});var c="0.11.1";t.default=r,"undefined"!=typeof window&&window.Vue&&window.Vue.use(r)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(1),a=n(0),o=n.n(a),i=n(2);t.default={name:"TheMask",props:{value:[String,Number],mask:{type:[String,Array],required:!0},masked:{type:Boolean,default:!1},tokens:{type:Object,default:function(){return o.a}}},directives:{mask:r.a},data:function(){return{lastValue:null,display:this.value}},watch:{value:function(e){e!==this.lastValue&&(this.display=e)},masked:function(){this.refresh(this.display)}},computed:{config:function(){return{mask:this.mask,tokens:this.tokens,masked:this.masked}}},methods:{onInput:function(e){e.isTrusted||this.refresh(e.target.value)},refresh:function(e){this.display=e;var e=n.i(i.a)(e,this.mask,this.masked,this.tokens);e!==this.lastValue&&(this.lastValue=e,this.$emit("input",e))}}}},function(e,t,n){"use strict";function r(e,t,n){return t=t.sort(function(e,t){return e.length-t.length}),function(r,a){for(var o=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],i=0;i<t.length;){var u=t[i];i++;var s=t[i];if(!(s&&e(r,s,!0,n).length>u.length))return e(r,u,o,n)}return""}}t.a=r},function(e,t,n){"use strict";function r(e,t){var n=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],r=arguments[3];e=e||"",t=t||"";for(var a=0,o=0,i="";a<t.length&&o<e.length;){var u=t[a],s=r[u],c=e[o];s&&!s.escape?(s.pattern.test(c)&&(i+=s.transform?s.transform(c):c,a++),o++):(s&&s.escape&&(a++,u=t[a]),n&&(i+=u),c===u&&o++,a++)}for(var f="";a<t.length&&n;){var u=t[a];if(r[u]){f="";break}f+=u,a++}return i+f}t.a=r},function(e,t,n){var r=n(8)(n(4),n(9),null,null);e.exports=r.exports},function(e,t){e.exports=function(e,t,n,r){var a,o=e=e||{},i=typeof e.default;"object"!==i&&"function"!==i||(a=e,o=e.default);var u="function"==typeof o?o.options:o;if(t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns),n&&(u._scopeId=n),r){var s=u.computed||(u.computed={});Object.keys(r).forEach(function(e){var t=r[e];s[e]=function(){return t}})}return{esModule:a,exports:o,options:u}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("input",{directives:[{name:"mask",rawName:"v-mask",value:e.config,expression:"config"}],attrs:{type:"text"},domProps:{value:e.display},on:{input:e.onInput}})},staticRenderFns:[]}},function(e,t,n){e.exports=n(3)}])});
 
 /***/ }),
 
@@ -14399,8 +14530,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! timepicki */ "./node_modules/timepicki/js/timepicki.js");
 /* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(timepicki__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.component('intention-tab', __webpack_require__(/*! ../components/intentions/IntentionsTabs.vue */ "./resources/js/components/intentions/IntentionsTabs.vue")["default"]);
 Vue.component('thanksgiven', __webpack_require__(/*! ../components/intentions/ThanksGivenIntentions.vue */ "./resources/js/components/intentions/ThanksGivenIntentions.vue")["default"]);
 Vue.component('deads', __webpack_require__(/*! ../components/intentions/DeadsIntentions.vue */ "./resources/js/components/intentions/DeadsIntentions.vue")["default"]);

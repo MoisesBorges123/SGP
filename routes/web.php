@@ -19,10 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Auth::routes();
+Route::get('/home', 'Painel\DashboardController@index')->name('home');
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-Route::get('/sacramentos','Painel\SacramentosController@index')->name('sacramentos.index');
+//Route::get('/sacramentos','Painel\SacramentosController@index')->name('sacramentos.index');
 
 //Rotas para crição e emissão de registros de batismo
 Route::get('/dashboard/certidao-batismo/{filter}','Painel\Certidoes\CertidaoBatismoController@filter')->name('certidao-batismo.filter');
@@ -56,3 +56,15 @@ Route::get('/certidao-casamento/export/{id}','Painel\Certidoes\ActionsCertidao@e
 //Rotas Inteçoes
 Route::get('/intentions/print','Painel\Celebracoes\IntencaoController@printer')->name('intentions.print');
 Route::resource('/intentions','Painel\Celebracoes\IntencaoController');
+
+//Rotas Agenda de Missas
+Route::resource('/schedule-celebrations','Painel\Celebracoes\ScheduleCelebrationController');
+Route::resource('/notice-intentions','Painel\Celebracoes\AvisosIntencoesController');
+
+//Rotas Dizimistas
+Route::resource('/tithe/tither','Painel\Tithe\Tither\TitherController');
+Route::match(array('GET', 'POST'),'/tithe/devolution/save/{dizmista?}','Painel\Tithe\Devolution\TitherDevolutionsController@save')->name('devolution.save');
+Route::resource('/tithe/devolution','Painel\Tithe\Devolution\TitherDevolutionsController');
+
+//Rotas Endereço
+Route::post('/address/seach/cep','Painel\Endereco\LogradouroController@search_cep')->name('search_cep');

@@ -47,5 +47,24 @@ mix
     .js('resources/js/intentions/form.js','public/admin/intentions/form.js')
     .js('resources/js/intentions/table.js','public/admin/intentions/table.js')
     .sass('resources/sass/intentions/form.scss','public/admin/intentions/')
+    .sass('resources/sass/intentions/table.scss','public/admin/intentions/')
+    /** 
+     * SCRIPTS AGENDA DE MISSA
+     * */    
+    .js('resources/js/schedule_celebration/speech_recognize.js','public/admin/schedule_celebration/')
+    /**
+     * SCRIPTS DIZIMO
+     * 
+     *  */    
+    .sass('resources/sass/tithe/tither/form.scss','public/admin/tithe/tither/css/')
+    .js('resources/js/tithe/tither/form.js','public/admin/tithe/tither/js/')
 
+    .sass('resources/sass/tithe/tither/table.scss','public/admin/tithe/tither/css/')
+    .js('resources/js/tithe/tither/table.js','public/admin/tithe/tither/js/')
+
+    .sass('resources/sass/tithe/devolution/table.scss','public/admin/tithe/devolution/css/')
+    .js('resources/js/tithe/devolution/table.js','public/admin/tithe/devolution/js/')
+    
+    .sass('resources/sass/tithe/devolution/form.scss','public/admin/tithe/devolution/css/')
+    .js('resources/js/tithe/devolution/form.js','public/admin/tithe/devolution/js/')
     .version();

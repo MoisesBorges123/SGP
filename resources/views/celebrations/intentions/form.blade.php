@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.headers.cards',['header'=>$header])
-    
+@include('layouts.headers.cards',['header'=>$header])
+
     <div class="container-fluid mt--7">        
         <div class="row mt-5">
             <div class="col-xl-6 mb-5 mb-xl-0">
       
                 <div class="card shadow">
                     <div id="app">
-                        <intention-tab v-on:select_intentions="selectIntention"></intention-tab>
+                        <intention-tab v-on:select_intentions="selectIntention" intencao = "{{$intention[0]['intention_group'] ?? ''}}"></intention-tab>
                     
                         <div class='card-header' style="border:0px;">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    @if(!empty($dados))
-                                        <h3 class="mb-0">Editar Intenção</h3>
+                                    @if(!empty($intention))
+                                        <h2 class="mb-0">Editar Intenção - @{{ intentionSelected }}</h2>
                                     @else
                                         <h3 class="mb-0" v-if="intentionSelected">Nova Intenção - @{{ intentionSelected }} </h3>
                                     @endif
@@ -24,8 +24,8 @@
                             </div>
                         </div>
                         <div class='card-body'>
-                            @if(!empty($dados))    
-                                <form class="form-register" action="{{route('intentions.update',$dados['id'])}}" method="post" id='form-intentions'>
+                            @if(!empty($intention))    
+                                <form class="form-register" action="{{route('intentions.update',$intention[0]['id'])}}" method="post" id='form-intentions'>
                                 @method('PUT')
                             @else
                                 <form class="form-register" action="{{route('intentions.store')}}" method="post" id='form-intentions'>
@@ -38,22 +38,25 @@
                                 v-if="intentionSelected == 'Ação de Graças'"
                                 pessoa='' 
                                 telefone='{{old('telefone') ?? ''}}' 
-                                data_agendamento='{{old('data_agendamento') ?? ''}}' 
-                                hora_agendamento='{{old('hora_agendamento') ?? ''}}' 
-                                agendado_por='{{ old('agendado_por') ?? ''}}' 
-                                observacao='{{ old('observacao') ?? ''}}'
-                                esposo='{{ old('esposa') ?? ''}}'
-                                esposa='{{ old('esposo') ?? ''}}'
-                                curso='{{ old('curso') ?? ''}}'
+                                data_agendamento='{{old('data_agendamento') ?? $intention[0]['data_american'] ?? ''}}' 
+                                hora_agendamento='{{old('hora_agendamento') ?? $intention[0]['hora'] ?? ''}}' 
+                                agendado_por='{{ old('agendado_por') ?? $intention[0]['claimant'] ?? ''}}' 
+                                observacao='{{ old('observacao') ?? $intention[0]['observations'] ?? ''}}'
+                                esposo='{{ old('esposa') ?? $intention[0]['esposa'] ?? ''}}'
+                                esposa='{{ old('esposo') ?? $intention[0]['esposo'] ?? ''}}'
+                                curso='{{ old('curso') ?? $intention[0]['complement'] ?? ''}}'
+                                type='{{$intention[0]['typeIntention'] ?? ''}}'
+                                anos = '{{$intention[0]['complement'] ?? ''}}'
                             ></thanksgiven>
                             <deads
                             v-if="intentionSelected == 'Falecimento'"                           
-                            falecido='{{ old('falecido') ?? ''}}'
-                                data_agendamento='{{ old('data_agendamento') ?? ''}}'
-                                hora_agendamento=' {{ old('hora_agendamento') ?? '' }}'
-                                agendado_por='{{ old('agendado_por') ?? ''}}' 
-                                observacao='{{ old('observacao') ?? '' }}'
-                                telefone='{{old('telefone') ?? ''}}'
+                            falecido='{{ old('falecido') ?? $intention[0]['intention'] ?? ''}}'
+                                data_agendamento='{{ old('data_agendamento') ?? $intention[0]['data_american'] ?? ''}}'
+                                hora_agendamento=' {{ old('hora_agendamento') ?? $intention[0]['hora'] ?? ''}}'
+                                agendado_por='{{ old('agendado_por') ?? $intention[0]['claimant'] ?? ''}}' 
+                                observacao='{{ old('observacao') ?? $intention[0]['observations'] ??'' }}'
+                                telefone='{{old('telefone') ?? $intention[0]['phone'] ?? ''}}'
+                                type='{{$intention[0]['typeIntention'] ?? ''}}'                                
                             ></deads>
                             <health  v-if="intentionSelected == 'Saúde'"
                                 pessoa='{{old('pessoa') ?? ''}}'
@@ -65,7 +68,12 @@
                             
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <button class="btn btn-primary" type='submit'>Salvar</button>
+                                    @if(empty($intention))
+                                        <button class="btn btn-primary" type='submit'>Salvar</button>
+                                    @else
+                                        <a class="btn btn-danger" href="{{route('intentions.index')}}">Cancelar</a>
+                                        <button class="btn btn-primary" type='submit'>Altera</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

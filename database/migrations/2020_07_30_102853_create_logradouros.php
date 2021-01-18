@@ -20,6 +20,9 @@ class CreateLogradouros extends Migration
             $table->string('bairro');
             $table->string('cep');
             $table->string('cidade');
+            $table->string('complemento')->nullable(); //Complementos vindos do código do cep (Correios)
+            $table->string('dd_local')->nullable();
+            $table->string('ibge')->nullable(); //Numero do IBGE da localidade.
             $table->timestamps();
 
             $table->foreign('estado')->references('id')->on('estados');

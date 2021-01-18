@@ -21,6 +21,7 @@ class CreatePessoas extends Migration
             $table->date('data_nascimento')->nullable();
             $table->string('ctps')->nullable();
             $table->string('titulo_eleitoral')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

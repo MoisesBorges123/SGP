@@ -1,7 +1,8 @@
 import 'timepicki';
-
-
 window.Vue = require('vue');
+import VueTheMask from 'vue-the-mask';
+Vue.use(VueTheMask);
+
 Vue.component('intention-tab',require('../components/intentions/IntentionsTabs.vue').default);
 Vue.component('thanksgiven',require('../components/intentions/ThanksGivenIntentions.vue').default);
 Vue.component('deads',require('../components/intentions/DeadsIntentions.vue').default);
@@ -25,8 +26,6 @@ let app = new Vue({
 
  
 $("#hora_agendamento").timepicki();
-
-
 
 
 

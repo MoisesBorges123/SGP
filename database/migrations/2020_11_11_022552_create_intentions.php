@@ -16,8 +16,7 @@ class CreateIntentions extends Migration
         Schema::create('intentions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('person');
-            $table->unsignedBigInteger('scope');
-            $table->string('complement');
+            $table->unsignedBigInteger('scope');            
             $table->timestamps();
 
             $table->foreign('person')->references('id')->on('pessoas');

@@ -923,11 +923,23 @@ var OrdersChart = (function() {
 	//
 	// Methods
 	//
-
+/**
+ * 
+ * LOCAL ONDE A MAGIA DOS GRAFICOS ACONTECE!!
+  */
 	// Init chart
 	function initChart($chart) {
+		var data = new Date();
+		var day = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];		
+		var month = ["Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+		if(data.getMonth>5){
 
+		}else{
+			var x = data.getMonth() - 6;
+			
+		}
 		// Create chart
+		
 		var ordersChart = new Chart($chart, {
 			type: 'bar',
 			options: {

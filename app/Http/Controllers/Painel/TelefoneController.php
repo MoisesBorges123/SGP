@@ -19,15 +19,18 @@ class TelefoneController extends Controller
         //
     }
     
-    public function store($request)
-    {
-        $telefone = new Telefone;
-        $nTelefones = count($request['telefone']);
-        if($nTelefones >= 1){
+    public static function store($request)    {
+        
+        
+        
+        if(is_array($request['telefone'])){
             foreach($request['telefone'] as $phone){
                 //dd(['pessoa'=>$request['pessoa'],'telefone'=>$phone]);
-                $insert = $telefone->created(['pessoa'=>$request['pessoa'],'telefone'=>$phone]);
+                $insert = Telefone::create(['pessoa'=>$request['pessoa'],'telefone'=>$phone]);
             }
+        }else{
+            $insert = Telefone::create(['pessoa'=>$request['pessoa'],'telefone'=>$request['telefone']]);
+            //dd($insert);
         }
         return $insert;
     }
@@ -42,9 +45,10 @@ class TelefoneController extends Controller
         //
     }
 
-    public function update(Request $request, Telefone $telefone)
+    public static function update($dados)
     {
-        //
+        $phone = Telefone::where('pessoa',$dados['id'])->first();
+        return $phone->update($dados);
     }
 
     public function destroy(Telefone $telefone)

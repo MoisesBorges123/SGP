@@ -1,0 +1,6 @@
+{ 
+    "compilerOptions" : {
+        "strictFunctionTypes":false
+    }
+    
+}

@@ -19,7 +19,7 @@ class CreateIntentionScopes extends Migration
             $table->string('time_schedule');
             $table->unsignedBigInteger('claimant')->nullable(); 
             $table->string('observations')->nullable();
-            $table->string('complemnt')->nullable();
+            $table->string('complement')->nullable();
             $table->unsignedBigInteger('classification');
             $table->timestamps();
 

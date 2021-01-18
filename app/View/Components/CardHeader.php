@@ -19,8 +19,9 @@ class CardHeader extends Component
     public $footerText;
     public $color;
     public $url;
+    public $identify;
 
-    public function __construct($headerText,$headerNumber,$bodyIcon,$footerNumber,$footerIcon,$footerText,$color,$url)
+    public function __construct($headerText='',$headerNumber='',$bodyIcon='',$footerNumber='',$footerIcon='',$footerText='',$color='',$url='',$identify='')
     {
         //
         $this->headerText   =   $headerText;
@@ -31,6 +32,7 @@ class CardHeader extends Component
         $this->footerText   =   $footerText;
         $this->color        =   $color;
         $this->url          =   $url;
+        $this->identify     =   $identify;
     }
 
     /**
