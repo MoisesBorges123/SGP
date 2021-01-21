@@ -17,14 +17,14 @@
                                 <ul class="nav nav-pills justify-content-end">
                                     <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
                                         <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                            <span class="d-none d-md-block">Mês</span>
-                                            <span class="d-md-none">M</span>
+                                            <span class="d-none d-md-block">Dízimo</span>
+                                            <span class="d-md-none">D</span>
                                         </a>
                                     </li>
                                     <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
                                         <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                                            <span class="d-none d-md-block">Semana</span>
-                                            <span class="d-md-none">S</span>
+                                            <span class="d-none d-md-block">Ofertas</span>
+                                            <span class="d-md-none">O</span>
                                         </a>
                                     </li>
                                 </ul>

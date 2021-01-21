@@ -67,4 +67,10 @@ mix
     
     .sass('resources/sass/tithe/devolution/form.scss','public/admin/tithe/devolution/css/')
     .js('resources/js/tithe/devolution/form.js','public/admin/tithe/devolution/js/')
+    
+    /**
+     * SCRIPTS CONTAGEM
+     */
+    .sass('resources/sass/contagem/form.scss','public/admin/contagem/css/')
+    .js('resources/js/contagem/form.js','public/admin/contagem/js/')
     .version();

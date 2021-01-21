@@ -1,4 +1,5 @@
 {
+    "/admin/contagem/js/form.js": "/admin/contagem/js/form.js?id=8f573fb8bd07e1024ba7",
     "/admin/intentions/form.js": "/admin/intentions/form.js?id=1c65ddd6a36ec03df0e4",
     "/admin/intentions/table.js": "/admin/intentions/table.js?id=0360f7b551b991f476d4",
     "/admin/livros/js/table.js": "/admin/livros/js/table.js?id=f8dc944862c3fe32a012",
@@ -14,8 +15,8 @@
     "/js/certidao/certidao-batismo/table.js": "/js/certidao/certidao-batismo/table.js?id=d6603a960a015013dd53",
     "/js/certidao/certidao-casamento/table.js": "/js/certidao/certidao-casamento/table.js?id=2d2f5ebc880bf3619bf3",
     "/js/certidao/certidao-crisma/table.js": "/js/certidao/certidao-crisma/table.js?id=fbb739a3169a13aff55b",
-    "/js/main/app.js": "/js/main/app.js?id=5e9771b7e1319e6aa3b3",
-    "/css/main/app.css": "/css/main/app.css?id=6b67a5963a3a3558655b",
+    "/js/main/app.js": "/js/main/app.js?id=65a4fbd8c291e2509d61",
+    "/css/main/app.css": "/css/main/app.css?id=92d05b3d243245f9c701",
     "/admin/certidao-batismo/table.css": "/admin/certidao-batismo/table.css?id=fa11f75c89ecc55cc0ef",
     "/admin/certidao-batismo/details.css": "/admin/certidao-batismo/details.css?id=faefbcaed3bde1295202",
     "/admin/certidao-batismo/form.css": "/admin/certidao-batismo/form.css?id=a042c5d9f1c24e2cd4ca",
@@ -36,6 +37,7 @@
     "/admin/tithe/tither/css/table.css": "/admin/tithe/tither/css/table.css?id=d41d8cd98f00b204e980",
     "/admin/tithe/devolution/css/table.css": "/admin/tithe/devolution/css/table.css?id=017312d9e99be4253512",
     "/admin/tithe/devolution/css/form.css": "/admin/tithe/devolution/css/form.css?id=30198594810931eafec8",
+    "/admin/contagem/css/form.css": "/admin/contagem/css/form.css?id=399160dbc96c488f4e5f",
     "/admin/certidao-batismo/form-styles.css": "/admin/certidao-batismo/form-styles.css?id=f298d73acfec8016fe63",
     "/admin/certidao-crisma/form-styles.css": "/admin/certidao-crisma/form-styles.css?id=f298d73acfec8016fe63",
     "/admin/certidao-casamento/form-styles.css": "/admin/certidao-casamento/form-styles.css?id=f298d73acfec8016fe63"

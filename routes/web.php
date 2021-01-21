@@ -68,3 +68,6 @@ Route::resource('/tithe/devolution','Painel\Tithe\Devolution\TitherDevolutionsCo
 
 //Rotas Endereço
 Route::post('/address/seach/cep','Painel\Endereco\LogradouroController@search_cep')->name('search_cep');
+
+//Rotas Contagem
+Route::resource('/contagem','Painel\Contagem\ContagemController');

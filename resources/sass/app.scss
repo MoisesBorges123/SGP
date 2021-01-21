@@ -14,12 +14,33 @@
     margin-left: 0px;
     margin-right: 0px;
     padding-left: 0px;
-    padding-right: 0px;
+    padding-right: 0px;    
 }
 .btn-full{
     width: 100%;
 }
-
+.border-primary{
+  border-color: #6772e54d !important;
+}
+.form-control-primary{
+  border-color:var(--primary);
+}
+.divider-text{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    border-top: solid;
+    height: 0px;
+    text-align: center;
+}
+.divider-text span{
+  border: solid;
+  background-color: #fff;
+  padding: 2px 15px;
+  position: relative;
+  top: -12px;
+  font-size: 16px;
+  white-space: nowrap;
+}
 /**
 *   STYLE SEARCH DATA TABLE
 */

@@ -234,6 +234,32 @@
                     </a>
                 </li>
             </ul>
+            <h6 class="navbar-heading text-muted">Financeiro</h6>
+            <ul class="navbar-nav">     
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#contagem" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-single-02"></i>
+                        <span class="nav-link-text text-primary">{{ __('Contagem') }}</span>
+                    </a>
+
+                    <div class="collapse " id="contagem">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('contagem.create') }}">
+                                    {{ __('Contar') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('contagem.index') }}">
+                                    {{ __('Meus Controles') }}
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                
+            </ul>
             
         </div>
     </div>
