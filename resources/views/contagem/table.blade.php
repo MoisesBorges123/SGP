@@ -11,7 +11,7 @@
                     <div class="card-header border-0">
                         <div class="row ">
                             <div class="col-6">
-                                <h3 class="mb-0">Meus Dizimistas</h3>                               
+                                <h3 class="mb-0">Minhas Entradas</h3>                               
                             </div>                           
                           
                         </div>
@@ -25,9 +25,9 @@
                                 <table class="table  table-flush table-full tables" id='titherTable'>
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">Nome</th>                                    
-                                            <th scope="col">Endereço</th>
-                                            <th scope="col">Telefone</th>                                    
+                                            <th scope="col">Entrada</th>                                    
+                                            <th scope="col">Data</th>
+                                            <th scope="col">Valor</th>                                    
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -36,17 +36,13 @@
                                         @foreach($dados as $dado)
                                             <tr>
                                                 <td class="budget">
-                                                    <span>{{$dado->nome}}</span>
+                                                    <span>{{$dado['categoria']}}</span>
                                                 </td>
-                                                <td class="budget text-center">                                           
-                                                <span class="name mb-0 text-sm ">{{$dado->rua.', '.$dado->bairro.', '.$dado->numero}}
-                                                    @if(!empty($dado->apartamento))
-                                                    {{' (APTO '.$dado->apartamento.')'}}
-                                                    @endif
-                                                    {{', '.$dado->cidade.'/ '.$dado->estado_sigla}}</span>                                                
+                                                <td class="budget text-center">
+                                                    <span>{{$dado['data']}}</span>                                               
                                                 </td>
                                                 <td class="budget">
-                                                    <span>{{$dado->telefone}}</span>
+                                                    <span>{{$dado['valor']}}</span>
                                                 </td>                                                                                      
                                                 <td class="text-right">
                                                     <div class="dropdown">
@@ -54,9 +50,9 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado->id)}}">Editar</a> 
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado->id)}}">Devolver Dízimo</a> 
-                                                            <button class="dropdown-item" id='btn-excluir' data-link="{{route('tither.destroy',$dado->id)}}" >Excluir</button>
+                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado['id'])}}">Editar</a> 
+                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado['id'])}}">Devolver Dízimo</a> 
+                                                            <button class="dropdown-item" id='btn-excluir' data-link="{{route('tither.destroy',$dado['id'])}}" >Excluir</button>
                                                         </div>
                                                     </div>
                                                 </td>

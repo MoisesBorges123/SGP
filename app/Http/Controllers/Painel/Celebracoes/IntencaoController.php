@@ -56,7 +56,7 @@ class IntencaoController extends Controller
             $fn_scope = new ScopeController;            
             $escopo = array(                                
                 'date_schedule'=>$request->input('data_agendamento'),
-                'time_schedule'=>$request->input('hora_agendamento'),
+                'time_schedule'=>str_replace(' ','',$request->input('hora_agendamento')),
                 'observations'=>$request->input('observacao'),
                 'classification'=>$request->input('tipo_intencao'),
                 'claimant'=>$claimant->id,

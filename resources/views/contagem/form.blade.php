@@ -10,10 +10,10 @@
       
                 <div class="card shadow">
                     @if(empty($dados))
-                        <form action="{{route('tither.store')}}" method="post" >
+                        <form action="{{route('contagem.store')}}" method="post" >
                        
                     @else
-                        <form action="{{route('tither.update',$dados->id)}}" method="post" >
+                        <form action="{{route('contagem.update',$dados->id)}}" method="post" >
                         @method('PUT')
                         
 
@@ -29,6 +29,21 @@
                         </div>
                         <div class='card-body'>                           
                             <div class='row mt-3'> 
+                                <div class="col-6">
+                                    <label>Tipo de Entrada</label>
+                                    <select name='categor' class="form-control form-control-sm" required>
+                                        <option> - Tipo de entrada - </option>
+                                        @if(!empty($categor))
+                                            @foreach($categor as $categoria)
+                                                <option value='{{$categoria->id}}'>{{$categoria->nome}}</option>
+                                            @endforeach
+                                        @endif
+                                      </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Data Ref.</label>
+                                    <input name='referer' class="form-control form-control-sm" type="date" required>                                    
+                                </div>
                                 <div class="col-12">
                                     <div class="divider-text border-primary">
                                         <span class='border-primary'>Moedas</span>
@@ -44,7 +59,7 @@
                                         </div>
                                         <input type="number" name='moeda_5' id='moeda_5'  class='form-control form-control-primary' value="{{$dados->nome ?? '0'}}">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary btn-icon btn-sm" type="button" id="button-addon2">
+                                            <button class="btn btn-outline-primary btn-icon btn-sm btn_less" for='moeda_5' type="button" id="button-addon2">
                                                 <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
                                             </button>
                                           </div>
@@ -60,7 +75,7 @@
                                         </div>
                                         <input type="number" name='moeda_10' id='moeda_10' class='form-control form-control-primary' value="{{$dados->nome ?? '0'}}">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary btn-icon btn-sm" type="button" id="button-addon2">
+                                            <button class="btn btn-outline-primary btn-icon btn-sm btn_less" for='moeda_10' type="button" id="button-addon2">
                                                 <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
                                             </button>
                                           </div>
@@ -76,7 +91,7 @@
                                         </div>
                                         <input type="number" name='moeda_25' id='moeda_25'  class='form-control form-control-primary' value="{{$dados->nome ?? '0'}}">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary btn-icon btn-sm" type="button" id="button-addon2">
+                                            <button class="btn btn-outline-primary btn-icon btn-sm btn_less" for='moeda_25' type="button" id="button-addon2">
                                                 <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
                                             </button>
                                           </div>
@@ -92,7 +107,7 @@
                                         </div>
                                         <input type="number" name='moeda_50' id='moeda_50'  class='form-control form-control-primary' value="{{$dados->nome ?? '0'}}">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary btn-icon btn-sm" type="button" id="button-addon2">
+                                            <button class="btn btn-outline-primary btn-icon btn-sm btn_less" for='moeda_50' type="button" id="button-addon2">
                                                 <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
                                             </button>
                                           </div>
@@ -216,16 +231,21 @@
                                           </div>
                                       </div>                             
                                 </div>                             
-                              
-                                <div  class="col-12">
-                                    <label for="nota_100"><b>Cheque (Valor Total R$)</b></label>
-                                    <input type="text" name='moeda_100' id='moeda_100'  class='form-control-sm form-control-primary' value="{{$dados->nome ?? '0'}}">
+                                <div class="col-12 mb-3">
+                                    <div class="divider-text border-primary">
+                                        <span class='border-primary'>Cheque</span>
+                                    </div>
                                 </div>
-                                
-                                
-
+                                <div class="col-12">
+                                    <label for="cheque"><b>Cheque (Valor Total R$)</b></label>
+                                    <div class="input-group mb-3  input-group-sm">                                       
+                                        <input type="text" name='cheque' id='cheque'  class='form-control form-control-primary money2' value="{{$dados->nome ?? '0'}}">                                       
+                                      </div>                             
+                                </div>
+                                <div class="col-12">
+                                    <span id="total"  title="Total">R$ 0,00</span>
+                                </div>
                             </div>
-                    
                         </div>
                         <div class='card-footer justify-content-center text-center'>
                             @if(!empty($dados))
