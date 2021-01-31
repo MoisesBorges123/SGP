@@ -24,7 +24,7 @@
                                 <a href="{{route('intentions.create')}}" class="btn btn-sm btn-primary">Nova Intenção</a>
                             </div>
                             <div class="col-1">
-                                <button id='old_intentions' data-link="{{route('intentions.index')}}" class="btn btn-sm btn-default">Intenções Antigas</button>
+                                <button id='old_intentions' data-link="{{route('intentions.index')}}" class="btn btn-sm btn-default">Filtrar Intenções</button>
                             </div>
                         </div>
                         

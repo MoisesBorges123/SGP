@@ -162,7 +162,7 @@ $(document).on('click', '#old_intentions', async function () {
 
     // @ts-ignore
     var busca = await swal.fire({
-        title: 'Intenções Antigas',
+        title: 'Filtrar Intenções por data',
         html: "<form method='GET' id='search-intention' action='" + $(this).data('link') + "'>" +
             "<div class='row'>" +
             "<div class='col-6'>" +

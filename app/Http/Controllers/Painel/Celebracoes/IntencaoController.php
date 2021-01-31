@@ -146,7 +146,7 @@ class IntencaoController extends Controller
             $pessoa = array(
                 'nome'=>$request->input('pessoa')
             );
-            dd($pessoa);
+            
             $fn_people = new PessoasController;
             $claimant = $fn_people->store($personRequired);
             $person = $fn_people->store($pessoa);
