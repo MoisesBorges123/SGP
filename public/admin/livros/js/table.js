@@ -51962,7 +51962,7 @@ function createTextarea(name, label, placeholder) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\livros\table.js */"./resources/js/livros/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\livros\table.js */"./resources/js/livros/table.js");
 
 
 /***/ })

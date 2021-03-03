@@ -1,8 +1,17 @@
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+
+.form-control.form-control-uppercase {
+  text-transform: uppercase;
+}
 .tables{
 
     min-height: 120px !important;
     
+}
+.radio-inline{
+    display: inline-block;
+    margin-right: 20px;
 }
 .table-full{
     width: 100% !important;
@@ -872,4 +881,4 @@ button.bg-translucent-darker:focus
   .show > .btn-outline-darker.dropdown-toggle:focus {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
   }
-  
+ 

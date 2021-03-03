@@ -145,8 +145,7 @@ class IntencaoController extends Controller
             );
             $pessoa = array(
                 'nome'=>$request->input('pessoa')
-            );
-            
+            );            
             $fn_people = new PessoasController;
             $claimant = $fn_people->store($personRequired);
             $person = $fn_people->store($pessoa);
@@ -378,7 +377,7 @@ class IntencaoController extends Controller
                      'typeIntention'=>$typeIntention->classe,
                      'intention'=>$intention,
                      'claimant'=>$claimant->nome,
-                     'phone'=>$phone,
+                     'phone'=>!empty($phone) ? $phone->telefone : '',
                      'intention_group'=> $typeIntention->name == 'Falecidos' ? 'Falecimento' : $typeIntention->name,
                      'observations' =>$value->observations,
                      'complement' => $value->complement,

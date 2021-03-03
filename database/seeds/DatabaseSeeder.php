@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassesIntentionsSeeder::class);
         $this->call(EstadosTableSeeder::class);        
         $this->call(CountCategorSeeder::class);
+        $this->call(TypeCarSeeder::class);
+        $this->call(PaymentSeeder::class);
     }
 }

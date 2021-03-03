@@ -181,7 +181,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\schedule_celebration\speech_recognize.js */"./resources/js/schedule_celebration/speech_recognize.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\schedule_celebration\speech_recognize.js */"./resources/js/schedule_celebration/speech_recognize.js");
 
 
 /***/ })

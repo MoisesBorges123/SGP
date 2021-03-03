@@ -50253,7 +50253,7 @@ $(document).on('click', '#old_intentions', /*#__PURE__*/_asyncToGenerator( /*#__
         case 0:
           _context2.next = 2;
           return swal.fire({
-            title: 'Intenções Antigas',
+            title: 'Filtrar Intenções por data',
             html: "<form method='GET' id='search-intention' action='" + $(this).data('link') + "'>" + "<div class='row'>" + "<div class='col-6'>" + "<label>Data Inicio</label>" + "<input class='form-control' name='begin' type='date'/>" + "</div>" + "<div class='col-6'>" + "<label>Data Fim</label>" + "<input class='form-control' name='end' type='date'/>" + "</div>" + "</div>" + "</form>",
             confirmButtonText: "Buscar..."
           });
@@ -50506,7 +50506,7 @@ function phoneValidate(telefone) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\intentions\table.js */"./resources/js/intentions/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\intentions\table.js */"./resources/js/intentions/table.js");
 
 
 /***/ })

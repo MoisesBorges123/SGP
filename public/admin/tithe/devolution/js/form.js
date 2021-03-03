@@ -50386,7 +50386,7 @@ $('.money2').mask("#.##0,00", {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\tithe\devolution\form.js */"./resources/js/tithe/devolution/form.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\tithe\devolution\form.js */"./resources/js/tithe/devolution/form.js");
 
 
 /***/ })

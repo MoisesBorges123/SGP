@@ -49814,7 +49814,7 @@ $(document).on('click', '#btn-excluir', /*#__PURE__*/_asyncToGenerator( /*#__PUR
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\tithe\tither\table.js */"./resources/js/tithe/tither/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\tithe\tither\table.js */"./resources/js/tithe/tither/table.js");
 
 
 /***/ })

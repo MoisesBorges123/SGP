@@ -73,4 +73,12 @@ mix
      */
     .sass('resources/sass/contagem/form.scss','public/admin/contagem/css/')
     .js('resources/js/contagem/form.js','public/admin/contagem/js/')
+    /**
+     * SCRIPTS ESTACIONAMENTO
+     */
+    .sass('resources/sass/estacionamento/fluxo/table.scss','public/admin/estacionamento/fluxo/css/')
+    .js('resources/js/estacionamento/fluxo/table.js','public/admin/estacionamento/fluxo/js/')
+
+    .sass('resources/sass/estacionamento/tablePrice/form.scss','public/admin/estacionamento/table-price/css/')
+    .js('resources/js/estacionamento/tablePrice/form.js','public/admin/estacionamento/table-price/js/')
     .version();

@@ -114,8 +114,17 @@
     overflow: auto !important;
   }
 }
+.form-control.form-control-uppercase {
+  text-transform: uppercase;
+}
+
 .tables {
   min-height: 120px !important;
+}
+
+.radio-inline {
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .table-full {

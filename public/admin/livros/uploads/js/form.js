@@ -18501,7 +18501,7 @@ window.addEventListener('DOMContentLoaded', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\livros\uploads\form.js */"./resources/js/livros/uploads/form.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\livros\uploads\form.js */"./resources/js/livros/uploads/form.js");
 
 
 /***/ })

@@ -104,7 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\tithe\devolution\table.js */"./resources/js/tithe/devolution/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\tithe\devolution\table.js */"./resources/js/tithe/devolution/table.js");
 
 
 /***/ })

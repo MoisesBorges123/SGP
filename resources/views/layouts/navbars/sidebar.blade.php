@@ -77,6 +77,7 @@
                 </div>
             </form>
             <!-- Navigation -->
+            @if(auth()->user()->name != 'Estacionamento')
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
@@ -87,6 +88,62 @@
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
+            @endif
+            <h6 class="navbar-heading text-muted">Estacionamento</h6>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('parking.create') }}">
+                        <i class="ni ni-bus-front-12 text-primary"></i> <b class='text-primary'>{{ __('Entrada / Saída') }}</b>
+                    </a>
+                </li>     
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#mensalistas" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-single-copy-04"></i>
+                        <span class="nav-link-text text-primary">{{ __('Mensalistas') }}</span>
+                    </a>
+
+                    <div class="collapse " id="mensalistas">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
+                                    {{ __('Novo Mensalista') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
+                                    {{ __('Pagamentos') }}
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-default" href="#tablePrice" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-single-copy-04"></i>
+                        <span class="nav-link-text text-primary">{{ __('Preços') }}</span>
+                    </a>
+
+                    <div class="collapse " id="tablePrice">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('table-price.create') }}">
+                                    {{ __('Novos Preços') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
+                                    {{ __('Tabela de Preços') }}
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                
+
+            </ul>
+            @if(auth()->user()->name != 'Estacionamento')
             <h6 class="navbar-heading text-muted">Registros</h6>
             
             <ul class="navbar-nav">     
@@ -260,7 +317,7 @@
                 </li>
                 
             </ul>
-            
+            @endif
         </div>
     </div>
 </nav>

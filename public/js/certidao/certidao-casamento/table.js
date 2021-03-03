@@ -51968,7 +51968,7 @@ function fill_datatable() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_catedralv3\resources\js\certidoes\certidao-casamento\table.js */"./resources/js/certidoes/certidao-casamento/table.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\certidoes\certidao-casamento\table.js */"./resources/js/certidoes/certidao-casamento/table.js");
 
 
 /***/ })
