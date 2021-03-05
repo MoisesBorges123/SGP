@@ -29,7 +29,7 @@ class CardHeader extends Component
         $this->bodyIcon     =   $bodyIcon;
         $this->footerNumber =   $footerNumber;
         $this->footerIcon   =   $footerIcon;
-        $this->footerText   =   $footerText;
+        $this->footerText   =   $footerText ;
         $this->color        =   $color;
         $this->url          =   $url;
         $this->identify     =   $identify;

@@ -14,7 +14,8 @@ class Payment extends Model
         'justify_discount',
         'table_price',
         'payed',
-        'modality'
+        'modality',
+        'date_payed'
     ];
     public $timestamps=true;
 }

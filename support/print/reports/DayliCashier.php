@@ -13,7 +13,7 @@ date_default_timezone_set('America/Sao_Paulo');
           
                 $printer->selectPrintMode(32);
                 $printer->setJustification(Printer::JUSTIFY_CENTER);               
-                $printer->setTextSize(2,2);                
+                $printer->setTextSize(3,3);                
                 $printer -> text("Relatório de Caixa do dia ".date('d/m/Y',time())."\n\n");   
 				
                 $printer->setJustification(Printer::JUSTIFY_LEFT);

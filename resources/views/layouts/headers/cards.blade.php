@@ -13,9 +13,9 @@
                         headerNumber="{!! $card['headerNumber'] !!}" 
                         bodyIcon="{!! $card['bodyIcon'] !!}"  
                         color="{{  $card['color']  }}"   
-                        footerNumber=""
-                        footerIcon=""
-                        footerText="{!!  $card['footerText']  ?? '' !!}" 
+                        footerNumber="{!!  empty($card['footerNumber']) ? '' : $card['footerNumber'] !!}"
+                        footerIcon="{!!  empty($card['footerIcon']) ? '' : $card['footerIcon'] !!}"
+                        footerText="{!!  empty($card['footerText']) ? '' : $card['footerText'] !!}" 
                         url="{{$card['url']}}"
                         identify="{{$card['identify'] ?? ''}}"
                         > 
