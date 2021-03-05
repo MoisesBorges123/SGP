@@ -132,8 +132,10 @@
     <meta name='parkingOut_show' content="{{route('parking-out.show')}}">
     <meta name='parkingOut_store' content="{{route('parking-out.store')}}">
     <meta name='fetchPrice' content="{{route('table-price.fetch')}}">
+    <meta name='parkingReportCashier' content="{{route('report.reportDaily')}}">
     <meta name='printOut' content="http://192.168.0.21/estacionamento_catedral/print/saida/PrintOut.php">
     <meta name='printIn' content="http://192.168.0.21/estacionamento_catedral/print/entrada/PrintIn.php">
+    <meta name='printReportCashier' content="http://192.168.0.21/estacionamento_catedral/print/report/DayliCashier.php">
     <!-- Main Style Css -->    
     <link rel="stylesheet" href="{{mix('admin/estacionamento/fluxo/css/table.css')}}"/>
 

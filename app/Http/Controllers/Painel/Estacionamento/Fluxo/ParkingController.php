@@ -127,39 +127,41 @@ class ParkingController extends Controller
         
         $card =array(
             [
-                'headerText'=>'Intenções p/ <b>HOJE</b>',
+                'headerText'=>'Faturamento do Dia',
                 'headerNumber'=> 0,
-                'bodyIcon'=>'<i class="fas fa-calendar-check"></i>',
+                'bodyIcon'=>'<i class="ni ni-money-coins"></i>',
                 'color'=>'bg-green',
                 'url'=>route('certidao-batismo.filter',1),
-                
+                'footerText'=>'<button id="btn-print-caixa" class="btn btn-primary btn-sm">Imprimir Relatório</button>'
                 
             ],
             [
-                'headerText'=> 'Intenções p/ Amanhã',
+                'headerText'=> 'Carros Estacionados',
                 'headerNumber'=>0,
-                'bodyIcon'=>'<i class="fas fa-history"></i>',
+                'bodyIcon'=>'<i class="ni ni-bus-front-12"></i>',
                 'color'=>'bg-warning',
                 'url'=>'',
+                'footerText'=>'',
                 
                 
             ],
             [
-                'headerText'=>'Intenções Falecidos',
+                'headerText'=>'Valor a receber',
                 'headerNumber'=>0,
-                'bodyIcon'=>'<i class="fas fa-dizzy"></i>',
+                'bodyIcon'=>'<i class="ni ni-chart-pie-35"></i>',
                 'color'=>'bg-yellow',
                 'url'=>'',
-                
+                'footerText'=>'',
                 
             ],
             [
-                'headerText'=>'Avisos Sacristia',
+                'headerText'=>'Total Mensalistas',
                 'headerNumber'=>0,
-                'bodyIcon'=>'<i class="fas fa-bell"></i>',
+                'bodyIcon'=>'<i class="ni ni-diamond"></i>',
                 'color'=>'bg-info',
                 'url'=>'',
-                'identify'=>'avisos'
+                'identify'=>'avisos',
+                'footerText'=>'',
             ]           
             
         );

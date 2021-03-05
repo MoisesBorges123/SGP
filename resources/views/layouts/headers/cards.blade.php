@@ -6,6 +6,7 @@
             <!-- Card stats -->
             <div class="row">
                 @foreach($header as $card)
+               
                     <x-card-header 
                         
                         headerText="{!! $card['headerText'] !!}" 
@@ -14,7 +15,7 @@
                         color="{{  $card['color']  }}"   
                         footerNumber=""
                         footerIcon=""
-                        footerText="" 
+                        footerText="{!!  $card['footerText']  ?? '' !!}" 
                         url="{{$card['url']}}"
                         identify="{{$card['identify'] ?? ''}}"
                         > 

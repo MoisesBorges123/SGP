@@ -55178,6 +55178,87 @@ $(document).on('click', '#btn-pg-sair', /*#__PURE__*/_asyncToGenerator( /*#__PUR
     }
   }, _callee2);
 })));
+$(document).on('click', '#btn-print-caixa', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  var deficit, obs, deficit_value, imprimir, dados, printDados, data;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          deficit = createInput('deficit', 'Diferença', 'text', true);
+          obs = '';
+          deficit_value = 0;
+          _context3.next = 5;
+          return Swal.fire({
+            title: 'Relatório de Caixa Diário',
+            html: "<div class='row'>" + "<div class='col-4'>" + deficit.label + "</div>" + "<div class='col-12 mb-3'>" + deficit.input + "</div>" + "<div class='col-4'><label>Observações</label></div>" + "<div class='col-12'><textarea rows='5' name='observacao' id='id_observacao' class='form-control'></textarea></div>" + "</div>",
+            onRender: function onRender() {
+              $('#id_deficit').mask("#.##0,00", {
+                reverse: true
+              });
+            },
+            confirmButtonText: 'Imprimir!',
+            cancelButtonText: 'Cancelar.',
+            showCancelButton: true,
+            preConfirm: function preConfirm() {
+              obs = $('#id_observacao').val();
+              deficit_value = $('#id_deficit').val();
+            }
+          });
+
+        case 5:
+          imprimir = _context3.sent;
+
+          if (!imprimir.value) {
+            _context3.next = 14;
+            break;
+          }
+
+          dados = new FormData();
+          dados.append('observacoes', obs);
+          dados.append('deficit', deficit_value);
+          _context3.next = 12;
+          return fetch($('meta[name="parkingReportCashier"]').attr('content'), {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: dados,
+            headers: {
+              'X-CSRF-TOKEN': _token
+            }
+          }).then(function (result) {
+            if (result.ok) {
+              return result.json();
+            } else {
+              return false;
+            }
+          });
+
+        case 12:
+          printDados = _context3.sent;
+
+          if (printDados != false) {
+            data = new FormData();
+            data.append('observacoes', printDados.observacoes);
+            data.append('deficit', printDados.deficit);
+            data.append('tn_mensalidade', printDados.tn_mensalidade);
+            data.append('tn_rotativo', printDados.tn_rotativo);
+            data.append('tv_geral', printDados.tv_geral);
+            data.append('tv_mensalidade', printDados.tv_mensalidade);
+            data.append('tv_rotativo', printDados.tv_rotativo);
+            fetch($('meta[name="printReportCashier"]').attr('content'), {
+              method: 'POST',
+              credentials: 'same-origin',
+              body: data,
+              mode: 'no-cors'
+            });
+          }
+
+        case 14:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
+})));
 
 function montarTable() {
   fetch($('meta[name="parking_index"]').attr('content'), {
@@ -55232,7 +55313,7 @@ function saidaEstacionamento(_x2) {
 }
 
 function _saidaEstacionamento() {
-  _saidaEstacionamento = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(cod) {
+  _saidaEstacionamento = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(cod) {
     var pago,
         dinheiro,
         desconto,
@@ -55243,18 +55324,18 @@ function _saidaEstacionamento() {
         url_calc,
         data,
         calc,
-        _args3 = arguments;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        _args4 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            pago = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : '';
-            dinheiro = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : '';
-            desconto = _args3.length > 3 && _args3[3] !== undefined ? _args3[3] : '';
-            justificativa = _args3.length > 4 && _args3[4] !== undefined ? _args3[4] : '';
-            troco = _args3.length > 5 && _args3[5] !== undefined ? _args3[5] : '';
-            imprimir = _args3.length > 6 && _args3[6] !== undefined ? _args3[6] : '';
-            server = _args3.length > 7 && _args3[7] !== undefined ? _args3[7] : '';
+            pago = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : '';
+            dinheiro = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : '';
+            desconto = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : '';
+            justificativa = _args4.length > 4 && _args4[4] !== undefined ? _args4[4] : '';
+            troco = _args4.length > 5 && _args4[5] !== undefined ? _args4[5] : '';
+            imprimir = _args4.length > 6 && _args4[6] !== undefined ? _args4[6] : '';
+            server = _args4.length > 7 && _args4[7] !== undefined ? _args4[7] : '';
             url_calc = $('meta[name="parkingOut_store"]').attr('content');
             data = new FormData();
             data.append('cod', cod);
@@ -55281,7 +55362,7 @@ function _saidaEstacionamento() {
                 data.append('duracao_token','');
                } */
 
-            _context3.next = 21;
+            _context4.next = 21;
             return fetch(url_calc, {
               method: 'POST',
               credentials: "same-origin",
@@ -55315,15 +55396,15 @@ function _saidaEstacionamento() {
             });
 
           case 21:
-            calc = _context3.sent;
-            return _context3.abrupt("return", calc);
+            calc = _context4.sent;
+            return _context4.abrupt("return", calc);
 
           case 23:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _saidaEstacionamento.apply(this, arguments);
 }
@@ -55333,14 +55414,14 @@ function calc_estacionamento(_x3) {
 }
 
 function _calc_estacionamento() {
-  _calc_estacionamento = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(cod) {
+  _calc_estacionamento = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(cod) {
     var link;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             link = $('meta[name="parkingOut_show"]').attr('content') + '/' + cod;
-            return _context4.abrupt("return", fetch(link).then(function (result) {
+            return _context5.abrupt("return", fetch(link).then(function (result) {
               if (result.ok) {
                 return result.json();
               } else {
@@ -55352,10 +55433,10 @@ function _calc_estacionamento() {
 
           case 2:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _calc_estacionamento.apply(this, arguments);
 }

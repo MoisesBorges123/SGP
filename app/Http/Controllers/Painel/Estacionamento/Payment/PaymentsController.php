@@ -21,7 +21,11 @@ class PaymentsController extends Controller
     }
     public static function update($payment){
         $pay = Payment::where('id',$payment['payment_id'])->first();
+        $payment['date_payed'] = date('Y-m-d',time());
         $update = $pay->update($payment);
         return $update;
+    }
+    public static function show($date){
+        return Payment::where('date_payed',$date)->get();
     }
 }

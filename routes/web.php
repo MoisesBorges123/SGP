@@ -73,6 +73,7 @@ Route::post('/address/seach/cep','Painel\Endereco\LogradouroController@search_ce
 Route::resource('/contagem','Painel\Contagem\ContagemController');
 
 //Rotas Estacionamento
+Route::post('/parking/report/daily-cashier','Painel\Estacionamento\Analyse\ReportController@reportDaily')->name('report.reportDaily');
 Route::post('/table-price/fetch','Painel\Estacionamento\TablePrice\TablePriceController@fetch')->name('table-price.fetch');
 Route::post('parking/out','Painel\Estacionamento\Fluxo\Out_ParkingController@store')->name('parking-out.store');
 Route::get('/parking/out/{id?}','Painel\Estacionamento\Fluxo\Out_ParkingController@show')->name('parking-out.show');

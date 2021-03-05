@@ -573,6 +573,66 @@ $(document).on('click','#btn-pg-sair',async function(){
     }
     montarTable();
  });
+$(document).on('click','#btn-print-caixa',async function(){
+    
+    var deficit = createInput('deficit','Diferença','text',true);
+    var obs='';
+    var deficit_value=0;
+    var imprimir = await Swal.fire({
+        title:'Relatório de Caixa Diário',
+        html:"<div class='row'>"
+            +"<div class='col-4'>"+deficit.label+"</div>"
+            +"<div class='col-12 mb-3'>"+deficit.input+"</div>"
+            +"<div class='col-4'><label>Observações</label></div>"
+            +"<div class='col-12'><textarea rows='5' name='observacao' id='id_observacao' class='form-control'></textarea></div>"
+        +"</div>",
+        onRender:()=>{
+            $('#id_deficit').mask("#.##0,00", {reverse: true});
+        },
+        confirmButtonText:'Imprimir!',
+        cancelButtonText:'Cancelar.',
+        showCancelButton:true,
+        preConfirm:function(){
+            obs = $('#id_observacao').val();
+            deficit_value = $('#id_deficit').val();
+        }
+    });
+    if(imprimir.value){
+        var dados = new FormData();
+        dados.append('observacoes',obs);
+        dados.append('deficit',deficit_value);
+        var printDados = await fetch($('meta[name="parkingReportCashier"]').attr('content'),{ 
+            method:'POST',
+            credentials:'same-origin',
+            body:dados,
+            headers:{
+                'X-CSRF-TOKEN':_token,
+            },            
+        }).then((result)=>{
+            if(result.ok){
+                return result.json();
+            }else{
+                return false
+            }
+        });
+        if(printDados != false){
+            var data = new FormData();
+            data.append('observacoes',printDados.observacoes);
+            data.append('deficit',printDados.deficit);
+            data.append('tn_mensalidade',printDados.tn_mensalidade);
+            data.append('tn_rotativo',printDados.tn_rotativo);
+            data.append('tv_geral',printDados.tv_geral);
+            data.append('tv_mensalidade',printDados.tv_mensalidade);
+            data.append('tv_rotativo',printDados.tv_rotativo);
+            fetch($('meta[name="printReportCashier"]').attr('content'),{ 
+                method:'POST',
+                credentials:'same-origin',
+                body:data,
+                mode: 'no-cors'
+            });
+        }
+    }
+});
 function montarTable(){
    
     fetch($('meta[name="parking_index"]').attr('content'),{'method':'GET'}).then((result)=>{
