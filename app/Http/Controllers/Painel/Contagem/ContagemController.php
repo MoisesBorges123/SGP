@@ -145,10 +145,27 @@ class ContagemController extends Controller
 
     public function show($contagem)
     {
+        $total_controlers = count($contagem['id']);
+        for($i=0;$total_controlers<$i,$i++){
+            DB::table('contagem')
+        ->join('coins','coins.id','=','contagem.coin')
+        ->join('countcategor','countcategor.id','=','contagem.categor')
+        ->join('banknotes','banknotes.id','=','contagem.banknote')
+        ->where('contagem.referer','like',date('Y-m',time()).'-%')
+        ->where('contagem.id',$contagem['id'][$i])
+        ->select('countcategor.id as id_categor','contagem.id as id', 'countcategor.nome as nome','contagem.referer as referer',
+        'coins.5 as moeda_5','coins.10 as moeda_10','coins.25 as moeda_25','coins.50 as moeda_50','coins.100 as moeda_100',
+        'banknotes.2 as nota_2','banknotes.5 as nota_5', 'banknotes.check as check','banknotes.10 as nota_10','banknotes.20 as nota_20','banknotes.50 as nota_50','banknotes.100 as nota_100')
+        ->get();
+            
         $pdf = new Fpdf();       
         $pdf::AddPage('L','A4');
         $pdf::SetFont('Arial','B',13); 
-        $pdf::Cell(140,10,'Mitra Diocesana de Teófilo Otoni',1,1,'C');
+        $pdf::Cell(140,10,utf8_decode('Controle de Numerários'),1,1,'C');
+        $pdf::Cell(140,10,utf8_decode('Mitra Diocesana de Teófilo Otoni'),1,1,'C');
+        $pdf::Cell(140,10,utf8_decode('Mitra Diocesana de Teófilo Otoni'),1,1,'C');
+        }
+        
         $pdf::Output('I','Intenção - dia-hora missa',true);  
         exit;
     }

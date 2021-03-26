@@ -50,7 +50,7 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            <a class="dropdown-item"  href="{{route('contagem.show',$dado['id'])}}">Imprimir</a> 
+                                                            <a class="dropdown-item"  href="{{route('contagem.show',['id'=>$dado['id']])}}">Imprimir</a> 
                                                             <a class="dropdown-item"  href="7">Editar</a> 
                                                             <button class="dropdown-item" id='btn-excluir' data-link="" >Excluir</button>
                                                         </div>
