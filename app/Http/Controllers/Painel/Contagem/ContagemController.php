@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Painel\Contagem;
 
+use Codedge\Fpdf\Facades\Fpdf;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Contagem\Contagem;
 use App\Http\Controllers\Painel\Contagem\CoinsController;
@@ -16,6 +17,40 @@ class ContagemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+        $header = $this->header();
+        $title = 'Meus Controles';
+        $dadosdb = DB::table('contagem')
+        ->join('coins','coins.id','=','contagem.coin')
+        ->join('countcategor','countcategor.id','=','contagem.categor')
+        ->join('banknotes','banknotes.id','=','contagem.banknote')
+        ->where('contagem.referer','like',date('Y-m',time()).'-%')
+        ->select('countcategor.id as id_categor','contagem.id as id', 'countcategor.nome as nome','contagem.referer as referer',
+        'coins.5 as moeda_5','coins.10 as moeda_10','coins.25 as moeda_25','coins.50 as moeda_50','coins.100 as moeda_100',
+        'banknotes.2 as nota_2','banknotes.5 as nota_5', 'banknotes.check as check','banknotes.10 as nota_10','banknotes.20 as nota_20','banknotes.50 as nota_50','banknotes.100 as nota_100')
+        ->get();   
+        //dd($dadosdb);     
+        $dados =[];
+        foreach($dadosdb as $register){
+            $total = ($register->moeda_5*0.05)+
+                    ($register->moeda_10*0.10)+
+                    ($register->moeda_25*0.25)+
+                    ($register->moeda_50*0.50)+
+                    ($register->moeda_100*1.00)+
+                    ($register->nota_2*2.00)+
+                    ($register->nota_5*5.00)+
+                    ($register->nota_10*10.00)+
+                    ($register->nota_20*20.00)+
+                    ($register->nota_50*50.00)+
+                    ($register->nota_100*100.00)+
+                    ($register->check);
+            $dados[]=['id'=>$register->id,'categoria'=>$register->nome,'data'=>date('d/m/Y',strtotime($register->referer)),'valor'=>'R$ '.number_format($total,2,',','.')];
+        }
+        //dd($dados);     
+        return view('contagem.table',compact('title','header','dados'));
+    }
+    public function index2()
     {
         //
         $header = $this->header();
@@ -108,9 +143,14 @@ class ContagemController extends Controller
         
     }
 
-    public function show(Contagem $contagem)
+    public function show($contagem)
     {
-        //
+        $pdf = new Fpdf();       
+        $pdf::AddPage('L','A4');
+        $pdf::SetFont('Arial','B',13); 
+        $pdf::Cell(140,10,'Mitra Diocesana de Teófilo Otoni',1,1,'C');
+        $pdf::Output('I','Intenção - dia-hora missa',true);  
+        exit;
     }
 
     public function edit(Contagem $contagem)

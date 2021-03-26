@@ -38,8 +38,8 @@
                                                 <td class="budget">
                                                     <span>{{$dado['categoria']}}</span>
                                                 </td>
-                                                <td class="budget text-center">
-                                                    <span>{{$dado['data']}}</span>                                               
+                                                <td class="budget">
+                                                    <span >{{$dado['data']}}</span>                                               
                                                 </td>
                                                 <td class="budget">
                                                     <span>{{$dado['valor']}}</span>
@@ -50,9 +50,9 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado['id'])}}">Editar</a> 
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado['id'])}}">Devolver Dízimo</a> 
-                                                            <button class="dropdown-item" id='btn-excluir' data-link="{{route('tither.destroy',$dado['id'])}}" >Excluir</button>
+                                                            <a class="dropdown-item"  href="{{route('contagem.show',$dado['id'])}}">Imprimir</a> 
+                                                            <a class="dropdown-item"  href="7">Editar</a> 
+                                                            <button class="dropdown-item" id='btn-excluir' data-link="" >Excluir</button>
                                                         </div>
                                                     </div>
                                                 </td>
