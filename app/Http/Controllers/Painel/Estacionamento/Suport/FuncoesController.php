@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Painel\Estacionamento\Precos\TablePrice;
 use App\Models\Painel\Estacionamento\Precos\MotocyclePrice;
 use App\Models\Painel\Estacionamento\Precos\CarPrice;
+use App\Models\Painel\Estacionamento\Views\Monthly;
+use App\Models\Painel\Estacionamento\Views\ParkingCar;
+use App\Http\Controllers\Painel\Estacionamento\Payment\PaymentsController;
 
 class FuncoesController extends Controller
 {
@@ -183,6 +186,7 @@ class FuncoesController extends Controller
         //  ||======================================RETORNO============================================================||           
         /*  ||      */  return array(
             'valor'=>"R$ ".number_format($valor,2,',','.'),
+            'valueFloat'=>$valor,
             'duracao'=>$duracao,
             'mensalista'=>$mensalista,
             'free'=>$free,
@@ -198,6 +202,26 @@ class FuncoesController extends Controller
             'tipo_veiculo'=>$tipo_veiculo,
             'placa'=>$placa);//             ||
         //  ||=========================================================================================================||
+    }
+    public static function calc_header(){
+        $dailyCashier = PaymentsController::show(date('Y-m-d',time()));
+        $total_card1 = $dailyCashier->sum('value') - $dailyCashier->sum('discount');
+        $total_card2 = sprintf("%02d",ParkingCar::all()->count());        
+        $total_card4 = sprintf("%02d",Monthly::all()->count());
+        $total_card3 = 0;
+        $carsParked = ParkingCar::all();
+        foreach($carsParked as $dado){
+            $values = FuncoesController::calc_estacionamento($dado);
+            $total_card3+=$values['valueFloat'];          
+            
+        }
+
+        return array(
+            'card1'=>'R$ '.number_format($total_card1,2,',','.'),
+            'card2'=>$total_card2,
+            'card3'=>'R$ '.number_format($total_card3,2,',','.'),
+            'card4'=>$total_card4,
+        );
     }
 
 }

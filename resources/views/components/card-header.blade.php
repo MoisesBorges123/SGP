@@ -15,7 +15,7 @@
                         
                     @endif
                 </h5>
-                    <span class="h2 font-weight-bold mb-0">{{$headerNumber ?? ''}}</span>
+                    <span class="h2 font-weight-bold mb-0 ">{!!$headerNumber ?? ''!!}</span>
                 </div>
                 <div class="col-4">
                     <div class="icon icon-shape bg-info text-white rounded-circle shadow {{  $color ?? '' }}">

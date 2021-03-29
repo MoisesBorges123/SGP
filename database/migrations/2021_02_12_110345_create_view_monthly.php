@@ -18,17 +18,25 @@ class CreateViewMonthly extends Migration
             "CREATE VIEW monthlyview as 
             select 
                 vehicle.id as 'vehicle_id',
+                vehicle.typevehicle as 'typevehicle',
                 vehicle.placa as 'placa',
                 parking.id as 'parking_id',
                 pessoas.nome as 'owner',
                 pessoas.id as 'owner_id',
-                payments.id as 'payment_id'
+                payments.id as 'payment_id',
+                timeparking.date_in as 'beginning',
+                timeparking.date_out as 'end'
+
             from 
                 parking,
                 payments,
                 vehicle,
-                pessoas
+                pessoas,
+                timeparking,
+                telefone
+            inn
             where 
+                timeparking.id = parking.time and
                 parking.payment!='' and
                 payments.modality='Mensalidade' and
                 parking.payment = payments.id and

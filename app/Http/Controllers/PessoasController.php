@@ -36,7 +36,7 @@ class PessoasController extends Controller
         $validated = $this->validation($dados);
         if(!$validated->fails()){
             $pessoa = new Pessoa;
-            $existe=DB::table('pessoas')->where('nome',$dados['nome'])->first();
+            $existe=$pessoa->where('nome',$dados['nome'])->first();
             if(!$existe){
                 $insert=$pessoa->create($dados);   
                 $dados['pessoa'] = $insert->id;
@@ -50,9 +50,16 @@ class PessoasController extends Controller
                 );
                 TelefoneController::store($dadosTelefone);               
                 
-            }             
+            }       
+           
             }else{
+                if(!empty($dados['email'])){
+                       
+                    $existe->update(['email'=>$dados['email']]);
+                    $existe=DB::table('pessoas')->where('nome',$dados['nome'])->first();
+                }
                 $insert = $existe;
+
             }
             
            return $insert;

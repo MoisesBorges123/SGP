@@ -1,6 +1,5 @@
 
 window._ = require('lodash');
-// @ts-ignore
 window.$ = window.jQuery = require('jquery');
 require('datatables.net-bs4');
 require('datatables.net-dt');
@@ -15,10 +14,12 @@ headers: {
     'X-CSRF-TOKEN': _token
 }
 });
+
 montarTable();
+fetchHeader();
 setInterval(() => {          
     montarTable();
-   
+    fetchHeader();
  }, 60000);      
  const Toast = Swal.mixin({
     toast: true,
@@ -122,6 +123,7 @@ $(document).on('click','#btn-entrar',function(){
             icon:'info'
         })
     }
+    fetchHeader();
 });
 $(document).on('click','.btn-edit',function(){
     var id = $(this).data('time');
@@ -249,7 +251,7 @@ $(document).on('click','.btn-edit',function(){
         }
         montarTable();
     });
- 
+    fetchHeader();
     
 });
 $(document).on('click','.btn-delete',function(){
@@ -337,6 +339,7 @@ $(document).on('click','.btn-delete',function(){
         }
     });
     montarTable();
+    fetchHeader();
 });
 $(document).on('input','#id_desconto',function(){
     if($('#id_desconto').val()==0 || $('#id_desconto').val()=='' || $('#id_desconto').val()==null ){
@@ -494,6 +497,7 @@ $(document).on('click','#btn-pg-sair',async function(){
             onOpen:()=>{                    
                     $('#id_pago').addClass('money2');
                     $('#id_desconto').addClass('money2');
+                    $('#id_troco').addClass('heading-title text-warning');
                     $('#id_troco').prop('disabled',true);
                     $('#id_troco').val('R$ 0,00');
                     $('.justificativa').hide();
@@ -548,7 +552,7 @@ $(document).on('click','#btn-pg-sair',async function(){
                  
                 //console.log('Dinheiro: '+dinheiro+'\nDesconto: '+desconto+'\nJustificativa: '+justificativa+'\nTroco: '+troco+'\nImprimir: '+imprimir);
                 var efetuaPagamento = await saidaEstacionamento(cod,pg,dinheiro,desconto,justificativa,troco,imprimir,dados);
-             
+                
                 if(efetuaPagamento){
                     if(efetuaPagamento.pagamento){
                         Toast.fire({
@@ -572,6 +576,7 @@ $(document).on('click','#btn-pg-sair',async function(){
         }
     }
     montarTable();
+    fetchHeader();
  });
 $(document).on('click','#btn-print-caixa',async function(){
     
@@ -650,16 +655,18 @@ function montarTable(){
         var btn_geraChave='';
         var icone_veiculo=null;
         var style;
-    $('#placa_saida').html("<option>Selecione uma placa...</option>");   
-    
+        var total =0;
+        var tipo_veiculo = '';
     for(var i=0;i<resposta.total_registros;i++){     
         
         if(dados[i].typevehicle ==1){
             icone_veiculo = 'icofont-motor-bike';  
-            style ='font-size: 21px;'           
+            style ='font-size: 21px;'  
+            tipo_veiculo = 'Carro';
         }else{
             icone_veiculo='icofont-police-car-alt-2';
             style=null;
+            tipo_veiculo = 'Moto';
         }
         if(dados[i].modalyti=='Rotativo'){
             btn_geraChave = "&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -673,7 +680,7 @@ function montarTable(){
         linhasTBL = linhasTBL+
         "<tr>"+
             "<td ><span data-tooltip='"+dados[i].modality+"'>"+dados[i].placa+"</span></td>"+
-            "<td>"+dados[i].modality+"</td>"+
+            "<td>"+tipo_veiculo+"</td>"+
             "<td>"+dados[i].hour_in+':'+dados[i].min_in+"</td>"+
             "<td>"+dados[i].how_much+"</td>"+
            "<td class='table-actions'>"+
@@ -687,7 +694,11 @@ function montarTable(){
             
       
     } 
-    $('#placa_saida').append(placas_saida);
+    console.log($('#placa_saida').val());
+    if($('#placa_saida').val()==''){
+        $('#placa_saida').html("<option value=''>Selecione uma placa...</option>");  
+        $('#placa_saida').append(placas_saida);
+    }
     $('.select2-search__field').addClass('placa');
     $('.placa').mask('AAA-0A00');  
     $('#tbody_minha_table').html('');
@@ -756,8 +767,6 @@ async function saidaEstacionamento(cod,pago='',dinheiro='',desconto='',justifica
          });
      return calc;
 }
-
-
 async function calc_estacionamento(cod){
     var link  = $('meta[name="parkingOut_show"]').attr('content')+'/'+cod;
     return fetch(link)
@@ -854,4 +863,22 @@ function buscaPreco(tipo_veiculo){
             return false;
         }
     });
+}
+async function fetchHeader(){
+    var link = $('meta[name="fetchHeader"]').attr('content');
+    var dados = fetch(link)
+    .then((result)=>{
+        if(result.ok){
+            return result.json();
+        }else{
+            return false;
+        }
+    }).then((response)=>{
+        
+        $('#headerNumber1').html(response.card1);
+        $('#headerNumber2').html(response.card2);
+        $('#headerNumber3').html(response.card3);
+        $('#headerNumber4').html(response.card4);
+    });
+   
 }

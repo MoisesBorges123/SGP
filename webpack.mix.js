@@ -81,4 +81,13 @@ mix
 
     .sass('resources/sass/estacionamento/tablePrice/form.scss','public/admin/estacionamento/table-price/css/')
     .js('resources/js/estacionamento/tablePrice/form.js','public/admin/estacionamento/table-price/js/')
+
+    .sass('resources/sass/estacionamento/monthly/form.scss','public/admin/estacionamento/monthly/css/')
+    .js('resources/js/estacionamento/monthly/form.js','public/admin/estacionamento/monthly/js/')
+    
+    .sass('resources/sass/estacionamento/monthly/table.scss','public/admin/estacionamento/monthly/css/')
+    .js('resources/js/estacionamento/monthly/table.js','public/admin/estacionamento/monthly/js/')
+
+    .sass('resources/sass/estacionamento/monthly/renew/form.scss','public/admin/estacionamento/monthly/renew/css/')
+    .js('resources/js/estacionamento/monthly/renew/form.js','public/admin/estacionamento/monthly/renew/js/')
     .version();

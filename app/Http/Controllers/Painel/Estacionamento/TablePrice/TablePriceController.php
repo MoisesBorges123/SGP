@@ -73,13 +73,25 @@ class TablePriceController extends Controller
 
     public function fetch (Request $request )
     {   
+       
+        return TablePriceController::show($request->typevehicle);
+    }
+    public static function show($typevehicle,$table=''){
         $base = TablePrice::max('id');       
-     
-        if(intval($request->typevehicle)==1){
-            
-            $dados = CarPrice::where('id',$base)->first();
-        }else{
-            $dados = MotocyclePrice::where('id',$base)->first();
+        if(intval($typevehicle)==1 || $typevehicle == 'Carro'){            
+            if(empty($table)){
+                $dados = CarPrice::where('id',$base)->first();
+            }else{
+                $base = TablePrice::find($table);                
+                $dados = CarPrice::where('id',$base->car_price)->first();                
+            }
+        }elseif(intval($typevehicle)==2 || $typevehicle == 'Moto'){
+            if(empty($table)){
+                $dados = MotocyclePrice::where('id',$base)->first();                
+            }else{
+                $base = TablePrice::find($table);
+                $dados = MotocyclePrice::where('id',$base->motocycle_price)->first();                
+            }
         }
        
         return $dados;

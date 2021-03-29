@@ -105,8 +105,13 @@
                     <div class="collapse " id="mensalistas">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
+                                <a class="nav-link" href="{{ route('monthly.create') }}">
                                     {{ __('Novo Mensalista') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('monthly.index') }}">
+                                    {{ __('Meus Mensalistas') }}
                                 </a>
                             </li>
                             <li class="nav-item">

@@ -19,7 +19,7 @@ class ReportController extends Controller
         $total_value = 0;
         $deficit = floatval(str_replace(',','.',str_replace('.','',$request->deficit)));;
         foreach($payeds as $payed){
-            if($payed->modality == 'Rotativo'){
+            if($payed->modality == 'Rotativo' || $payed->modality == 'Diaria' || $payed->modality == 'Pernoite'){
                 $rotativo_count++;
                 $rotativo_value += ($payed->value - $payed->discount);
             }else if($payed->modality == 'Mensalidade'){

@@ -1,0 +1,36 @@
+@import 'select2';
+.customSelect2{
+    width: 20.8rem !important;
+    }
+.select2{
+    width: 20.8rem !important;
+}
+form .row > div {
+    margin-bottom: 1.2rem;
+}  
+.input-group-append a[disabled="disabled"] {
+    pointer-events: none;
+} 
+.input-group-append a{
+    text-decoration: none;
+}
+
+.input-group-append:hover{
+    cursor: pointer;
+    color:var(--primary);
+    
+}
+div .col-8 .form-group{
+    margin-bottom: 0px;
+}
+.form-control:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.block {
+    cursor: not-allowed;
+    opacity: 0.5;
+}    
+
+
+ 

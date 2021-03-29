@@ -30,7 +30,7 @@ class ParkingController extends Controller
             array_push($parking,$dado);
         }
         $dados = array(
-            'dados'=>$parking,
+            'dados'=>$parking,            
             'total_registros'=>ParkingCar::all()->count(),
         );
         return $dados;
@@ -102,6 +102,9 @@ class ParkingController extends Controller
                 );
             }
     }
+    public function fetchHeader(){
+        return FuncoesController::calc_header();
+    }
     public function show(Parking $parking)
     {
         //
@@ -122,13 +125,17 @@ class ParkingController extends Controller
         $deletePayment = PaymentsController::destroy($parking->payment);
        return $delete;
     }
+    
     private function header(){
-      
-        
+        $dailyCashier = PaymentsController::show(date('Y-m-d',time()));
+        $total_card1 = $dailyCashier->sum('value') - $dailyCashier->sum('discount');
+        $total_card2 = sprintf("%02d",ParkingCar::all()->count());        
+        $total_card4 = sprintf("%02d",Monthly::all()->count());
+
         $card =array(
             [
                 'headerText'=>'Faturamento do Dia',
-                'headerNumber'=> 0,
+                'headerNumber'=> "<div id='headerNumber1'>R$ ".number_format($total_card1,2,',','.')."</div>",
                 'bodyIcon'=>'<i class="ni ni-money-coins"></i>',
                 'color'=>'bg-green',
                 'url'=>route('certidao-batismo.filter',1),
@@ -137,7 +144,7 @@ class ParkingController extends Controller
             ],
             [
                 'headerText'=> 'Carros Estacionados',
-                'headerNumber'=>0,
+                'headerNumber'=>"<div id='headerNumber2'>".$total_card2."</div>",
                 'bodyIcon'=>'<i class="ni ni-bus-front-12"></i>',
                 'color'=>'bg-warning',
                 'url'=>'',
@@ -147,7 +154,7 @@ class ParkingController extends Controller
             ],
             [
                 'headerText'=>'Valor a receber',
-                'headerNumber'=>0,
+                'headerNumber'=>"<div id='headerNumber3'>R$ 0,00</div>",
                 'bodyIcon'=>'<i class="ni ni-chart-pie-35"></i>',
                 'color'=>'bg-yellow',
                 'url'=>'',
@@ -156,12 +163,12 @@ class ParkingController extends Controller
             ],
             [
                 'headerText'=>'Total Mensalistas',
-                'headerNumber'=>0,
+                'headerNumber'=>"<div id='headerNumber4'>".$total_card4."</div>",
                 'bodyIcon'=>'<i class="ni ni-diamond"></i>',
                 'color'=>'bg-info',
                 'url'=>'',
                 'identify'=>'avisos',
-                'footerText'=>'',
+                'footerText'=>'<button id="btn-detalhes-mensalista" class="btn btn-info btn-sm">Detalhes</button>'
             ]           
             
         );

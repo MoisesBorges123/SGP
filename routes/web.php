@@ -77,9 +77,12 @@ Route::post('/parking/report/daily-cashier','Painel\Estacionamento\Analyse\Repor
 Route::post('/table-price/fetch','Painel\Estacionamento\TablePrice\TablePriceController@fetch')->name('table-price.fetch');
 Route::post('parking/out','Painel\Estacionamento\Fluxo\Out_ParkingController@store')->name('parking-out.store');
 Route::get('/parking/out/{id?}','Painel\Estacionamento\Fluxo\Out_ParkingController@show')->name('parking-out.show');
+Route::get('/parking/fech/header','Painel\Estacionamento\Fluxo\ParkingController@fetchHeader')->name('parking.fetch.header');
 Route::post('/time-parking','Painel\Estacionamento\Time\TimeParkingController@update')->name('time.update');
 Route::post('/parking/delete','Painel\Estacionamento\Fluxo\ParkingController@delete')->name('parking.delete');
 Route::resource('/parking','Painel\Estacionamento\Fluxo\ParkingController');
+Route::resource('/monthly','Painel\Estacionamento\Monthly\MonthlyController');
+Route::resource('/monthly-pay','Painel\Estacionamento\Monthly\MonthlyPaysController');
 Route::resource('/table-price','Painel\Estacionamento\TablePrice\TablePriceController');
 
 //Rotas System

@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <select class="form-control form-control-danger" id="placa_saida">
-                                                    <option>Selecione uma placa...</option>
+                                                    <option value=''>Selecione uma placa...</option>
                                                 </select>
                                             </div>
                                             <div class="col-4">
@@ -95,7 +95,7 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Carro</th>                                    
-                                                <th scope="col">Modalid.</th>                                    
+                                                <th scope="col">Categoria</th>                                    
                                                 <th scope="col">Entrada</th>
                                                 <th scope="col">Valor</th>
                                                 <th scope="col">Ações</th>                                                
@@ -133,6 +133,7 @@
     <meta name='parkingOut_store' content="{{route('parking-out.store')}}">
     <meta name='fetchPrice' content="{{route('table-price.fetch')}}">
     <meta name='parkingReportCashier' content="{{route('report.reportDaily')}}">
+    <meta name='fetchHeader' content="{{route('parking.fetch.header')}}">
     <meta name='printOut' content="http://192.168.0.21/estacionamento_catedral/print/saida/PrintOut.php">
     <meta name='printIn' content="http://192.168.0.21/estacionamento_catedral/print/entrada/PrintIn.php">
     <meta name='printReportCashier' content="http://192.168.0.21/estacionamento_catedral/print/report/DayliCashier.php">
