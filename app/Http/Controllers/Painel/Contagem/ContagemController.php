@@ -146,7 +146,7 @@ class ContagemController extends Controller
     public function show($contagem)
     {
         $total_controlers = count($contagem['id']);
-        for($i=0;$total_controlers<$i,$i++){
+        for($i=0;$total_controlers<$i;$i++){
             DB::table('contagem')
         ->join('coins','coins.id','=','contagem.coin')
         ->join('countcategor','countcategor.id','=','contagem.categor')
@@ -161,8 +161,7 @@ class ContagemController extends Controller
         $pdf = new Fpdf();       
         $pdf::AddPage('L','A4');
         $pdf::SetFont('Arial','B',13); 
-        $pdf::Cell(140,10,utf8_decode('Controle de Numerários'),1,1,'C');
-        $pdf::Cell(140,10,utf8_decode('Mitra Diocesana de Teófilo Otoni'),1,1,'C');
+        $pdf::Cell(140,10,utf8_decode('Controle de Numerários'),1,1,'C');        
         $pdf::Cell(140,10,utf8_decode('Mitra Diocesana de Teófilo Otoni'),1,1,'C');
         }
         

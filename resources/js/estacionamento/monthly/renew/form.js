@@ -47,8 +47,8 @@ $(document).on('change','input[name="tipo_veiculo"]',async function(){
     $('#id_total').val("R$ "+number_format(price.mensalidade,2,',','.'));
     $('#id_table_price').val(price.id);
 });
-$(document).on('click','.pagar',function(){
-    openGave();
+$(document).on('click','.pagar',async function(){
+    openGave();    
 });
 $(document).on('input','#id_desconto',function(){
     if($('#id_desconto').val()==0 || $('#id_desconto').val()=='' || $('#id_desconto').val()==null ){
@@ -199,8 +199,7 @@ async function fetchLastPay(placa){
     return dados;
     
 }
-function openGave(){
-   
+async function openGave(){   
 
     fetch($('meta[name="openGave"]').attr('content'),{ 
         method:'GET',
