@@ -98,7 +98,7 @@
                 </li>     
                 <li class="nav-item">
                     <a class="nav-link text-default" href="#mensalistas" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="ni ni-single-copy-04"></i>
+                         <i class="fas fa-warehouse"></i>
                         <span class="nav-link-text text-primary">{{ __('Mensalistas') }}</span>
                     </a>
 
@@ -111,12 +111,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('monthly.index') }}">
-                                    {{ __('Meus Mensalistas') }}
+                                    {{ __('Mensalidades Ativas') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
-                                    {{ __('Pagamentos') }}
+                                <a class="nav-link" href="{{ route('monthly-pay.create') }}">
+                                    {{ __('Efetuar Pagamento') }}
                                 </a>
                             </li>
                            
@@ -125,7 +125,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-default" href="#tablePrice" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="ni ni-single-copy-04"></i>
+                        <i class="ni ni-money-coins"></i>
                         <span class="nav-link-text text-primary">{{ __('Preços') }}</span>
                     </a>
 

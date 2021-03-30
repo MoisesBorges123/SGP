@@ -94,7 +94,7 @@
                                 <a class="btn btn-primary text-center" href='{{url()->previous()}}'>Voltar</a>
                                 <button class="btn btn-default text-center" type='submit'>Salvar Alterações</button>
                             @else
-                                <button class="btn btn-primary text-center" type='submit'>Pagar e salvar</button>
+                                <button class="btn btn-primary text-center pagar" type='submit'>Pagar e salvar</button>
                             @endif
                         </div>
                     </form>
@@ -106,6 +106,7 @@
 @push('css')
     <link rel="stylesheet" href="{{mix('admin/estacionamento/monthly/css/form.css')}}"/>
     <meta name='fetchPrice' content="{{route('table-price.fetch')}}">
+    <meta name='openGave' content="http://192.168.0.21/estacionamento_catedral/print/opengave/opening.php">
 @endpush
 @push('js')
     <script src="{{mix('admin/estacionamento/monthly/js/form.js')}}"></script>

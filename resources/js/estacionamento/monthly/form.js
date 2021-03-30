@@ -111,6 +111,9 @@ $(document).on('input','.money2',function(){
         $("#id_troco").val(troco);   
     
 });
+$(document).on('click','.pagar',function(){
+    openGave();
+});
 function buscaPreco(tipo_veiculo){
     var link = $('meta[name="fetchPrice"]').attr('content');
     var data = new FormData();
@@ -154,4 +157,14 @@ function number_format (number, decimals, dec_point, thousands_sep) {
         s[1] += new Array(prec - s[1].length + 1).join('0');
     }
     return s.join(dec);
+}
+function openGave(){
+   
+
+    fetch($('meta[name="openGave"]').attr('content'),{ 
+        method:'GET',
+        credentials:'same-origin',
+        body:data,
+        mode: 'no-cors'
+    });
 }

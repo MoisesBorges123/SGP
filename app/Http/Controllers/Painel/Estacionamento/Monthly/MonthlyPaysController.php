@@ -95,4 +95,22 @@ class MonthlyPaysController extends Controller
             return redirect()->back();
         }
     }
+    public function print($id_parking){
+        $lastdata = DB::table('monthlyview')
+            ->join('payments','payments.id','=','monthlyview.payment_id')
+            ->join('vehicle','vehicle.id','=','monthlyview.vehicle_id')
+            ->where('parking_id',$request->parking_id)->first();   
+            $tablePrice = TablePriceController::show($lastdata->typevehicle,$lastdata->table_price);
+            $troco = (($tablePrice->mensalidade - $lastdata->discount) - $lastdata->payed) * (-1);
+        return array(
+            'placa'=>$lastdata->placa,
+            'proprietario'=>$lastdata->owner,
+            'data_inicio'=>date('d/m/Y',strtotime($lastdata->beginning)),
+            'data_fim'=>date('d/m/Y',strtotime($lastdata->end)),
+            'desconto'=>'R$ '.number_format($lastdata->discount,2,',','.'),
+            'dinheiro'=>'R$ '.number_format($lastdata->payed,2,',','.'),
+            'valor'=>'R$ '.number_format($tablePrice->mensalidade,2,',','.'),
+            'troco'=>'R$ '.number_format($troco,2,',','.'),
+        );
+    }
 }

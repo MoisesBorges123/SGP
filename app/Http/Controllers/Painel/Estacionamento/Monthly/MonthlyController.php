@@ -23,7 +23,8 @@ class MonthlyController extends Controller
         
         foreach($monthlys as $monthly){
             $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->first();
-            $intervalo = date('d',strtotime(date('Y-m-d',time())) - strtotime($monthly->end));
+            $today = date('Y-m-d',time());
+            $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24));            
             if($intervalo >= 21){
                 $classe = 'bg-success';
             }else if($intervalo<21 && $intervalo >10){
