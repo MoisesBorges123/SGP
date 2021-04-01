@@ -50093,20 +50093,20 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-mask-plugin */ "./node_modules/jquery-mask-plugin/dist/jquery.mask.js");
-/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
-/* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! timepicki */ "./node_modules/timepicki/js/timepicki.js");
-/* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(timepicki__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-mask-plugin */ "./node_modules/jquery-mask-plugin/dist/jquery.mask.js");
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
+/* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! timepicki */ "./node_modules/timepicki/js/timepicki.js");
+/* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(timepicki__WEBPACK_IMPORTED_MODULE_5__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // @ts-ignore
 
@@ -50120,6 +50120,29 @@ __webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/j
 
 
 
+
+
+var _token = $('meta[name="csrf-token"]').attr('content');
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': _token
+  }
+});
+
+var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+var Toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: function onOpen(toast) {
+    toast.addEventListener('mouseenter', swal.stopTimer);
+    toast.addEventListener('mouseleave', swal.resumeTimer);
+  }
+});
 var myTable = $('#certidoesTable').DataTable({
   "searching": true,
   "ordering": true,
@@ -50142,12 +50165,107 @@ var myTable = $('#certidoesTable').DataTable({
   pageLength: 50,
   scroller: true,
   "fnInitComplete": function fnInitComplete() {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__["default"]('.dataTables_scrollBody');
+    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
   },
   "fnDrawCallback": function fnDrawCallback(oSettings) {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__["default"]('.dataTables_scrollBody');
+    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
   }
 });
+$(document).on('click', '.print', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  var dados, data;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return fetch($(this).data('link'));
+
+        case 2:
+          dados = _context.sent;
+
+          if (dados != '') {
+            data = new FormData();
+            data.append('valor', dados.valor);
+            data.append('desconto', dados.desconto);
+            data.append('troco', dados.troco);
+            data.append('dinheiro', dados.dinheiro);
+            data.append('proprietario', dados.proprietario);
+            data.append('placa', dados.placa);
+            data.append('data_inicio', dados.data_inicio);
+            data.append('data_fim', dados.data_fim);
+            data.append('valor_pagar', dados.valor_pagar);
+            fetch($('meta[name="printMonthly"]').attr('content'), {
+              method: 'POST',
+              credentials: 'same-origin',
+              body: data,
+              mode: 'no-cors'
+            });
+          }
+
+        case 4:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee, this);
+})));
+$(document).on('click', '.btn-delete', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+  var resposta;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return swal.fire({
+            title: "Excluir Pagamento??",
+            text: 'Tem certeza que deseja excluir esse pagamento?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Excluir!!',
+            cancelButtonText: 'Cancelar.'
+          });
+
+        case 2:
+          resposta = _context2.sent;
+
+          if (resposta.value) {
+            fetch($(this).data('link'), {
+              method: 'DELETE',
+              credentials: 'same-origin',
+              headers: {
+                'X-CSRF-TOKEN': _token
+              }
+            }).then(function (result) {
+              if (result.ok) {
+                return result.json();
+              } else {
+                false;
+              }
+            }).then(function (resposta) {
+              if (resposta) {
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Pagamento excluido com sucesso!!'
+                });
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1200);
+              } else {
+                Toast.fire({
+                  icon: 'error',
+                  title: 'Erro ao excluir pagamento'
+                });
+              }
+            });
+          }
+
+        case 4:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _callee2, this);
+})));
 
 function createInput(name, label, type, required) {
   var id = "id_" + name;
@@ -50159,258 +50277,6 @@ function createInput(name, label, type, required) {
     input: input
   };
   return campo;
-}
-
-$(document).on('click', '#old_intentions', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-  var busca;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _context.next = 2;
-          return swal.fire({
-            title: 'Filtrar Intenções por data',
-            html: "<form method='GET' id='search-intention' action='" + $(this).data('link') + "'>" + "<div class='row'>" + "<div class='col-6'>" + "<label>Data Inicio</label>" + "<input class='form-control' name='begin' type='date'/>" + "</div>" + "<div class='col-6'>" + "<label>Data Fim</label>" + "<input class='form-control' name='end' type='date'/>" + "</div>" + "</div>" + "</form>",
-            confirmButtonText: "Buscar..."
-          });
-
-        case 2:
-          busca = _context.sent;
-
-          if (busca.value) {
-            $('#search-intention').submit();
-          }
-
-        case 4:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _callee, this);
-})));
-$(document).on('click', '#print', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var print;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.next = 2;
-          return swal.fire({
-            title: 'Qual horário??',
-            icon: 'question',
-            confirmButtonText: 'Imprimir!',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar.',
-            html: "<form id='form-print' action='" + $(this).data('link') + "' method='GET' target='_blank'><div class='row'>" + "<div class='col-6'>" + "<label>Data</label>" + "<input type='date' name='date_schedule' class='form-control'/>" + "</div>" + "<div class='col-6'>" + "<label>Hora</label>" + "<input type='text' name='time_schedule' id='in_time_schedule' class='form-control time' />" + "</div>" + "</div></form>",
-            onRender: function onRender() {
-              $('.time').mask('00:00');
-            }
-          });
-
-        case 2:
-          print = _context2.sent;
-
-          if (print.value) {
-            $('#form-print').submit();
-          }
-
-        case 4:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, _callee2, this);
-})));
-$(document).on('click', '#btn-excluir', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-  var excluir, excluido;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          _context3.next = 2;
-          return swal.fire({
-            title: 'Excluir??',
-            text: 'Tem certeza que deseja excluir essa intenção?',
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar.',
-            confirmButtonText: 'Excluir!'
-          });
-
-        case 2:
-          excluir = _context3.sent;
-
-          if (!excluir.value) {
-            _context3.next = 15;
-            break;
-          }
-
-          _context3.next = 6;
-          return fetch($(this).data('link'), {
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            method: 'DELETE'
-          }).then(function (result) {
-            if (result.ok) {
-              return result.json();
-            } else {
-              return false;
-            }
-          });
-
-        case 6:
-          excluido = _context3.sent;
-          console.log(excluido);
-
-          if (!(excluido && !excluido.erro)) {
-            _context3.next = 14;
-            break;
-          }
-
-          _context3.next = 11;
-          return swal.fire('Excluido!!', 'Intenção excluida com sucesso.', 'success');
-
-        case 11:
-          window.location.reload();
-          _context3.next = 15;
-          break;
-
-        case 14:
-          // @ts-ignore
-          swal.fire('Ops!!', 'Ocorreu um erro ao tentar excluir essa intenção.', 'error');
-
-        case 15:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, _callee3, this);
-})));
-$(document).on('input', '.time', function () {
-  timerValidate($(this));
-});
-$(document).on('input', '.phone', function () {
-  phoneValidate($(this));
-});
-$(document).on('click', '.avisos', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-  var url, aviso;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-    while (1) {
-      switch (_context4.prev = _context4.next) {
-        case 0:
-          url = $('meta[name="fetch-notice"]').attr('content');
-          _context4.next = 3;
-          return fetch(url, {
-            method: 'GET',
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            credentials: 'same-origin'
-          }).then(function (result) {
-            if (result.ok) {
-              return result.json();
-            } else {
-              return false;
-            }
-          });
-
-        case 3:
-          aviso = _context4.sent;
-
-          if (aviso) {
-            // @ts-ignore
-            swal.fire({
-              title: 'Avisos',
-              background: 'linear-gradient(35deg,#f5365c,#f56036)',
-              html: "<br><br>" + aviso.observations,
-              icon: 'warning',
-              showCloseButton: true,
-              showConfirmButton: false,
-              iconHtml: '<span class="fas fa-bell"></span>',
-              customClass: {
-                container: 'text-warning',
-                popup: '...',
-                header: '...',
-                title: 'text-white',
-                closeButton: '...',
-                icon: '...',
-                image: '...',
-                content: 'text-white text-justify',
-                input: '...',
-                validationMessage: '...',
-                actions: '...',
-                confirmButton: '...',
-                denyButton: '...',
-                cancelButton: '...',
-                loader: '...',
-                footer: '....'
-              }
-            });
-            console.log(aviso);
-          } else {
-            // @ts-ignore
-            swal.fire({
-              title: 'Avisos',
-              text: 'Não há nenhum aviso por hora.',
-              icon: 'warning',
-              showCloseButton: false,
-              showConfirmButton: true
-            });
-          }
-
-        case 5:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  }, _callee4);
-})));
-
-function timerValidate(horario) {
-  var x;
-  var y;
-  var caracteres = horario.val().length; //alert(caracteres);
-
-  if (caracteres == 1) {
-    if (horario.val() > 2) {
-      horario.val(null);
-    }
-  } else if (caracteres == 2) {
-    if (horario.val() > 23) {
-      horario.val(null);
-    }
-  } else if (caracteres == 4) {
-    x = horario.val();
-    y = x.substring(3, 4);
-
-    if (y > 6) {
-      horario.val(x.substring(0, 3));
-    }
-  } else if (caracteres == 5) {
-    x = horario.val();
-    y = x.substring(3, 5);
-
-    if (y > 59) {
-      horario.val(x.substring(0, 3));
-    }
-  }
-}
-
-function phoneValidate(telefone) {
-  var caracteres = telefone.val().length;
-
-  if (caracteres >= 5) {
-    var x = telefone.val();
-    var y = x.substr(5, 1);
-
-    if (y == 9) {
-      //Montar Função para o telefone funcionar tanto com celular como fixo
-      $('.phone').mask('(00) 00000-0000');
-    } else {
-      $('.phone').mask('(00) 0000-0000');
-    }
-  }
 }
 
 /***/ }),

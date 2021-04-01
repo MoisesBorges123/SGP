@@ -33,11 +33,13 @@ $(document).on('change','#id_placa',async  function(){
         $('#id_valor').val(dados.valor);
         $('#id_desconto').val(dados.desconto);
         $('#id_total').val(dados.valor_pagar);
-        
+        console.log(dados.desconto);
         $('#id_parking').val(dados.parking_id);
-        if(dados.justify != ''){
+        if(dados.desconto != 0 && dados.desconto!=''){
             $('.dinheiro').after('<div class="col-12 justificativa">'+justify+"</div>");
             $('#id_justificativa').html(dados.justify);
+        }else{
+            $('.justificativa').remove();
         }
     }
 });

@@ -28,7 +28,10 @@ class TimeParkingController extends Controller
         //
         $dados['hour_in'] = date('H',time());
         $dados['min_in'] = date('i',time());
-        $dados['date_in']=date('Y-m-d',time());
+        if(empty($dados['date_in'])){
+            $dados['date_in']=date('Y-m-d',time());
+        }
+        
         return TimeParking::create($dados);
     }
 

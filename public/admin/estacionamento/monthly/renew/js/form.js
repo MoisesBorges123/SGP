@@ -48316,7 +48316,7 @@ $(document).on('change', '#id_placa', /*#__PURE__*/_asyncToGenerator( /*#__PURE_
       switch (_context.prev = _context.next) {
         case 0:
           if (!($(this).val() != '')) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
@@ -48329,14 +48329,17 @@ $(document).on('change', '#id_placa', /*#__PURE__*/_asyncToGenerator( /*#__PURE_
           $('#id_valor').val(dados.valor);
           $('#id_desconto').val(dados.desconto);
           $('#id_total').val(dados.valor_pagar);
+          console.log(dados.desconto);
           $('#id_parking').val(dados.parking_id);
 
-          if (dados.justify != '') {
+          if (dados.desconto != 0 && dados.desconto != '') {
             $('.dinheiro').after('<div class="col-12 justificativa">' + justify + "</div>");
             $('#id_justificativa').html(dados.justify);
+          } else {
+            $('.justificativa').remove();
           }
 
-        case 10:
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -48364,6 +48367,20 @@ $(document).on('change', 'input[name="tipo_veiculo"]', /*#__PURE__*/_asyncToGene
       }
     }
   }, _callee2, this);
+})));
+$(document).on('click', '.pagar', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          openGave();
+
+        case 1:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
 })));
 $(document).on('input', '#id_desconto', function () {
   if ($('#id_desconto').val() == 0 || $('#id_desconto').val() == '' || $('#id_desconto').val() == null) {
@@ -48512,13 +48529,13 @@ function fetchLastPay(_x) {
 }
 
 function _fetchLastPay() {
-  _fetchLastPay = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(placa) {
+  _fetchLastPay = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(placa) {
     var dados;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            _context3.next = 2;
+            _context4.next = 2;
             return fetch($('#id_placa').data('link') + '/' + placa, {
               method: 'GET',
               credentials: 'same-origin'
@@ -48533,17 +48550,44 @@ function _fetchLastPay() {
             });
 
           case 2:
-            dados = _context3.sent;
-            return _context3.abrupt("return", dados);
+            dados = _context4.sent;
+            return _context4.abrupt("return", dados);
 
           case 4:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _fetchLastPay.apply(this, arguments);
+}
+
+function openGave() {
+  return _openGave.apply(this, arguments);
+}
+
+function _openGave() {
+  _openGave = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            fetch($('meta[name="openGave"]').attr('content'), {
+              method: 'GET',
+              credentials: 'same-origin',
+              body: data,
+              mode: 'no-cors'
+            });
+
+          case 1:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+  return _openGave.apply(this, arguments);
 }
 
 /***/ }),

@@ -57,7 +57,7 @@ class MonthlyPaysController extends Controller
         $tablePrice = TablePriceController::show($lastdata->typevehicle);
         return array(
             'valor'=>'R$ '.number_format($tablePrice->mensalidade,2,',','.'),
-            'desconto'=>$lastdata->discount==0 ? '': number_format($lastdata->discount,2,',','.'),
+            'desconto'=>$lastdata->discount==0 ? '0': number_format($lastdata->discount,2,',','.'),
             'typevehicle'=>$lastdata->typevehicle,
             'valor_pagar'=>'R$ '.number_format(($tablePrice->mensalidade - $lastdata->discount),2,',','.'),
             'justify'=>$lastdata->justify_discount,
@@ -78,7 +78,7 @@ class MonthlyPaysController extends Controller
             $justify = empty($request->justify) ? '' :  $request->justify;
             $value = floatval(str_replace(',','.',str_replace('.','',$request->valor)));
 
-            $timeParking=TimeParkingController::store(['data_in'=>$date_beginning,'date_out'=>date('Y-m-d',strtotime("+30 days",strtotime($date_beginning))), 'hour_out'=>23,'min_out'=>59]);
+            $timeParking=TimeParkingController::store(['date_in'=>$date_beginning,'date_out'=>date('Y-m-d',strtotime("+30 days",strtotime($date_beginning))), 'hour_out'=>23,'min_out'=>59]);
             $payment = PaymentsController::store(['modality'=>'Mensalidade','value'=>$value,'discount'=>$discount,'justify_discount'=>$justify,'table_price'=>$request->table_price,'payed'=>$cash,'date_payed'=>date('Y-m-d',time())]);
     
             $dados = array(
@@ -95,12 +95,14 @@ class MonthlyPaysController extends Controller
             return redirect()->back();
         }
     }
-    public function print($id_parking){
+    public function print(Request $request){
         $lastdata = DB::table('monthlyview')
             ->join('payments','payments.id','=','monthlyview.payment_id')
             ->join('vehicle','vehicle.id','=','monthlyview.vehicle_id')
-            ->where('parking_id',$request->parking_id)->first();   
+            ->where('parking_id',$request->id_parking)->first();  
+            
             $tablePrice = TablePriceController::show($lastdata->typevehicle,$lastdata->table_price);
+            //dd($tablePrice);
             $troco = (($tablePrice->mensalidade - $lastdata->discount) - $lastdata->payed) * (-1);
         return array(
             'placa'=>$lastdata->placa,
@@ -111,6 +113,19 @@ class MonthlyPaysController extends Controller
             'dinheiro'=>'R$ '.number_format($lastdata->payed,2,',','.'),
             'valor'=>'R$ '.number_format($tablePrice->mensalidade,2,',','.'),
             'troco'=>'R$ '.number_format($troco,2,',','.'),
+            'valor_pagar'=>'R$ '.number_format( ($tablePrice->mensalidade - $lastdata->discount),2,',','.'),
         );
+    }
+    public function destroy($id){
+        $parking = Parking::where('id',$id)->first();
+        $parking->delete();
+        TimeParkingController::destroy($parking->time);
+        PaymentsController::destroy($parking->payment);
+        $parking = Parking::where('id',$id)->first();
+        if(empty($parking)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

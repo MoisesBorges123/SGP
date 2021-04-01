@@ -51,13 +51,11 @@ class MonthlyController extends Controller
         return view('estacionamento.monthly.table',compact('dados'));
         
     }
-
     public function create()
     {
         //
         return view('estacionamento.monthly.form');
     }
-
     public function store(Request $request)
     {
         $value = floatval(str_replace(',','.',str_replace('.','',$request->valor)));
@@ -82,11 +80,7 @@ class MonthlyController extends Controller
         }
 
     }
-
-    public function show($id)
-    {
-        //
-    }
+    
 
     public function edit($id)
     {

@@ -14,18 +14,7 @@
                             <div class="col-6">
                                 <h3 class="mb-0">Mensalistas</h3>                               
                             </div>                            
-                            <div class="col-1">                            
-                                <button id='sextou' data-link="{{route('intentions.print')}}" class="btn btn-sm btn-danger">#Sextou!!</button>
-                            </div>
-                            <div class="col-1">                            
-                                <button id="print" data-link="{{route('intentions.print')}}" class="btn btn-sm btn-primary">Imprimir</button>
-                            </div>
-                            <div class="col-2 text-right">                            
-                                <a href="{{route('intentions.create')}}" class="btn btn-sm btn-primary">Nova Intenção</a>
-                            </div>
-                            <div class="col-1">
-                                <button id='old_intentions' data-link="{{route('intentions.index')}}" class="btn btn-sm btn-default">Filtrar Intenções</button>
-                            </div>
+                           
                         </div>
                         
                     </div>
@@ -83,7 +72,10 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">                                                     
                                                     <a class="dropdown-item" id='btn-renovacao' href="{{route('monthly-pay.create',['tipo_veiculo'=>$dado['tipo_veiculo'],'placa'=>$dado['placa'],'owner'=>$dado['responsavel'],'date_end'=>$dado['encerramento'],'id_parking'=>$dado['id']])}}">Renovar</a>
+                                                    <button class="dropdown-item print" data-link="{{route('monthly-pay.print',['id_parking'=>$dado['id']])}}">Imprimir</button>
+                                                    <button class="dropdown-item btn-delete" data-link="{{route('monthly-pay.destroy',$dado['id'])}}">Excluir</button>
                                                 </div>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -113,7 +105,7 @@
    
     <!-- Main Style Css -->   
     <link rel="stylesheet" href="{{mix('admin/estacionamento/monthly/css/table.css')}}"/> 
-    
+    <meta name='printMonthly' content="http://192.168.0.21/estacionamento_catedral/print/mensalidade/PrintMonthly.php">
 
     <style>
         .col-12{

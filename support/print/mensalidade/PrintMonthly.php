@@ -26,21 +26,19 @@ require "../../impressora/drivers/autoload.php " ;
                 
                 
 
-                if(!empty($_POST['desconto'])&&$_POST['desconto'] != 'R$ 0,00'){
-					$x = explode('R$ ',$_POST['valor']);
+                if(!empty($_POST['desconto']) && $_POST['desconto'] != 'R$ 0,00'){
 					
-					$valor = floatval(str_replace(',','.',str_replace('.','',$x[1])));
-					$desconto = floatval(str_replace(',','.',str_replace('.','',$_POST['desconto'])));					
-					$total = $valor-$desconto;
+					
+					
 					$dinheiro = floatval(str_replace(',','.',str_replace('.','',$_POST['dinheiro'])));
                     $printer->text("\nTOTAL............................".$_POST['valor']);
-                    $printer->text("\nDESCONTO.........................R$ ".number_format($desconto,2,',','.'));
-					$printer->text("\nVALOR À PAGAR.................... R$ ".number_format($total,2,',','.'));                
-                    $printer->text("\n\nDINHEIRO.........................R$ ".number_format($dinheiro,2,',','.'));
+                    $printer->text("\nDESCONTO.........................".$_POST['desconto']);
+					$printer->text("\nVALOR À PAGAR....................".$_POST['valor_pagar']);                
+                    $printer->text("\n\nDINHEIRO.........................".$_POST['dinheiro']);
                     $printer->text("\nTROCO............................".$_POST['troco']."\n\n");
                 }else{
                     $printer->text("\nVALOR À PAGAR....................".$_POST['valor']);                
-                    $printer->text("\nDINHEIRO.........................R$ ".number_format($dinheiro,2,',','.'));
+                    $printer->text("\nDINHEIRO.........................".$_POST['dinheiro']);
                     $printer->text("\nTROCO............................".$_POST['troco']."\n\n");
                 }
                 $printer->setJustification(Printer::JUSTIFY_CENTER);
