@@ -21,5 +21,17 @@ class DatabaseSeeder extends Seeder
         $this->call(CountCategorSeeder::class);
         $this->call(TypeCarSeeder::class);
         $this->call(PaymentSeeder::class);
+        $this->call(PessoasTableSeeder::class);
+        $this->call(PriceCarsTableSeeder::class);
+        $this->call(PriceMotocyclesTableSeeder::class);
+        $this->call(TablePriceTableSeeder::class);
+        $this->call(VehicleTableSeeder::class);
+        $this->call(TimeparkingTableSeeder::class);
+        $this->call(PaymentsTableSeeder::class);
+        $this->call(ParkingTableSeeder::class);
+        $this->call(TelefoneTableSeeder::class);
+        $this->call(ScheduleCelebrationTableSeeder::class);
+        $this->call(IntentionScopesTableSeeder::class);
+        $this->call(IntentionsTableSeeder::class);
     }
 }
