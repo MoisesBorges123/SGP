@@ -694,7 +694,7 @@ function montarTable(){
             
       
     } 
-    console.log($('#placa_saida').val());
+    
     if($('#placa_saida').val()==''){
         $('#placa_saida').html("<option value=''>Selecione uma placa...</option>");  
         $('#placa_saida').append(placas_saida);

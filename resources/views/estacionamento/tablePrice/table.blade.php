@@ -22,55 +22,67 @@
                     </div>
     
                     <div>
-                        <table class="table align-items-center table-flush table-full tables" id='certidoesTable'>
+                       <table class="table align-items-center table-flush table-full tables" id='certidoesTable'>
                             <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Tipo</th>                                    
-                                    <th scope="col">Intenção</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Horário</th>
-                                    <th scope="col">Solicitante</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col"></th>
+                                <tr>                                                                      
+                                    <th scope="col" class='text-center'>ID</th>
+                                    <th scope="col">Vigência</th>                                    
+                                    <th scope="col" class='text-center'>Preços</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 
                                 @foreach($dados as $dado)
-                                    <tr>
-                                        <td class="budget">
-                                            <span>{{$dado['typeIntention']}}</span>
-                                        </td>
-                                        <td class="budget text-center">                                           
-                                        <span class="name mb-0 text-sm ">{!! str_replace(' e ',' e ',$dado['intention']) !!}</span>                                                
+                                    <tr>                                        
+                                       
+                                        <td class="budget text-center">
+                                            <span>{{$dado['id']}}</span>
                                         </td>
                                         <td class="budget">
-                                            <span>{{$dado['data']}}</span>
+                                            <span>{{$dado['created_at']}}</span>
                                         </td>
-                                        <td class="budget">
-                                            <span>{{$dado['hora']}}</span>
-                                        </td>
-                                        <td>
-                                            <span>{{$dado['claimant']}}</span>
-                                        </td>
-                                        <td>
-                                            <span>{{$dado['phone']}}</span>                        
-                                        </td>                                        
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                  <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                     <!-- <a class="dropdown-item"  href="{{route('intentions.edit',$dado['id'])}}">Editar</a> -->
-                                                    <button class="dropdown-item" id='btn-excluir' data-link="{{route('intentions.destroy',$dado['id'])}}" >Excluir</button>
-                                                </div>
+                                        <td class='precos'>
+                                            <div class="row">
+                                                <div class="col-6 cars-price">
+                                                    <div class="row">
+                                                        <div class="col-12 "><b>Preços Carro</b></div>
+                                                        <div class="col-6">
+                                                            Até 15 min.: {{$dado['carPrice']['min_15']}}<br>
+                                                            Acima de 15 min.: {{$dado['carPrice']['min_30']}}<br>
+                                                            Acima de 30 min.: {{$dado['carPrice']['min_60']}}
+                                                        </div>
+                                                        <div class="col-6">
+                                                            Diária: {{$dado['carPrice']['diaria']}}<br>
+                                                            Pernoite: {{$dado['carPrice']['pernoite']}}<br>
+                                                            Mensalidade: {{$dado['carPrice']['mensalidade']}}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>                                                
+                                                <div class="col-6 motocycles-price">
+                                                    <div class="row">
+                                                        <div class="col-12"><b>Preços Moto</b></div>
+                                                        <div class="col-6">
+                                                            Até 15 min.: {{$dado['motocyclePrice']['min_15']}}<br>
+                                                            Acima de 15 min.: {{$dado['motocyclePrice']['min_30']}}<br>
+                                                            Acima de 30 min.: {{$dado['motocyclePrice']['min_60']}}
+                                                        </div>
+                                                        <div class="col-6">
+                                                            Diária: {{$dado['motocyclePrice']['diaria']}}<br>
+                                                            Pernoite: {{$dado['motocyclePrice']['pernoite']}}<br>
+                                                            Mensalidade: {{$dado['motocyclePrice']['mensalidade']}}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>                                                
+
                                             </div>
-                                        </td>
+                                        </td>                                       
                                     </tr>
                                     @endforeach    
                             </tbody>
                         </table>
+                        
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
@@ -85,18 +97,10 @@
     </div>
 @endsection
 
-@push('js')   
-    <script src="{{mix('admin/intentions/table.js')}}"></script>    
-@endpush
 @push('css')
-    <meta name="fetch-notice" content="{{ route('notice-intentions.index') }}">  
-   
-    <!-- Main Style Css -->    
-    <link rel="stylesheet" href="{{mix('admin/intentions/table.css')}}"/>
+<link rel="stylesheet" href="{{mix('admin/estacionamento/table-price/css/table.css')}}"/>
 
-    <style>
-        .col-12{
-            margin-bottom: 20px;
-        }
-    </style>
+@endpush
+@push('js')
+    <script src="{{mix('admin/estacionamento/table-price/js/table.js')}}"></script>   
 @endpush

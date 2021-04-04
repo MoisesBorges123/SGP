@@ -32,9 +32,8 @@ class CreateViewMonthly extends Migration
                 payments,
                 vehicle,
                 pessoas,
-                timeparking,
-                telefone
-            inn
+                timeparking
+                
             where 
                 timeparking.id = parking.time and
                 parking.payment!='' and

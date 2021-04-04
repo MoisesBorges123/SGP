@@ -63,6 +63,7 @@
                                 <div class="col-6">                                    
                                     <label for="valor">Valor</label>
                                     <input type="text" name='valor' id='id_valor' class='form-control' disabled='true' value="{{$dados->valor ?? ''}}">                                    
+                                    <input type="hidden" name='preco' id='id_preco' value="{{$dados->valor ?? ''}}">                                    
                                 </div>
                                 <div class="col-6">
                                     <label for="valor">Desconto</label>

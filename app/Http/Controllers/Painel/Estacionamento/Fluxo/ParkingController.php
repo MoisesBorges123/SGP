@@ -39,7 +39,12 @@ class ParkingController extends Controller
     {
         $header = $this->header();
         $dados=null;
-        return view('estacionamento.fluxo.table',compact('header','dados'));
+        $tableVehicles = Vehicle::get();
+        $vehicles='';
+        foreach ($tableVehicles as $value) {
+            $vehicles.="<option value='".$value->placa."'>".$value->placa."</option>";
+        }
+        return view('estacionamento.fluxo.table',compact('header','dados','vehicles'));
     }
     public function store(Request $request)
     {
@@ -138,7 +143,7 @@ class ParkingController extends Controller
                 'headerNumber'=> "<div id='headerNumber1'>R$ ".number_format($total_card1,2,',','.')."</div>",
                 'bodyIcon'=>'<i class="ni ni-money-coins"></i>',
                 'color'=>'bg-green',
-                'url'=>route('certidao-batismo.filter',1),
+                'url'=>'',
                 'footerText'=>'<button id="btn-print-caixa" class="btn btn-primary btn-sm">Imprimir Relatório</button>'
                 
             ],
@@ -166,9 +171,9 @@ class ParkingController extends Controller
                 'headerNumber'=>"<div id='headerNumber4'>".$total_card4."</div>",
                 'bodyIcon'=>'<i class="ni ni-diamond"></i>',
                 'color'=>'bg-info',
-                'url'=>'',
+                'url'=>route('monthly.index'),
                 'identify'=>'avisos',
-                'footerText'=>'<button id="btn-detalhes-mensalista" class="btn btn-info btn-sm">Detalhes</button>'
+                'footerText'=>'<a href="'.route('monthly.index').'" id="btn-detalhes-mensalista" class="btn btn-info btn-sm">Detalhes</a>'
             ]           
             
         );

@@ -31,7 +31,8 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <label>Placa</label>
-                                                    <input type="text" class="form-control form-control-primary color-class form-control-uppercase placa" maxlength="10" name="placa_entrada" id="placa_entrada" placeholder="AAA-0000">
+                                                    <input type="text" list='vehicles' class="form-control form-control-primary color-class form-control-uppercase placa" maxlength="10" name="placa_entrada" id="placa_entrada" placeholder="AAA-0000">
+                                                    <datalist id="vehicles">{!! $vehicles !!}}</datalist>
                                                 </div>                                        
                                                 <div class="col-md-4"> 
                                                 <button style="margin-top:26px;" class="btn btn-info" data-url="{{route('parking.store')}}" type="button" id="btn-entrar">Salvar</button>

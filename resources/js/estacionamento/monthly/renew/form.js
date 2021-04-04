@@ -31,9 +31,9 @@ $(document).on('change','#id_placa',async  function(){
         var dados = await fetchLastPay($(this).val());        
         $('input[name="tipo_veiculo"]').filter('[value="'+dados.typevehicle+'"]').prop('checked',true);
         $('#id_valor').val(dados.valor);
+        $('#id_preco').val(dados.valor);
         $('#id_desconto').val(dados.desconto);
-        $('#id_total').val(dados.valor_pagar);
-        console.log(dados.desconto);
+        $('#id_total').val(dados.valor_pagar);        
         $('#id_parking').val(dados.parking_id);
         if(dados.desconto != 0 && dados.desconto!=''){
             $('.dinheiro').after('<div class="col-12 justificativa">'+justify+"</div>");

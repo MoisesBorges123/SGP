@@ -40,17 +40,17 @@ class PessoasController extends Controller
             if(!$existe){
                 $insert=$pessoa->create($dados);   
                 $dados['pessoa'] = $insert->id;
-            if(!empty($dados['cep'])){                
-                EnderecoController::store($dados);
-            }
-            if(!empty($dados['telefone'])){
-                $dadosTelefone = array(
-                    'pessoa'=>$insert->id,
-                    'telefone'=>$dados['telefone']
-                );
-                TelefoneController::store($dadosTelefone);               
-                
-            }       
+                if(!empty($dados['cep'])){                
+                    EnderecoController::store($dados);
+                }
+                if(!empty($dados['telefone'])){
+                    $dadosTelefone = array(
+                        'pessoa'=>$insert->id,
+                        'telefone'=>$dados['telefone']
+                    );
+                    TelefoneController::store($dadosTelefone);               
+                    
+                }       
            
             }else{
                 if(!empty($dados['email'])){
@@ -58,6 +58,14 @@ class PessoasController extends Controller
                     $existe->update(['email'=>$dados['email']]);
                     $existe=DB::table('pessoas')->where('nome',$dados['nome'])->first();
                 }
+                if(!empty($dados['telefone'])){
+                    $dadosTelefone = array(
+                        'pessoa'=> $existe->id,
+                        'telefone'=>$dados['telefone']
+                    );
+                    TelefoneController::store($dadosTelefone);               
+                    
+                }    
                 $insert = $existe;
 
             }

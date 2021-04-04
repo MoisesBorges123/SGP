@@ -14,9 +14,38 @@ class TablePriceController extends Controller
     public function index()
     {
         $title = 'Histórico de Preço';
+        $base_prices = TablePrice::orderBy('created_at','asc')->get();
+        
+        foreach($base_prices as $base){
+            
+            $priceMotocycle = MotocyclePrice::where('id',$base->motocycle_price)->first();
+            $priceCar = CarPrice::where('id',$base->car_price)->first();
+            
+            $dados[]=[
+                'id'=>$base->id,
+                'created_at'=>date('d/m/Y - H:i:s',strtotime($base->created_at)),
+                'carPrice'=>[
+                    'mensalidade'=>"R$ ".number_format($priceCar->mensalidade,2,',','.'),
+                    'min_15'=>"R$ ".number_format($priceCar->min_15,2,',','.'),
+                    'min_30'=>"R$ ".number_format($priceCar->min_30,2,',','.'),
+                    'min_60'=>"R$ ".number_format($priceCar->min_60,2,',','.'),
+                    'diaria'=>"R$ ".number_format($priceCar->diaria,2,',','.'),
+                    'pernoite'=>"R$ ".number_format($priceCar->pernoite,2,',','.'),
+                ],
+                'motocyclePrice'=>[
+                    'mensalidade'=>"R$ ".number_format($priceMotocycle->mensalidade,2,',','.'),
+                    'min_15'=>"R$ ".number_format($priceMotocycle->min_15,2,',','.'),
+                    'min_30'=>"R$ ".number_format($priceMotocycle->min_30,2,',','.'),
+                    'min_60'=>"R$ ".number_format($priceMotocycle->min_60,2,',','.'),
+                    'diaria'=>"R$ ".number_format($priceMotocycle->diaria,2,',','.'),
+                    'pernoite'=>"R$ ".number_format($priceMotocycle->diaria,2,',','.')
+                ]
+            ];
+        }
+        //dd($dados);
         return view('estacionamento.tablePrice.table',compact('title','dados'));
     }
-
+   
     public function create()
     {
         $table_price = TablePrice::max('id');
@@ -72,7 +101,7 @@ class TablePriceController extends Controller
     }
 
     public function fetch (Request $request )
-    {   
+    {  
        
         return TablePriceController::show($request->typevehicle);
     }
