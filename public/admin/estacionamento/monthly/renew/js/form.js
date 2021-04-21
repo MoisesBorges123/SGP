@@ -48374,8 +48374,9 @@ $(document).on('click', '.pagar', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_
       switch (_context3.prev = _context3.next) {
         case 0:
           openGave();
+          $('#form_monthly').submit();
 
-        case 1:
+        case 2:
         case "end":
           return _context3.stop();
       }
@@ -48576,7 +48577,6 @@ function _openGave() {
             fetch($('meta[name="openGave"]').attr('content'), {
               method: 'GET',
               credentials: 'same-origin',
-              body: data,
               mode: 'no-cors'
             });
 

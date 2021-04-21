@@ -28,7 +28,7 @@ class MonthlyController extends Controller
             if($intervalo >= 21){
                 $classe = 'bg-success';
             }else if($intervalo<21 && $intervalo >10){
-                $class='bg-warning';
+                $classe='bg-warning';
             }else{
                 $classe = 'bg-danger';
             }

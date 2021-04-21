@@ -42211,6 +42211,7 @@ $(document).on('input', '.money2', function () {
 });
 $(document).on('click', '.pagar', function () {
   openGave();
+  $('#form_monthly').submit();
 });
 
 function buscaPreco(tipo_veiculo) {
@@ -42267,7 +42268,6 @@ function openGave() {
   fetch($('meta[name="openGave"]').attr('content'), {
     method: 'GET',
     credentials: 'same-origin',
-    body: data,
     mode: 'no-cors'
   });
 }

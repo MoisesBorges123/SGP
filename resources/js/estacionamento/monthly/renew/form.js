@@ -51,6 +51,7 @@ $(document).on('change','input[name="tipo_veiculo"]',async function(){
 });
 $(document).on('click','.pagar',async function(){
     openGave();    
+    $('#form_monthly').submit();
 });
 $(document).on('input','#id_desconto',function(){
     if($('#id_desconto').val()==0 || $('#id_desconto').val()=='' || $('#id_desconto').val()==null ){
@@ -205,8 +206,7 @@ async function openGave(){
 
     fetch($('meta[name="openGave"]').attr('content'),{ 
         method:'GET',
-        credentials:'same-origin',
-        body:data,
+        credentials:'same-origin',        
         mode: 'no-cors'
     });
 }

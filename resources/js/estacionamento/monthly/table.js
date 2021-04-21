@@ -60,9 +60,16 @@ const myTable = $('#certidoesTable').DataTable({
 
 });
 $(document).on('click','.print',async function(){
-    var dados = await fetch($(this).data('link'));
+    var dados = await fetch($(this).data('link'))
+    .then((result)=>{
+        if(result.ok){
+            return result.json();
+        }
+    });
     if(dados != '' ){
         var data = new FormData();
+        console.log(dados);
+        console.log(dados.valor);
         data.append('valor',dados.valor);
         data.append('desconto',dados.desconto);
         data.append('troco',dados.troco);

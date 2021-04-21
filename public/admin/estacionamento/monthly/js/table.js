@@ -50178,13 +50178,19 @@ $(document).on('click', '.print', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch($(this).data('link'));
+          return fetch($(this).data('link')).then(function (result) {
+            if (result.ok) {
+              return result.json();
+            }
+          });
 
         case 2:
           dados = _context.sent;
 
           if (dados != '') {
             data = new FormData();
+            console.log(dados);
+            console.log(dados.valor);
             data.append('valor', dados.valor);
             data.append('desconto', dados.desconto);
             data.append('troco', dados.troco);

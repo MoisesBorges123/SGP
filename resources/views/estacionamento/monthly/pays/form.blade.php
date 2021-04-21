@@ -11,7 +11,7 @@
       
                 <div class="card shadow">
                     @if(empty($dados))
-                        <form action="{{route('monthly-pay.store')}}" method="post" >
+                        <form action="{{route('monthly-pay.store')}}" id="form_monthly" method="post" >
                        
                     @else
                         <form action="{{route('monthly-pay.update',$dados['id'] ?? '')}}" method="post" >
@@ -106,7 +106,7 @@
                                 <a class="btn btn-primary text-center" href='{{url()->previous()}}'>Voltar</a>
                                 <button class="btn btn-default text-center" type='submit'>Salvar Alterações</button>
                             @else
-                                <button class="btn btn-primary text-center" type='submit'>Renovar !!</button>
+                                <button class="btn btn-primary text-center" type='button'>Renovar !!</button>
                             @endif
                         </div>
                     </form>
