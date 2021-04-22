@@ -11,7 +11,7 @@
       
                 <div class="card shadow">
                     @if(empty($dados))
-                        <form action="{{route('monthly-pay.store')}}" method="post" >
+                        <form action="{{route('monthly-pay.store')}}" id="form_monthly" method="post" >
                        
                     @else
                         <form action="{{route('monthly-pay.update',$dados['id'] ?? '')}}" method="post" >
@@ -72,6 +72,7 @@
                                 <div class="col-6">                                    
                                     <label for="valor">Valor</label>
                                     <input type="text" name='valor' id='id_valor' class='form-control' disabled='true' value="{{$dados['valor'] ?? ''}}">                                    
+                                    <input type="hidden" name='preco' id='id_preco' value="{{$dados->valor ?? ''}}">  
                                 </div>
                                 <div class="col-6">
                                     <label for="valor">Desconto</label>
@@ -81,6 +82,7 @@
                                 <div class="col-6 valor_pagar">
                                     <label for="valor">Valor a Pagar</label>
                                     <input type="text" name='total' id='id_total' class='form-control' disabled='true' value="{{$dados['valor_pagar'] ?? ''}}">
+
                                 </div>
                                 <div class="col-6 dinheiro">
                                     <label for="id_cash">Dinheiro</label>
@@ -104,7 +106,7 @@
                                 <a class="btn btn-primary text-center" href='{{url()->previous()}}'>Voltar</a>
                                 <button class="btn btn-default text-center" type='submit'>Salvar Alterações</button>
                             @else
-                                <button class="btn btn-primary text-center" type='submit'>Renovar !!</button>
+                                <button class="btn btn-primary text-center" type='button'>Renovar !!</button>
                             @endif
                         </div>
                     </form>

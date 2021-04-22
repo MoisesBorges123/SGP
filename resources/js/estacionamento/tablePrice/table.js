@@ -4,8 +4,7 @@ window.$ = window.jQuery = require('jquery');
 require('datatables.net-bs4');
 require('datatables.net-dt');
 import 'jquery-mask-plugin';
-import PerfectScrollbar from 'perfect-scrollbar';
-const myTable = $('#titherTable').DataTable({
+const myTable = $('#certidoesTable').DataTable({
     "searching": true,
     "ordering": true,
     'paging': true,

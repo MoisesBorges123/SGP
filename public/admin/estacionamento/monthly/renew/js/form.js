@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -48327,9 +48327,9 @@ $(document).on('change', '#id_placa', /*#__PURE__*/_asyncToGenerator( /*#__PURE_
           dados = _context.sent;
           $('input[name="tipo_veiculo"]').filter('[value="' + dados.typevehicle + '"]').prop('checked', true);
           $('#id_valor').val(dados.valor);
+          $('#id_preco').val(dados.valor);
           $('#id_desconto').val(dados.desconto);
           $('#id_total').val(dados.valor_pagar);
-          console.log(dados.desconto);
           $('#id_parking').val(dados.parking_id);
 
           if (dados.desconto != 0 && dados.desconto != '') {
@@ -48374,8 +48374,9 @@ $(document).on('click', '.pagar', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_
       switch (_context3.prev = _context3.next) {
         case 0:
           openGave();
+          $('#form_monthly').submit();
 
-        case 1:
+        case 2:
         case "end":
           return _context3.stop();
       }
@@ -48576,7 +48577,6 @@ function _openGave() {
             fetch($('meta[name="openGave"]').attr('content'), {
               method: 'GET',
               credentials: 'same-origin',
-              body: data,
               mode: 'no-cors'
             });
 
@@ -48592,7 +48592,7 @@ function _openGave() {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /*!*****************************************************************!*\
   !*** multi ./resources/js/estacionamento/monthly/renew/form.js ***!
   \*****************************************************************/

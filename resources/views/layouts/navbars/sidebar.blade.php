@@ -137,7 +137,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('system.mensWorking') }}">
+                                <a class="nav-link" href="{{ route('table-price.index') }}">
                                     {{ __('Tabela de Preços') }}
                                 </a>
                             </li>
@@ -293,6 +293,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('devolution.index') }}">
                         <i class="ni ni-favourite-28 text-danger"></i> <b class='text-danger'>{{ __('Devolver') }}</b>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('tither.import') }}">
+                        <i class="ni ni-settings"></i> <b >{{ __('Importar Dizimistas ') }}</b>
                     </a>
                 </li>
             </ul>

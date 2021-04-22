@@ -10,6 +10,7 @@ class PaymentsController extends Controller
 {
     //
     public static function store($dados =[]){
+      
         $precoBase = TablePrice::max('id');       
         $dados['table_price'] = $precoBase;
         return Payment::create($dados);

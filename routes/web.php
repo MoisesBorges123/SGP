@@ -62,6 +62,7 @@ Route::resource('/schedule-celebrations','Painel\Celebracoes\ScheduleCelebration
 Route::resource('/notice-intentions','Painel\Celebracoes\AvisosIntencoesController');
 
 //Rotas Dizimistas
+Route::get('/tithe/tither/import','Painel\Tithe\Tither\TitherController@import')->name('tither.import');
 Route::resource('/tithe/tither','Painel\Tithe\Tither\TitherController');
 Route::match(array('GET', 'POST'),'/tithe/devolution/save/{dizmista?}','Painel\Tithe\Devolution\TitherDevolutionsController@save')->name('devolution.save');
 Route::resource('/tithe/devolution','Painel\Tithe\Devolution\TitherDevolutionsController');

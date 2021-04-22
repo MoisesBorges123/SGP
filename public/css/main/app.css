@@ -208,7 +208,11 @@
 }
 
 .tables {
-  min-height: 120px !important;
+  min-height: 400px !important;
+}
+
+.tables td {
+  white-space: pre-line !important;
 }
 
 .radio-inline {

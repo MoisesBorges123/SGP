@@ -21,16 +21,32 @@ class LogradouroController extends Controller
     public static function store($dados)
     {
         //dd($dados);
-        if(!empty($dados['cep'] && $dados['rua'])){ 
-            $logradouro = LogradouroController::show($dados['cep']);
-            if(empty($logradouro['id'])){
-                if(is_string($dados['estado'])){
+        
+        if(!empty($dados['cep'])){ 
+            $logradouro = LogradouroController::show($dados['cep']);            
+            if(!empty($logradouro) && empty($logradouro['id'])){
+                if(!empty($dados['estado']) && is_string($dados['estado'])){
                     $estado = DB::table('estados')->where('nome',$dados['estado'])->first();
                     $dados['estado']= $estado->id;
-                }       
-                return Logradouro::create($dados);                
+                }else{
+                    $estado = DB::table('estados')->where('nome',$logradouro['nome_estado'])->first();
+                    $dados['estado']= $estado->id;
+                }     
+                  
+                $dadosLog = [
+                    'estado'=>$dados['estado'],
+                    'rua'=>$logradouro['logradouro'],
+                    'bairro'=>$logradouro['bairro'],
+                    'cep'=>$logradouro['cep'],
+                    'cidade'=>$logradouro['cidade'],
+                    'dd_local'=>$logradouro['dd_local'],
+                    'complemento'=>$logradouro['complemento'],
+                    'ibge'=>$logradouro['ibge']
+                ];
+                //dd($dadosLog);
+                return Logradouro::create($dadosLog);                
             }else{
-
+                return $logradouro;
             }
         }else{
             return false;
@@ -46,26 +62,29 @@ class LogradouroController extends Controller
     }
     public static function show($cep)
     {      
-        
+        $cep = trim($cep);
         $localidade = LogradouroController::internalSearch($cep);
         if($localidade==false){ // Se não achar no banco de dados local faça uma pesquisa online
-            $localidade=LogradouroController::externalSearch($cep);              
+            $localidade=LogradouroController::externalSearch($cep); 
             if(!empty($localidade)){
+                if(empty($localidade['uf'])){
+                    $localidade['uf']='MG';
+                }
                 $estado = DB::table('estados')                   
                         ->where('sigla',$localidade['uf'])
                         ->first();  
                 
                 $endereco = array( 
                     'resposta'=>true,
-                    'cep'=>$localidade['cep'],                    
-                    'logradouro'=>$localidade['logradouro'],
-                    'bairro'=>$localidade['bairro'],
-                    'cidade'=>$localidade['localidade'],
-                    'estado'=>$estado->id,
-                    'nome_estado'=>$estado->nome,
-                    'complemento'=>$localidade['complemento'],
-                    'dd_local'=>$localidade['ddd'],
-                    'ibge'=>$localidade['ibge'],
+                    'cep'=>empty($localidade['cep']) ? '' : $localidade['cep'],                    
+                    'logradouro'=>empty($localidade['logradouro']) ? '' : $localidade['logradouro'],
+                    'bairro'=>empty($localidade['bairro']) ? '' : $localidade['bairro'],
+                    'cidade'=>empty($localidade['localidade']) ? '' : $localidade['localidade'],
+                    'estado'=>$estado->id ?? '',
+                    'nome_estado'=>$estado->nome ,
+                    'complemento'=>empty($localidade['complemento']) ? '' : $localidade['complemento'],
+                    'dd_local'=>empty($localidade['ddd']) ? '' : $localidade['ddd'],
+                    'ibge'=>empty($localidade['ibge']) ? '' : $localidade['ibge'],
                     );                 
             }else{
                 $endereco = array('resposta'=>false);
@@ -108,10 +127,14 @@ class LogradouroController extends Controller
         $cep = preg_replace("/[^0-9]/", "", $cep);
         //$cep= substr($cep, 0,5).'-'.substr($cep, 5,3);
         $url = "http://viacep.com.br/ws/$cep/xml/";
-        $xml = simplexml_load_file($url);   
+        $xml = simplexml_load_file($url);         
         $array = json_decode(json_encode((array) $xml), 1);     
-        
-        return $array;
+        if(!empty($array['error'])){
+            return false;
+        }else{
+
+            return $array;
+        }
     }
     private static function internalSearch($dado){      
            

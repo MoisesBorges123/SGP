@@ -28,7 +28,8 @@ class IntencaoController extends Controller
             $scopes = DB::table('intention_scopes')->where('date_schedule','>=',date('Y-m-d',time()))->get();
         }
         
-        $dados=$this->mountedIntention($scopes);         
+        $dados=$this->mountedIntention($scopes);        
+        //dd($dados);
         return view('celebrations.intentions.table',compact('header','dados'));
     }    
     public function create()
@@ -47,7 +48,8 @@ class IntencaoController extends Controller
                 'nome'=>$request->input('falecido')
             );
             $personRequired = array(
-                'nome'=>$request->input('agendado_por')
+                'nome'=>$request->input('agendado_por'),
+                'telefone'=>$request->input('telefone')
             );
             $claimant = $fn_people->store($personRequired);
             $deceased = $fn_people->store($deadPerson);    
@@ -98,7 +100,7 @@ class IntencaoController extends Controller
                 }
                 else if( $classification == 8 || $classification ==5){
                     $pessoa = array(
-                        'nome'=>$request->input('pessoa')
+                        'nome'=>$request->input('pessoa')                        
                     );
                     $person = $fn_people->store($pessoa);
                     $complement = $request->input('age') ?? '';
@@ -141,7 +143,8 @@ class IntencaoController extends Controller
         }
         else{
             $personRequired = array(
-                'nome'=>$request->input('agendado_por')
+                'nome'=>$request->input('agendado_por'),
+                'telefone'=>$request->input('telefone')
             );
             $pessoa = array(
                 'nome'=>$request->input('pessoa')
@@ -377,12 +380,13 @@ class IntencaoController extends Controller
                      'typeIntention'=>$typeIntention->classe,
                      'intention'=>$intention,
                      'claimant'=>$claimant->nome,
-                     'phone'=>!empty($phone) ? $phone->telefone : '',
+                     'phone'=>!empty($phone) ? $phone->telefone : 'Não Cadastrado',
                      'intention_group'=> $typeIntention->name == 'Falecidos' ? 'Falecimento' : $typeIntention->name,
                      'observations' =>$value->observations,
                      'complement' => $value->complement,
                      'esposo'=>$engaged,
                      'esposa'=>$fiancee,
+                     'pessoa'=>$claimant->id,
                 ];
             }
         } 

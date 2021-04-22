@@ -22,13 +22,13 @@ class MonthlyController extends Controller
         $dados=[];
         
         foreach($monthlys as $monthly){
-            $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->first();
+            $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->orderBy('created_at','desc')->first();
             $today = date('Y-m-d',time());
             $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24));            
             if($intervalo >= 21){
                 $classe = 'bg-success';
             }else if($intervalo<21 && $intervalo >10){
-                $class='bg-warning';
+                $classe='bg-warning';
             }else{
                 $classe = 'bg-danger';
             }
@@ -36,7 +36,7 @@ class MonthlyController extends Controller
             $dados[]= [
                 'id'=>$monthly->parking_id,
                 'responsavel'=>$monthly->owner,
-                'telefone'=>$telefone->telefone,
+                'telefone'=>empty($telefone->telefone) ? '' :  $telefone->telefone,
                 'placa'=>$monthly->placa,
                 'tipo_veiculo'=>$monthly->typevehicle == 1 ? 'Carro':'Moto',
                 'inicio'=>date('d/m/Y',strtotime($monthly->beginning)),
@@ -58,7 +58,8 @@ class MonthlyController extends Controller
     }
     public function store(Request $request)
     {
-        $value = floatval(str_replace(',','.',str_replace('.','',$request->valor)));
+        
+        $value = floatval(str_replace(',','.',str_replace('.','',str_replace('R$ ','',$request->preco))));        
         $cash = floatval(str_replace(',','.',str_replace('.','',$request->cash)));
         $discount = !empty($request->discount) ? floatval(str_replace(',','.',str_replace('.','',$request->discount))) : 0;
         $justify = empty($request->justify) ? '' :  $request->justify;              
@@ -68,7 +69,7 @@ class MonthlyController extends Controller
         $vehicle = VehiclesController::store(['pessoa'=>$pessoa->id,'placa'=>strtoupper($request->placa),'typevehicle'=>$request->tipo_veiculo]);
         $timeParking=TimeParkingController::store(['date_out'=>date('Y-m-d',strtotime("+30 days",strtotime(date('Y-m-d',time())))), 'hour_out'=>date('H',time()),'min_out'=>date('i',time())]);
         $payment = PaymentsController::store(['modality'=>'Mensalidade','value'=>$value,'discount'=>$discount,'justify_discount'=>$justify,'table_price'=>$request->table_price,'payed'=>$cash,'date_payed'=>date('Y-m-d',time())]);
-
+        
         $dados = array(
             'payment'=>$payment->id,
             'time'=>$timeParking->id,

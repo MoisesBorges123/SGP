@@ -50376,6 +50376,9 @@ $('#devolucoes').Tabledit({
 $('.money2').mask("#.##0,00", {
   reverse: true
 });
+$(document).on('focus', '.money2', function () {
+  $(this).val(null);
+});
 
 /***/ }),
 

@@ -10,7 +10,7 @@
       
                 <div class="card shadow">
                     @if(empty($dados))
-                        <form action="{{route('monthly.store')}}" method="post" >
+                        <form action="{{route('monthly.store')}}" id='form_monthly' method="post" >
                        
                     @else
                         <form action="{{route('monthly.update',$dados->id)}}" method="post" >
@@ -63,6 +63,7 @@
                                 <div class="col-6">                                    
                                     <label for="valor">Valor</label>
                                     <input type="text" name='valor' id='id_valor' class='form-control' disabled='true' value="{{$dados->valor ?? ''}}">                                    
+                                    <input type="hidden" name='preco' id='id_preco' value="{{$dados->valor ?? ''}}">                                    
                                 </div>
                                 <div class="col-6">
                                     <label for="valor">Desconto</label>
@@ -94,7 +95,7 @@
                                 <a class="btn btn-primary text-center" href='{{url()->previous()}}'>Voltar</a>
                                 <button class="btn btn-default text-center" type='submit'>Salvar Alterações</button>
                             @else
-                                <button class="btn btn-primary text-center pagar" type='submit'>Pagar e salvar</button>
+                                <button class="btn btn-primary text-center pagar" type='button'>Pagar e salvar</button>
                             @endif
                         </div>
                     </form>

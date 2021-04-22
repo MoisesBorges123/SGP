@@ -21,7 +21,15 @@ class VehiclesController extends Controller
 
     public static function store($dados)
     {
-        return Vehicle::create($dados);
+        $existe = Vehicle::where('placa',$dados['placa'])->first();
+        if(!empty($existe)){
+            if($existe->pessoa =='' && !empty($dados['pessoa'])){
+                $existe->update(['pessoa'=>$dados['pessoa']]);
+            }
+            return $existe;
+        }else{
+            return Vehicle::create($dados);
+        }
     }
 
     public static function show( $placa)

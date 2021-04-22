@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -42108,9 +42108,10 @@ $(document).on('change', 'input[name="tipo_veiculo"]', /*#__PURE__*/_asyncToGene
           price = _context.sent;
           $('#id_valor').val("R$ " + number_format(price.mensalidade, 2, ',', '.'));
           $('#id_total').val("R$ " + number_format(price.mensalidade, 2, ',', '.'));
+          $('#id_preco').val("R$ " + number_format(price.mensalidade, 2, ',', '.'));
           $('#id_table_price').val(price.id);
 
-        case 6:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -42210,6 +42211,7 @@ $(document).on('input', '.money2', function () {
 });
 $(document).on('click', '.pagar', function () {
   openGave();
+  $('#form_monthly').submit();
 });
 
 function buscaPreco(tipo_veiculo) {
@@ -42266,14 +42268,13 @@ function openGave() {
   fetch($('meta[name="openGave"]').attr('content'), {
     method: 'GET',
     credentials: 'same-origin',
-    body: data,
     mode: 'no-cors'
   });
 }
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /*!***********************************************************!*\
   !*** multi ./resources/js/estacionamento/monthly/form.js ***!
   \***********************************************************/

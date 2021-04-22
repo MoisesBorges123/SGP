@@ -22,6 +22,7 @@ $(document).on('change','input[name="tipo_veiculo"]',async function(){
     var price = await buscaPreco($(this).val());    
     $('#id_valor').val("R$ "+number_format(price.mensalidade,2,',','.'));
     $('#id_total').val("R$ "+number_format(price.mensalidade,2,',','.'));
+    $('#id_preco').val("R$ "+number_format(price.mensalidade,2,',','.'));
     $('#id_table_price').val(price.id);
 });
 $(document).on('input','#id_desconto',function(){
@@ -113,6 +114,8 @@ $(document).on('input','.money2',function(){
 });
 $(document).on('click','.pagar',function(){
     openGave();
+    $('#form_monthly').submit();
+    
 });
 function buscaPreco(tipo_veiculo){
     var link = $('meta[name="fetchPrice"]').attr('content');
@@ -163,8 +166,7 @@ function openGave(){
 
     fetch($('meta[name="openGave"]').attr('content'),{ 
         method:'GET',
-        credentials:'same-origin',
-        body:data,
+        credentials:'same-origin',        
         mode: 'no-cors'
     });
 }
