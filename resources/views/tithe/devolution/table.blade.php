@@ -22,7 +22,7 @@
                     <div class='card-body '>
                         <div class='row'> 
                             <div class="col-12 ">                            
-                                <table class="table table-flush table-full" id='titherTable'>
+                                <table class="table table-flush table-full tables" id='titherTable'>
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Nome</th>                                    
@@ -39,11 +39,11 @@
                                                     <span>{{$dado->nome}}</span>
                                                 </td>
                                                 <td class="budget ">                                           
-                                                <span class="name mb-0 text-sm ">{{$dado->rua.', '.$dado->bairro.', '.$dado->numero}}
+                                                <span class="name mb-0 text-sm ">{{$dado->rua.', '.$dado->bairro.', '.$dado->numero.', '}}
                                                     @if(!empty($dado->apartamento))
-                                                    {{' (APTO '.$dado->apartamento.')'}}
+                                                    {{'(APTO '.$dado->apartamento.'), '}}
                                                     @endif
-                                                    {{', '.$dado->cidade.'/ '.$dado->estado_sigla}}</span>                                                
+                                                    {{$dado->cidade.'/ '.$dado->estado_sigla}}</span>                                                
                                                 </td>                                                                                                                                    
                                                 <td class="text-right">
                                                     <a href='{{route('devolution.create',['dizimista'=>$dado->id])}}' class='btn btn-outline-secondary'>Fazer Devolução</a>

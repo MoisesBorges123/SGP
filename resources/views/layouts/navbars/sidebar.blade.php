@@ -295,6 +295,11 @@
                         <i class="ni ni-favourite-28 text-danger"></i> <b class='text-danger'>{{ __('Devolver') }}</b>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('tither.import') }}">
+                        <i class="ni ni-settings"></i> <b >{{ __('Importar Dizimistas ') }}</b>
+                    </a>
+                </li>
             </ul>
             <h6 class="navbar-heading text-muted">Financeiro</h6>
             <ul class="navbar-nav">     

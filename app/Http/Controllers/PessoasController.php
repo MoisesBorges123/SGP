@@ -37,10 +37,13 @@ class PessoasController extends Controller
         if(!$validated->fails()){
             $pessoa = new Pessoa;
             $existe=$pessoa->where('nome',$dados['nome'])->first();
+            
             if(!$existe){
+               // dd("Não existe");
                 $insert=$pessoa->create($dados);   
                 $dados['pessoa'] = $insert->id;
-                if(!empty($dados['cep'])){                
+                if(!empty($dados['cep'])){ 
+                    //dd($dados);
                     EnderecoController::store($dados);
                 }
                 if(!empty($dados['telefone'])){
@@ -51,10 +54,11 @@ class PessoasController extends Controller
                     TelefoneController::store($dadosTelefone);               
                     
                 }       
-           
+                
             }else{
-                if(!empty($dados['email'])){
-                       
+               // dd("existe");
+               $dados['pessoa'] = $existe->id;
+                if(!empty($dados['email'])){                       
                     $existe->update(['email'=>$dados['email']]);
                     $existe=DB::table('pessoas')->where('nome',$dados['nome'])->first();
                 }
@@ -63,13 +67,15 @@ class PessoasController extends Controller
                         'pessoa'=> $existe->id,
                         'telefone'=>$dados['telefone']
                     );
-                    TelefoneController::store($dadosTelefone);               
+                    TelefoneController::store($dadosTelefone);              
                     
                 }    
+                if(!empty($dados['cep'])){                    
+                    EnderecoController::store($dados);                
+                }
                 $insert = $existe;
-
             }
-            
+        
            return $insert;
         }else{
             return $validated;

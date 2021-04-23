@@ -20,15 +20,14 @@ class TitherDevolutionsController extends Controller
         $header = $this->header();
         $dados = DB::table('tithers')
         ->join('pessoas','pessoas.id','=','tithers.person')
-        ->join('enderecos','pessoas.id','=','enderecos.pessoa')
-        ->join('logradouros','logradouros.id','=','enderecos.logradouro')
-        ->join('telefone','pessoas.id','=','telefone.pessoa')
-        ->join('estados','estados.id','=','logradouros.estado')
-        ->select('pessoas.nome as nome','telefone','rua','bairro','cidade','estados.sigla as estado_sigla','tithers.id as id','enderecos.numero as numero','enderecos.apartamento as apartamento')
+        ->leftjoin('enderecos','pessoas.id','=','enderecos.pessoa')
+        ->leftjoin('logradouros','logradouros.id','=','enderecos.logradouro')        
+        ->leftjoin('estados','estados.id','=','logradouros.estado')
+        ->select('pessoas.nome as nome','rua','bairro','cidade','estados.sigla as estado_sigla','tithers.id as id','enderecos.numero as numero','enderecos.apartamento as apartamento')
         ->orderBy('pessoas.nome')
         ->get();
         
-        
+        //dd($dados);
         return view('tithe.devolution.table',compact('header','dados'));
     }
     
@@ -38,6 +37,7 @@ class TitherDevolutionsController extends Controller
         $tither = DB::table('tithers')->where('id',$request->dizimista)->first();
         $pessoa = DB::table('pessoas')->where('id',$tither->person)->first();        
         $endereco = DB::table('enderecos')
+        ->where('pessoa',$pessoa->id)
         ->join('logradouros','logradouros.id','=','enderecos.logradouro')
         ->join('estados','estados.id','=','logradouros.estado')
         ->first();
@@ -48,15 +48,15 @@ class TitherDevolutionsController extends Controller
                 'data_cadastro'=>$tither->created_at,
                 'nome'=>$pessoa->nome,
                 'data_nascimento'=>$pessoa->data_nascimento,
-                'rua'=>$endereco->rua,
-                'bairro'=>$endereco->bairro,
-                'cep'=>$endereco->cep,
-                'cidade'=>$endereco->cidade,
-                'estado'=>$endereco->sigla,
+                'rua'=>$endereco->rua ?? '',
+                'bairro'=>$endereco->bairro ?? '',
+                'cep'=>$endereco->cep ?? '',
+                'cidade'=>$endereco->cidade ?? '',
+                'estado'=>$endereco->sigla ?? '',
                 'email'=>$pessoa->email,
-                'apartamento'=>$endereco->apartamento,
-                'numero'=>$endereco->numero,
-                'telefone'=>$telefone->telefone,
+                'apartamento'=>$endereco->apartamento ?? '',
+                'numero'=>$endereco->numero ?? '',
+                'telefone'=>$telefone->telefone ?? '',
                 'id'=>$request->dizimista,
                 'situacao'=>$tither->situation
                
@@ -64,6 +64,7 @@ class TitherDevolutionsController extends Controller
 
             ],
             'devolution' => $this->buscar_ficha($tither->id)
+
         );
         //dd($dados);
         return view('tithe.devolution.form',compact('dados'));
@@ -100,12 +101,12 @@ class TitherDevolutionsController extends Controller
                //     $this->computadores->create(['ip'=>$ip,'tipo'=>'desconhecido']) ;
               //  }
                 $dados = array(
-                    'tither'=>$dados['tither'],
+                    'tither'=>$dizimista,
                     'amoutn' =>$month['valor'],
                     'month'=>$month['mes'],
                     'year'=>$year,
                     'location'=>$dados['ip'],
-                    'amount'=>$dizimista
+                   
                     
                     
                 );
@@ -137,17 +138,31 @@ class TitherDevolutionsController extends Controller
         //
     }
     private function header(){
-        $totalRegisterTither = null;//$this->tither->all()->count();
-        $onTither = null;//$this->tither->where('situation','Ativo')->count();
-        $offTither =null;// $this->tither->where('situation','Inativo')->count();
-        $birthdays = null;//$this->tither->join('pessoas','pessoas.id','=','tithers.person')->where('pessoas.data_nascimento','like','%-'.date('m',time()).'-%')->count();
+        $totalRegisterTither = DB::table('tithers')->get()->count();      
+        $tithers = DB::table('tithers')->get();
+        $offTither = 0;
+        $i =1;
+        foreach($tithers as $tither){            
+            $devolution = DB::table('tither_devolutions')    
+            ->where('created_at','>',date('Y-m-d H:i:s',strtotime('-91 days',time())))          
+            ->where('tither',$tither->id)                         
+            ->first();            
+            if(empty($devolution)){
+                $offTither++;
+
+            }
+           
+        }
+        
+        $onTither  = $totalRegisterTither - $offTither;
+        $birthdays = DB::table('tithers')->join('pessoas','pessoas.id','=','tithers.person')->where('pessoas.data_nascimento','like','%-'.date('m',time()).'-%')->count();
         
         
         $card =array(
             [
                 'headerText'=>'Dizimistas Cadastrados',
                 'headerNumber'=> $totalRegisterTither,
-                'bodyIcon'=>'<i class="fas fa-calendar-check"></i>',
+                'bodyIcon'=>'<i class="ni ni-chart-bar-32"></i>',
                 'color'=>'bg-green',
                 'url'=>route('certidao-batismo.filter',1),
                 
@@ -156,7 +171,7 @@ class TitherDevolutionsController extends Controller
             [
                 'headerText'=> 'Dizimistas Ativos',
                 'headerNumber'=>$onTither,
-                'bodyIcon'=>'<i class="fas fa-history"></i>',
+                'bodyIcon'=>'<i class="ni ni-satisfied"></i>',
                 'color'=>'bg-warning',
                 'url'=>'',
                 
@@ -193,9 +208,10 @@ class TitherDevolutionsController extends Controller
                        ->orderby('year','asc')                    
                        ->get();
         $totalRegister = count($Devolutions);
-        $lastDevolution=$Devolutions[$totalRegister-1];
+        
         
         if(!empty($firstDevolution)){ // CASO EXISTA ALGUMA DEVOLUÇÃO
+            $lastDevolution=$Devolutions[$totalRegister-1];
             $firstYear = $firstDevolution->year;
             if(($lastDevolution->year) < ((date('Y',time())))){            
                 $intervalo = (date('Y',time())) - ($lastDevolution->year) ;

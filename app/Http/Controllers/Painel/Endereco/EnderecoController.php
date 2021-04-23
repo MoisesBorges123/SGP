@@ -24,16 +24,32 @@ class EnderecoController extends Controller
     {
         
         
-        $logradouro = LogradouroController::store($dados);
-        $dados['complemento'] = $dados['complemento2'];
-        $dados['logradouro'] = $logradouro->id;
-        return Endereco::create($dados);
+        $logradouro = LogradouroController::store($dados); 
+        
+        $dados['complemento'] = $dados['complemento2'] ?? '';
+        $dados['logradouro'] = $logradouro->id ?? $logradouro['id'] ?? '';
+        if(!empty($dados['logradouro'])){
+            $endereco = Endereco::where('pessoa',$dados['pessoa'])->get();
+            
+            if(empty($endereco->id)){
+                return Endereco::create($dados);
+            }elseif(!empty($endereco) && ($endereco->logradouro != $dados['logradouro'] || $endereco->numero != $dados['numero'] || $endereco->apartamento != $dados['apartamento']) ){
+                $endereco->update($dados);
+                return Endereco::where('pessoa',$dados['pessoa'])->first();
+            }else{
+                return $endereco;
+            }
+
+        }else{
+            return null;
+        }
+        
         
     }
 
-    public function show(Endereco $endereco)
+    public static function show($id_endereco)
     {
-        //
+        return Endereco::find($id_endereco);
     }
 
     public function edit(Endereco $endereco)

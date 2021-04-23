@@ -4,7 +4,9 @@ window.$ = window.jQuery = require('jquery');
 require('datatables.net-bs4');
 require('datatables.net-dt');
 require('select2');
+require('jquery-countdown');
 import 'jquery-mask-plugin';
+import { delay } from 'lodash';
 const Swal = require('sweetalert2');
 
 $('.placa').mask('AAA-0A00');
@@ -31,7 +33,42 @@ setInterval(() => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-    })
+});
+var data = new Date(),
+dia  = data.getDate(),
+mes  = data.getMonth() + 1,
+ano  = data.getFullYear();
+var hoje = ano+"/"+mes+"/"+dia;
+
+
+$('#clock').countdown(hoje+' 17:50:00', function(event) {
+    var x = event.offset;
+    if(event.offset.hours==0){
+        if(event.offset.minutes==0){
+            $(this).html(event.strftime('%S'));            
+            if(event.offset.seconds==1){                
+                var x = 0;
+                var elm = $('.btn-fechar-caixa');        
+                setInterval(function(){    
+                    if(x==0){
+                        elm.css('box-shadow','0 3px 27px rgb(255 0 0 / 100%');  
+                        x=1;
+                    }else{
+                        elm.css('box-shadow','none'); 
+                        x=0;
+                    }
+                    
+                },1000) ; 
+            }
+        }else{
+            
+                $(this).html(event.strftime('%M:%S'));
+            
+        }
+    }else{
+        $(this).html(event.strftime('%H:%M:%S'));
+    }
+});
 $(document).on('keypress','#placa_entrada',function(e) {
     if (e.which == 13) {
          $('#btn-entrar').trigger('click'); 
@@ -548,7 +585,7 @@ $(document).on('click','#btn-pg-sair',async function(){
                 var troco =$('#id_troco').val();
                 var imprimir = $("input[name='imprimir']").prop("checked");          
                 var cod = $('#placa_saida').val();
-              
+                
                  
                 //console.log('Dinheiro: '+dinheiro+'\nDesconto: '+desconto+'\nJustificativa: '+justificativa+'\nTroco: '+troco+'\nImprimir: '+imprimir);
                 var efetuaPagamento = await saidaEstacionamento(cod,pg,dinheiro,desconto,justificativa,troco,imprimir,dados);
@@ -560,7 +597,7 @@ $(document).on('click','#btn-pg-sair',async function(){
                             title: 'Pagamento Efetuado!!'
                         });
                         
-                       
+                        $('#placa_saida').val('');
                     }
                     
                 }
@@ -882,3 +919,8 @@ async function fetchHeader(){
     });
    
 }
+
+    function blink(elm) {
+         
+    
+    }

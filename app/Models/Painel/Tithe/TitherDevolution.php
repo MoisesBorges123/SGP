@@ -8,5 +8,5 @@ class TitherDevolution extends Model
 {
     //
     protected $table = 'tither_devolutions';
-    public $fillable = ['tither','amoutn','month','year','location'];
+    public $fillable = ['tither','amoutn','month','year','location','created_at'];
 }

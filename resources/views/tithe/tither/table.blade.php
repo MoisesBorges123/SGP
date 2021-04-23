@@ -35,18 +35,18 @@
                                         
                                         @foreach($dados as $dado)
                                             <tr>
-                                                <td class="budget">
-                                                    <span>{{$dado->nome}}</span>
+                                                <td >
+                                                    <span>{{$dado['nome']}}</span>
                                                 </td>
-                                                <td class="budget text-center">                                           
-                                                <span class="name mb-0 text-sm ">{{$dado->rua.', '.$dado->bairro.', '.$dado->numero}}
-                                                    @if(!empty($dado->apartamento))
-                                                    {{' (APTO '.$dado->apartamento.')'}}
+                                                <td>                                           
+                                                <span class="name mb-0 text-sm ">{{$dado['rua'].', '.$dado['bairro'].', '.$dado['numero'].', '}}
+                                                    @if(!empty($dado['apartamento']))
+                                                    {{'(APTO '.$dado['apartamento'].'), '}}
                                                     @endif
-                                                    {{', '.$dado->cidade.'/ '.$dado->estado_sigla}}</span>                                                
+                                                    {{$dado['cidade'].'/ '.$dado['estado_sigla']}}</span>                                                
                                                 </td>
                                                 <td class="budget">
-                                                    <span>{{$dado->telefone}}</span>
+                                                    <span>{{ $dado['telefone'] }}</span>
                                                 </td>                                                                                      
                                                 <td class="text-right">
                                                     <div class="dropdown">
@@ -54,9 +54,9 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado->id)}}">Editar</a> 
-                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado->id)}}">Devolver Dízimo</a> 
-                                                            <button class="dropdown-item" id='btn-excluir' data-link="{{route('tither.destroy',$dado->id)}}" >Excluir</button>
+                                                            <a class="dropdown-item"  href="{{route('tither.edit',$dado['id'])}}">Editar</a> 
+                                                            <a class="dropdown-item"  href="{{route('devolution.create',$dado['id'])}}">Devolver Dízimo</a> 
+                                                            <button class="dropdown-item" id='btn-excluir' data-link="{{route('tither.destroy',$dado['id'])}}" >Excluir</button>
                                                         </div>
                                                     </div>
                                                 </td>
