@@ -104,9 +104,9 @@
                         <div class='card-footer justify-content-center text-center'>
                             @if(!empty($dados))
                                 <a class="btn btn-primary text-center" href='{{url()->previous()}}'>Voltar</a>
-                                <button class="btn btn-default text-center" type='submit'>Salvar Alterações</button>
+                                <button class="btn btn-default text-center" type='submit'>Renovar +30 dias</button>
                             @else
-                                <button class="btn btn-primary text-center" type='button'>Renovar !!</button>
+                                <button class="btn btn-primary text-center" type='submit'>Renovar !!</button>
                             @endif
                         </div>
                     </form>
@@ -118,6 +118,7 @@
 @push('css')
     <link rel="stylesheet" href="{{mix('admin/estacionamento/monthly/renew/css/form.css')}}"/>
     <meta name='fetchPrice' content="{{route('table-price.fetch')}}">
+    <meta name='new_monthly' content="{{route('monthly.create')}}">
     <meta name='openGave' content="http://192.168.0.21/estacionamento_catedral/print/opengave/opening.php">
 @endpush
 @push('js')

@@ -15,7 +15,7 @@ class MonthlyPaysController extends Controller
     public function create(Request $request){
         $dados = [];
         if(!empty($request->placa)){
-            $dados['id'] ='2';
+            $dados['id'] =$request->id_parking;
             if(!empty($request->placa)){
                 $dados['placa']=$request->placa;
             }
@@ -49,20 +49,26 @@ class MonthlyPaysController extends Controller
             return view('estacionamento.monthly.pays.form',['option'=>$option]);
         }
     }
-    public function show($id_vehicle){
+    public function show($id_vehicle ){
+        
         $lastdata = DB::table('monthlyview')
         ->join('payments','payments.id','=','monthlyview.payment_id')
         ->join('vehicle','vehicle.id','=','monthlyview.vehicle_id')
         ->where('vehicle_id',$id_vehicle)->orderBy('parking_id', 'desc')->first();
-        $tablePrice = TablePriceController::show($lastdata->typevehicle);
-        return array(
-            'valor'=>'R$ '.number_format($tablePrice->mensalidade,2,',','.'),
-            'desconto'=>$lastdata->discount==0 ? '0': number_format($lastdata->discount,2,',','.'),
-            'typevehicle'=>$lastdata->typevehicle,
-            'valor_pagar'=>'R$ '.number_format(($tablePrice->mensalidade - $lastdata->discount),2,',','.'),
-            'justify'=>$lastdata->justify_discount,
-            'parking_id'=>$lastdata->parking_id
-        );
+        if(!empty($lastdata)){
+            $tablePrice = TablePriceController::show($lastdata->typevehicle);
+            return array(
+                'valor'=>'R$ '.number_format($tablePrice->mensalidade,2,',','.'),
+                'desconto'=>$lastdata->discount==0 ? '0': number_format($lastdata->discount,2,',','.'),
+                'typevehicle'=>$lastdata->typevehicle,
+                'valor_pagar'=>'R$ '.number_format(($tablePrice->mensalidade - $lastdata->discount),2,',','.'),
+                'justify'=>$lastdata->justify_discount,
+                'parking_id'=>$lastdata->parking_id
+            );
+
+        }else{
+            return array('error'=>'null');
+        }
         
     }
     public function store(Request $request){
@@ -126,6 +132,38 @@ class MonthlyPaysController extends Controller
             return true;
         }else{
             return false;
+        }
+    }
+    public function update(Request $request, $id){
+        
+        if(!empty($id)){
+            $lastdata = DB::table('monthlyview')
+            ->join('payments','payments.id','=','monthlyview.payment_id')
+            ->join('vehicle','vehicle.id','=','monthlyview.vehicle_id')
+            ->where('parking_id',$id)->first();   
+            
+            $next_date = date('Y-m-d',strtotime('+1 days',strtotime($lastdata->end)));  
+            $date_beginning = $next_date < date('Y-m-d',time()) ? date('Y-m-d',time()) : $next_date;
+            $cash = floatval(str_replace(',','.',str_replace('.','',$request->cash)));
+            $discount = !empty($request->discount) ? floatval(str_replace(',','.',str_replace('.','',$request->discount))) : 0;
+            $justify = empty($request->justify) ? '' :  $request->justify;
+            $value = floatval(str_replace(',','.',str_replace('.','',str_replace('R$ ','',$request->preco))));        
+
+            $timeParking=TimeParkingController::store(['date_in'=>$date_beginning,'date_out'=>date('Y-m-d',strtotime("+30 days",strtotime($date_beginning))), 'hour_out'=>23,'min_out'=>59]);
+            $payment = PaymentsController::store(['modality'=>'Mensalidade','value'=>$value,'discount'=>$discount,'justify_discount'=>$justify,'table_price'=>$request->table_price,'payed'=>$cash,'date_payed'=>date('Y-m-d',time())]);
+    
+            $dados = array(
+                'payment'=>$payment->id,
+                'time'=>$timeParking->id,
+                'vehicle'=>$lastdata->vehicle_id
+            );
+            $newPark = Parking::create($dados);
+            if(!empty($payment->id) && !empty($newPark->id) ){
+                return redirect()->route('monthly.index');
+            }
+
+        }else{
+            return redirect()->back();
         }
     }
 }
