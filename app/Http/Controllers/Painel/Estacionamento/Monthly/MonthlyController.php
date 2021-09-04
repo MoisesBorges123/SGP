@@ -22,31 +22,33 @@ class MonthlyController extends Controller
         $dados=[];
         
         foreach($monthlys as $monthly){
-            $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->orderBy('created_at','desc')->first();
-            $today = date('Y-m-d',time());
-            $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24));            
-            if($intervalo >= 21){
-                $classe = 'bg-success';
-            }else if($intervalo<21 && $intervalo >10){
-                $classe='bg-warning';
-            }else{
-                $classe = 'bg-danger';
+            if($monthly->end > date('Y-m-d',time())){
+                $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->orderBy('created_at','desc')->first();
+                $today = date('Y-m-d',time());
+                $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24));            
+                if($intervalo >= 21){
+                    $classe = 'bg-success';
+                }else if($intervalo<21 && $intervalo >10){
+                    $classe='bg-warning';
+                }else{
+                    $classe = 'bg-danger';
+                }
+                $progresso = (100*$intervalo) /30;
+                $dados[]= [
+                    'id'=>$monthly->parking_id,
+                    'responsavel'=>$monthly->owner,
+                    'telefone'=>empty($telefone->telefone) ? '' :  $telefone->telefone,
+                    'placa'=>$monthly->placa,
+                    'tipo_veiculo'=>$monthly->typevehicle == 1 ? 'Carro':'Moto',
+                    'inicio'=>date('d/m/Y',strtotime($monthly->beginning)),
+                    'encerramento'=>date('d/m/Y',strtotime($monthly->end)),
+                    'intervalo'=>$intervalo,
+                    'classe'=>$classe,
+                    'progresso'=>$progresso
+                ];
+                
             }
-            $progresso = (100*$intervalo) /30;
-            $dados[]= [
-                'id'=>$monthly->parking_id,
-                'responsavel'=>$monthly->owner,
-                'telefone'=>empty($telefone->telefone) ? '' :  $telefone->telefone,
-                'placa'=>$monthly->placa,
-                'tipo_veiculo'=>$monthly->typevehicle == 1 ? 'Carro':'Moto',
-                'inicio'=>date('d/m/Y',strtotime($monthly->beginning)),
-                'encerramento'=>date('d/m/Y',strtotime($monthly->end)),
-                'intervalo'=>$intervalo,
-                'classe'=>$classe,
-                'progresso'=>$progresso
-            ];
-            
-        }
+            }
         
         return view('estacionamento.monthly.table',compact('dados'));
         

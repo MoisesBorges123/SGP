@@ -4,10 +4,7 @@ window.Vue = require ('vue');
 import 'jquery-mask-plugin';
 import {mask} from 'vue-the-mask'
 import 'select2';
-import 'sweetalert2';
-import Swal from 'sweetalert2';
 
-var novo_mensalista = $('meta[name="new_monthly"]').attr('content');
 var _token = $('meta[name="csrf-token"]').attr('content');
 $.ajaxSetup({
 headers: {
@@ -31,10 +28,8 @@ $('.js-example-basic-single').select2({
 });
 $(document).on('change','#id_placa',async  function(){
     if($(this).val()!=''){
-        var dados = await fetchLastPay($(this).val()); 
-        console.log(dados.erro);
-        if(!dados.error)       {
-            $('input[name="tipo_veiculo"]').filter('[value="'+dados.typevehicle+'"]').prop('checked',true);
+        var dados = await fetchLastPay($(this).val());        
+        $('input[name="tipo_veiculo"]').filter('[value="'+dados.typevehicle+'"]').prop('checked',true);
         $('#id_valor').val(dados.valor);
         $('#id_preco').val(dados.valor);
         $('#id_desconto').val(dados.desconto);
@@ -46,17 +41,6 @@ $(document).on('change','#id_placa',async  function(){
         }else{
             $('.justificativa').remove();
         }
-        }else{
-            var ok = await Swal.fire({
-                title:'Mensalista Inexistente',
-                html:'Ops! Não foi possível encontrar os dados desse mensalista, por favor vá para a pagina <b> Novo Mensalista</b> para fazer o cadastro do mesmo.',
-                icon:'warning'
-            });
-            if(ok.value){
-                window.location.href = novo_mensalista;
-            }
-        }
-        
     }
 });
 $(document).on('change','input[name="tipo_veiculo"]',async function(){
