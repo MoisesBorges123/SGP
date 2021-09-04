@@ -232,7 +232,7 @@ class IntencaoController extends Controller
             $pdf::Image("admin/intentions/images/folha_de_intencao.jpg",2,2,193);    
             $pdf::SetY(55);
             foreach($class_intentions as $class){
-                $pdf::SetFont('Arial','B',13);  
+                $pdf::SetFont('Arial','B',14);  
                 $pdf::Text(120,50,ucfirst(strftime('%A, %d de %B de %Y',strtotime($request->date_schedule))));               
                 $pdf::Text(120,58,utf8_decode("Horário: ".$request->time_schedule));               
                 $pdf::Cell(190,10,utf8_decode($class->classe),0, 1,'L',FALSE);
@@ -244,7 +244,7 @@ class IntencaoController extends Controller
                 ->get();
                 $intentions = $this->mountedIntention($scopes);                
                 if(count($intentions) > 0 ){
-                    $pdf::SetFont('Arial','',12);
+                    $pdf::SetFont('Arial','',13);
                     foreach($intentions as $intention){
                         $pdf::Cell(190,7,utf8_decode($intention['intention']),0,1,'L',FALSE);
                     }

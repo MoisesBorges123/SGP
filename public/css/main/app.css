@@ -208,7 +208,7 @@
 }
 
 .tables {
-  min-height: 400px !important;
+  /*min-height: 400px !important;*/
 }
 
 .tables td {
