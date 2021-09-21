@@ -24,13 +24,13 @@
                             
                             <div class="col-12">
                                     <h3 class='text-center mb-3 '>Histórico</h3>
-                                    <table class="table align-items-center table-flush table-full tables table-responsive" id='minha_tabela'>
+                                    <table class="table align-items-center table-flush table-full " >
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Data</th>                                    
                                                 <th scope="col">Valor</th>                                    
                                                 <th scope="col">Descontos</th>
-                                                <th scope="col">Total</th>
+                                                <th scope="col">Resultado</th>
                                                 <th scope="col">Ações</th>                                                
                                             </tr>
                                         </thead>
@@ -38,7 +38,7 @@
                                             @foreach ($payments as $payment)
                                                 
                                                 <tr>
-                                                    <td>{{date('d/m/Y',strtotime($payment->data_payed))}}</td>
+                                                    <td>{{date('d/m/Y',strtotime($payment->date_payed))}}</td>
                                                     <td>R$ {{number_format($payment->cash,2,',','.')}}</td>
                                                     <td>R$ {{number_format($payment->discount,2,',','.')}}</td>
                                                     <td>R$ {{number_format(($payment->cash-$payment->discount),2,',','.')}}</td>
@@ -66,7 +66,7 @@
 @endsection
 
 @push('js')   
-    <script src="{{mix('admin/estacionamento/fluxo/js/table.js')}}"></script>    
+    
 @endpush
 @push('css')
    <!-- <meta name="fetch-notice" content="{{ route('notice-intentions.index') }}">  
