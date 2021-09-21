@@ -18,4 +18,6 @@ class Payment extends Model
         'date_payed'
     ];
     public $timestamps=true;
+
+    
 }
