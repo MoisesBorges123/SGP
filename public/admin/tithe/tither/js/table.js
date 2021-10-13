@@ -49700,8 +49700,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // @ts-ignore
-
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");

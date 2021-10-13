@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -12,17 +13,29 @@
                         <div class="row ">
                             <div class="col-6">
                                 <h3 class="mb-0">Minhas Entradas</h3>                               
-                            </div>                           
-                          
+                            </div>                            
+                            
+                            <div class="col-1">                            
+                                <button id="print" data-link="{{route('contagem.printByinterval')}}" class="btn btn-sm btn-primary">Imprimir</button>
+                            </div>
+                            <div class="col-2 text-right">                            
+                                <a href="{{route('contagem.create')}}" class="btn btn-sm btn-primary">Nova entrada</a>
+                            </div>
+                            <div class="col-1">
+                                <button id='btn-filter' data-link="{{route('contagem.index')}}" class="btn btn-sm btn-default">Filtrar Controles</button>
+                            </div>
                         </div>
                         
+                    </div>
+                    
+                    <div class="col-12">
                     </div>
                    
     
                     <div class='card-body align-items-center'>
                         <div class='row'> 
                             <div class="col-12 ">                            
-                                <table class="table  table-flush table-full tables" id='titherTable'>
+                                <table class="table  table-flush table-full" id='titherTable'>
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Entrada</th>                                    
@@ -33,28 +46,35 @@
                                     </thead>
                                     <tbody>
                                         
-                                        @foreach($dados as $dado)
+                                        @foreach($contagens as $dado)
                                             <tr>
                                                 <td class="budget">
-                                                    <span>{{$dado['categoria']}}</span>
+                                                    <span>{{$dado->categors->nome}}</span>
                                                 </td>
                                                 <td class="budget">
-                                                    <span >{{$dado['data']}}</span>                                               
+                                                    <span >{{date('d/m/Y',strtotime($dado->referer))}}</span>                                               
                                                 </td>
                                                 <td class="budget">
-                                                    <span>{{$dado['valor']}}</span>
+                                                    <span>R$ {{number_format($dado->banknotes->total+$dado->coins->total,2,',','.')}}</span>
                                                 </td>                                                                                      
                                                 <td class="text-right">
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            <a class="dropdown-item"  href="{{route('contagem.show',['id'=>$dado['id']])}}">Imprimir</a> 
-                                                            <a class="dropdown-item"  href="7">Editar</a> 
-                                                            <button class="dropdown-item" id='btn-excluir' data-link="" >Excluir</button>
-                                                        </div>
-                                                    </div>
+                                                    <a class="btn btn-icon btn-2 btn-primary btn-sm" href="{{route('contagem.show',$dado->id)}}">
+                                                        <span class="btn-inner--icon"><i class="fa fa-eye"></i></span>
+                                                        
+                                                    </a>
+                                                    <a class="btn btn-icon btn-2 btn-primary btn-sm" target="_blank" href="{{route('contagem.print',$dado->id)}}">
+                                                        <span class="btn-inner--icon"><i class="fa fa-print"></i></span>
+                                                        
+                                                    </a>
+                                                    <a class="btn btn-icon btn-2 btn-warning btn-sm" href="{{route('contagem.edit',$dado->id)}}">
+                                                        <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                                                        
+                                                    </a>
+                                                    <button class="btn btn-icon btn-2 btn-danger btn-sm btn-delete" data-link="{{route('contagem.destroy',$dado->id)}}">
+                                                        <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+                                                        
+                                                    </button>
+                                                   
                                                 </td>
                                             </tr>
                                             @endforeach    
@@ -80,5 +100,5 @@
     <link rel="stylesheet" href="{{mix('admin/tithe/tither/css/table.css')}}"/>
 @endpush
 @push('js')
-    <script src="{{mix('admin/tithe/tither/js/table.js')}}"></script>
+    <script src="{{mix('admin/contagem/js/table.js')}}"></script>
 @endpush

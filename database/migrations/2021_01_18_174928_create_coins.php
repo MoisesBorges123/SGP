@@ -15,11 +15,11 @@ class CreateCoins extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->integer('5');
-            $table->integer('10');
-            $table->integer('25');
-            $table->integer('50');
-            $table->integer('100');
+            $table->integer('m5');
+            $table->integer('m10');
+            $table->integer('m25');
+            $table->integer('m50');
+            $table->integer('m100');
             $table->timestamps();
         });
     }

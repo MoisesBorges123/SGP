@@ -72,7 +72,8 @@ mix
      * SCRIPTS CONTAGEM
      */
     .sass('resources/sass/contagem/form.scss','public/admin/contagem/css/')
-    .js('resources/js/contagem/form.js','public/admin/contagem/js/')
+    .js('resources/js/financial/count/form.js','public/admin/contagem/js/')
+    .js('resources/js/financial/count/table.js','public/admin/contagem/js/')
     /**
      * SCRIPTS ESTACIONAMENTO
      */

@@ -8,10 +8,10 @@ class Coin extends Model
 {
     //
     public $fillable =[
-        '5',
-        '10',
-        '25',
-        '50',
-        '100',        
+        'm5',
+        'm10',
+        'm25',
+        'm50',
+        'm100',        
     ];
 }

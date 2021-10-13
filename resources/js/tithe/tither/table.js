@@ -1,6 +1,5 @@
 const swal = require('sweetalert2');
 window._ = require('lodash');
-// @ts-ignore
 window.$ = window.jQuery = require('jquery');
 require('datatables.net-bs4');
 require('datatables.net-dt');

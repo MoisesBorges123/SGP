@@ -28813,10 +28813,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/contagem/form.js":
-/*!***************************************!*\
-  !*** ./resources/js/contagem/form.js ***!
-  \***************************************/
+/***/ "./resources/js/financial/count/form.js":
+/*!**********************************************!*\
+  !*** ./resources/js/financial/count/form.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28848,7 +28848,6 @@ $(document).on('click', '.btn_less', function () {
 });
 $(document).on('input', '.form-control-primary', function () {
   if ($(this).val() == '') {
-    $(this).val(0);
     total();
   }
 });
@@ -28892,20 +28891,23 @@ function total() {
   str_cheque = str_cheque.replace("/,/gi", '.');
   console.log(str_cheque);
   var cheque = parseFloat(str_cheque);
-  var total = moeda_05 * 0.05 + moeda_10 * 0.10 + moeda_25 * 0.25 + moeda_50 * 0.50 + moeda_100 * 1.00 + nota_2 * 2.00 + nota_5 * 5.00 + nota_10 * 10.00 + nota_20 * 20.00 + nota_50 * 50.00 + nota_100 * 100.00 + cheque;
-  $('#total').html('R$ ' + number_format(total, 2, ',', '.'));
+  var moedas = moeda_05 * 0.05 + moeda_10 * 0.10 + moeda_25 * 0.25 + moeda_50 * 0.50 + moeda_100 * 1.00;
+  var notas = nota_2 * 2.00 + nota_5 * 5.00 + nota_10 * 10.00 + nota_20 * 20.00 + nota_50 * 50.00 + nota_100 * 100.00 + cheque;
+  var total = moedas + notas;
+  ;
+  $('#total').html('Moedas: R$ ' + number_format(moedas, 2, ',', '.') + '<br>' + 'Notas: R$ ' + number_format(notas, 2, ',', '.') + '<br>' + 'Total: R$ ' + number_format(total, 2, ',', '.'));
 }
 
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** multi ./resources/js/contagem/form.js ***!
-  \*********************************************/
+/*!****************************************************!*\
+  !*** multi ./resources/js/financial/count/form.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\contagem\form.js */"./resources/js/contagem/form.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sgp\resources\js\financial\count\form.js */"./resources/js/financial/count/form.js");
 
 
 /***/ })

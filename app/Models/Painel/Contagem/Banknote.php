@@ -8,12 +8,12 @@ class Banknote extends Model
 {
     //
     public $fillable = [
-        '2',
-        '5',
-        '10',
-        '20',
-        '50',
-        '100',
-        'check'
+        'n2',
+        'n5',
+        'n10',
+        'n20',
+        'n50',
+        'n100',
+        'check_paper'
     ];
 }

@@ -36,9 +36,11 @@ class BankNotesController extends Controller
     }
 
    
-    public function update(Request $request, Banknote $banknote)
+    public static function update($request)
     {
-        //
+        $banknote = Banknote::find($request['id']);
+        return $banknote->update($request);
+
     }
 
     public function destroy(Banknote $banknote)

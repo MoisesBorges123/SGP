@@ -15,12 +15,12 @@ class CreateBanknotes extends Migration
     {
         Schema::create('banknotes', function (Blueprint $table) {
             $table->id();
-            $table->integer('2');
-            $table->integer('5');
-            $table->integer('10');
-            $table->integer('20');
-            $table->integer('50');
-            $table->integer('100');
+            $table->integer('n2');
+            $table->integer('n5');
+            $table->integer('n10');
+            $table->integer('n20');
+            $table->integer('n50');
+            $table->integer('n100');
             $table->float('check');
             $table->timestamps();
         });

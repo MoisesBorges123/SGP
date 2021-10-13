@@ -23,14 +23,16 @@
                         <div class="row">
                             
                             <div class="col-12">
-                                    <h3 class='text-center mb-3 '>Histórico</h3>
+                                    <h3 class='text-center mb-3 '>Caixa Detalhado</h3>
                                     <table class="table align-items-center table-flush table-full " >
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">Data</th>                                    
+                                                <th scope="col">Código</th>                                    
                                                 <th scope="col">Valor</th>                                    
                                                 <th scope="col">Descontos</th>
+                                                <th scope="col">Descrição</th>
                                                 <th scope="col">Resultado</th>
+                                                <th scope="col">Justificativa</th>
                                                 <th scope="col">Ações</th>                                                
                                             </tr>
                                         </thead>
@@ -38,13 +40,11 @@
                                             @foreach ($payments as $payment)
                                                 
                                                 <tr>
-                                                    <td>{{date('d/m/Y',strtotime($payment->date_payed))}}</td>
+                                                    <td>{{date('d/m/Y',strtotime($payment->payment_info->id))}}</td>
                                                     <td>R$ {{number_format($payment->cash,2,',','.')}}</td>
                                                     <td>R$ {{number_format($payment->discount,2,',','.')}}</td>
                                                     <td>R$ {{number_format(($payment->cash-$payment->discount),2,',','.')}}</td>
-                                                    <td>
-                                                        <a  href="{{route('cash-history.show',$payment->date_payed)}}"><i class='fas fa-eye'></i></a>
-                                                    </td>
+                                                    <td>Em breve</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

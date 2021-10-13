@@ -16,73 +16,21 @@ class ContagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $header = $this->header();
-        $title = 'Meus Controles';
-        $dadosdb = DB::table('contagem')
-        ->join('coins','coins.id','=','contagem.coin')
-        ->join('countcategor','countcategor.id','=','contagem.categor')
-        ->join('banknotes','banknotes.id','=','contagem.banknote')
-        ->where('contagem.referer','like',date('Y-m',time()).'-%')
-        ->select('countcategor.id as id_categor','contagem.id as id', 'countcategor.nome as nome','contagem.referer as referer',
-        'coins.5 as moeda_5','coins.10 as moeda_10','coins.25 as moeda_25','coins.50 as moeda_50','coins.100 as moeda_100',
-        'banknotes.2 as nota_2','banknotes.5 as nota_5', 'banknotes.check as check','banknotes.10 as nota_10','banknotes.20 as nota_20','banknotes.50 as nota_50','banknotes.100 as nota_100')
-        ->get();   
-        //dd($dadosdb);     
-        $dados =[];
-        foreach($dadosdb as $register){
-            $total = ($register->moeda_5*0.05)+
-                    ($register->moeda_10*0.10)+
-                    ($register->moeda_25*0.25)+
-                    ($register->moeda_50*0.50)+
-                    ($register->moeda_100*1.00)+
-                    ($register->nota_2*2.00)+
-                    ($register->nota_5*5.00)+
-                    ($register->nota_10*10.00)+
-                    ($register->nota_20*20.00)+
-                    ($register->nota_50*50.00)+
-                    ($register->nota_100*100.00)+
-                    ($register->check);
-            $dados[]=['id'=>$register->id,'categoria'=>$register->nome,'data'=>date('d/m/Y',strtotime($register->referer)),'valor'=>'R$ '.number_format($total,2,',','.')];
+        if(!empty($request->date_start) && !empty($request->date_end)){
+
+            $contagens = Contagem::where('referer','>=',date('Y-m-d',strtotime($request->date_start)))->where('referer','<=',date('Y-m-d',strtotime($request->date_end)))->get();
+        }else{
+
+            $contagens = Contagem::where('referer','like',date('Y-m',time()).'-%')->get();
         }
-        //dd($dados);     
-        return view('contagem.table',compact('title','header','dados'));
-    }
-    public function index2()
-    {
-        //
         $header = $this->header();
-        $title = 'Meus Controles';
-        $dadosdb = DB::table('contagem')
-        ->join('coins','coins.id','=','contagem.coin')
-        ->join('countcategor','countcategor.id','=','contagem.categor')
-        ->join('banknotes','banknotes.id','=','contagem.banknote')
-        ->where('contagem.referer','like',date('Y-m',time()).'-%')
-        ->select('countcategor.id as id_categor',
-        'coins.5 as moeda_5','coins.10 as moeda_10','coins.25 as moeda_25','coins.50 as moeda_50','coins.100 as moeda_100',
-        'banknotes.2 as nota_2','banknotes.5 as nota_5', 'banknotes.10 as nta_10','banknotes.20 as nota_20','banknotes.50 as nota_50','banknotes.100 as nota_100, *')
-        ->get();
-        dd($dadosdb);
-        $dados =[];
-        foreach($dadosdb as $register){
-            $total = ($register->moeda_5*0.05)+
-                    ($register->moeda_10*0.10)+
-                    ($register->moeda_25*0.25)+
-                    ($register->moeda_50*0.50)+
-                    ($register->moeda_100*1.00)+
-                    ($register->nota_2*2.00)+
-                    ($register->nota_5*5.00)+
-                    ($register->nota_10*10.00)+
-                    ($register->nota_20*20.00)+
-                    ($register->nota_50*50.00)+
-                    ($register->nota_100*100.00)+
-                    ($register->check);
-            $dados=['id'=>$register->id,'categoria'=>$register->nome,'data'=>date('d/m/Y',strtotime($register->referer)),'valor'=>$total];
-        }
-        return view('contagem.table',compact('title','header','dados'));
+        $title = 'Meus Controles';                                
+        return view('contagem.table',compact('title','header','contagens'));
     }
+  
 
     /**
      * Show the form for creating a new resource.
@@ -100,20 +48,20 @@ class ContagemController extends Controller
     {
         //
         $dadosCoins = array (
-            '5'=>$request->moeda_5,
-            '10'=>$request->moeda_10,
-            '25'=>$request->moeda_25,
-            '50'=>$request->moeda_50,
-            '100'=>$request->moeda_100,
+            'm5'=>$request->moeda_5,
+            'm10'=>$request->moeda_10,
+            'm25'=>$request->moeda_25,
+            'm50'=>$request->moeda_50,
+            'm100'=>$request->moeda_100,
         );        
         $dadosBankNotes  = array(
-            '2'=>$request->nota_2,
-            '5'=>$request->nota_5,
-            '10'=>$request->nota_10,
-            '20'=>$request->nota_20,
-            '50'=>$request->nota_50,
-            '100'=>$request->nota_100,
-            'check'=>floatval(str_replace(',','.',str_replace('.','',$request->cheque))),
+            'n2'=>$request->nota_2,
+            'n5'=>$request->nota_5,
+            'n10'=>$request->nota_10,
+            'n20'=>$request->nota_20,
+            'n50'=>$request->nota_50,
+            'n100'=>$request->nota_100,
+            'check_paper'=>floatval(str_replace(',','.',str_replace('.','',$request->cheque))),
         );
         $coin = CoinsController::store($dadosCoins);
         $banknote = BankNotesController::store($dadosBankNotes);
@@ -143,45 +91,271 @@ class ContagemController extends Controller
         
     }
 
-    public function show($contagem)
+    public function show(Contagem $contagem)
     {
-        $total_controlers = count($contagem['id']);
-        for($i=0;$total_controlers<$i;$i++){
-            DB::table('contagem')
-        ->join('coins','coins.id','=','contagem.coin')
-        ->join('countcategor','countcategor.id','=','contagem.categor')
-        ->join('banknotes','banknotes.id','=','contagem.banknote')
-        ->where('contagem.referer','like',date('Y-m',time()).'-%')
-        ->where('contagem.id',$contagem['id'][$i])
-        ->select('countcategor.id as id_categor','contagem.id as id', 'countcategor.nome as nome','contagem.referer as referer',
-        'coins.5 as moeda_5','coins.10 as moeda_10','coins.25 as moeda_25','coins.50 as moeda_50','coins.100 as moeda_100',
-        'banknotes.2 as nota_2','banknotes.5 as nota_5', 'banknotes.check as check','banknotes.10 as nota_10','banknotes.20 as nota_20','banknotes.50 as nota_50','banknotes.100 as nota_100')
-        ->get();
-            
+        
+        $title = $contagem->categors->nome.' - '.date('d/m/Y',strtotime($contagem->referer));
+        //$total = check;
+        return view('contagem.details',compact('title','contagem'));
+       
         $pdf = new Fpdf();       
         $pdf::AddPage('L','A4');
         $pdf::SetFont('Arial','B',13); 
         $pdf::Cell(140,10,utf8_decode('Controle de Numerários'),1,1,'C');        
         $pdf::Cell(140,10,utf8_decode('Mitra Diocesana de Teófilo Otoni'),1,1,'C');
-        }
         
-        $pdf::Output('I','Intenção - dia-hora missa',true);  
-        exit;
     }
 
     public function edit(Contagem $contagem)
     {
-        //
+        $title = 'Editar Controle';
+        $categor = DB::table('countcategor')->get();
+        return view('contagem.form',compact('title','categor','contagem'));
     }
 
     public function update(Request $request, Contagem $contagem)
     {
-        //
+        $dadosCoins = array (
+            'id'=>$contagem->coin,
+            'm5'=>$request->moeda_5,
+            'm10'=>$request->moeda_10,
+            'm25'=>$request->moeda_25,
+            'm50'=>$request->moeda_50,
+            'm100'=>$request->moeda_100,
+        );        
+        $dadosBankNotes  = array(
+            'id'=>$contagem->banknote,
+            'n2'=>$request->nota_2,
+            'n5'=>$request->nota_5,
+            'n10'=>$request->nota_10,
+            'n20'=>$request->nota_20,
+            'n50'=>$request->nota_50,
+            'n100'=>$request->nota_100,
+            'check_paper'=>floatval(str_replace(',','.',str_replace('.','',$request->cheque))),
+        );
+        $coin = CoinsController::update($dadosCoins);
+        $banknote = BankNotesController::update($dadosBankNotes);
+        if(!empty($coin) || !empty($banknote)){
+            notify()->success("Controle editado com sucesso. ;)");
+            return redirect()->route('contagem.index');
+        }else{
+            notify()->error("Ops! Algo deu errado :/");
+            return redirect()->back();
+
+        }
     }
 
     public function destroy(Contagem $contagem)
     {
-        //
+        return $contagem->delete();
+    }
+    public function generatePDF($var){       
+        
+        $contagem = Contagem::find($var);
+        
+        if(!empty($contagem)){
+            $title1 = utf8_decode("Controle de Numerários (".$contagem->categors->nome.")");
+            $title2 = utf8_decode('Mitra Diocesana de Teófilo Otoni - F17');            
+            $title3 = utf8_decode('Data: '.date('d/m/Y',strtotime($contagem->referer)));
+            $pdf = new Fpdf(); 
+            $pdf::setTitle('Controle ('.$contagem->categors->nome.') - '.date('d-m-Y',strtotime($contagem->referer)));
+            $pdf::AddPage('L','A4');
+            $pdf::SetAutoPageBreak(40);
+            $pdf::SetFont('Arial','B',14);
+            $pdf::setX(10);
+            $pdf::Cell(120,10,$title1,1,1,'C');
+            $pdf::Cell(120,10,$title2,1,1,'C');
+            $pdf::Cell(120,10,$title3,1,1,'C');
+            //Cabelçalho
+            $pdf::Cell(30,10,"Valor",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,"Quant.",1,0,'C');
+            $pdf::Cell(40,10,utf8_decode("(R$)"),1,1,'C');
+            //Linha1 (Moedas de 0,05)
+            $pdf::Cell(30,10,"R$ 0,05",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->coins->m5 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m5*0.05,2,',','.'),1,1,'C');
+            //Linha2 (Moeda de 0,10)
+            $pdf::Cell(30,10,"R$ 0,10",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->coins->m10 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m10*0.1,2,',','.'),1,1,'C');
+            //Linha3 (Moeda de 0,25)
+            $pdf::Cell(30,10,"R$ 0,25",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->coins->m25 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m25*0.1,2,',','.'),1,1,'C');
+            //Linha4 (Moeda de 0,50)
+            $pdf::Cell(30,10,"R$ 0,50",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->coins->m50 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m50*0.1,2,',','.'),1,1,'C');
+            //Linha5 (Moeda de 1,00)
+            $pdf::Cell(30,10,"R$ 1,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->coins->m100 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m100*0.1,2,',','.'),1,1,'C');
+            //Linha6 ( Nota de 2,00)
+            $pdf::Cell(30,10,"R$ 2,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n2 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n2*2,2,',','.'),1,1,'C');
+            //Linha7 ( Nota de 5,00)
+            $pdf::Cell(30,10,"R$ 5,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n5 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n5*5,2,',','.'),1,1,'C');
+            //Linha8 ( Nota de 10,00)
+            $pdf::Cell(30,10,"R$ 10,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n10 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n10*10,2,',','.'),1,1,'C');
+            //Linha9 ( Nota de 20,00)
+            $pdf::Cell(30,10,"R$ 20,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n20 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n20*20,2,',','.'),1,1,'C');
+            //Linha10 ( Nota de 50,00)
+            $pdf::Cell(30,10,"R$ 50,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n50 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n50*50,2,',','.'),1,1,'C');
+            //Linha10 ( Nota de 100,00)
+            $pdf::Cell(30,10,"R$ 100,00",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,str_pad($contagem->banknotes->n100 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n100*100,2,',','.'),1,1,'C');
+            //Linha10 ( Cheque )
+            $pdf::Cell(30,10,"Cheque",1,0,'C');
+            $pdf::Cell(10,10,"X",1,0,'C');
+            $pdf::Cell(40,10,'-',1,0,'C');
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->check_paper,2,',','.'),1,1,'C');
+            //Linha11 ( Total )
+            $pdf::Cell(80,10,"Total",1,0,'C');          
+            $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->total+$contagem->coins->total,2,',','.'),1,1,'C');
+            $pdf::setFont('Arial','',10);
+            $pdf::setFont('Arial','',9);
+            $pdf::Cell(120,5,"Impresso em ".date('d/m/Y - H:i:s',time()),0,0,'L');            
+            $pdf::Ln(2);
+            $pdf::Cell(120,10,"",'B',1,'L');
+            $pdf::Cell(120,10,"",'B',1,'L');
+            $pdf::Output('I','Controle - '.$contagem->categors->nome.'-'.date('d-m-Y',strtotime($contagem->referer)),true);
+
+            exit();
+        }
+    }
+    public function printByinterval(Request $request){
+        
+        
+        if(!empty($request->date_end) && !empty($request->date_start)){
+            $date_beginning = $request->date_start;
+            $date_end = $request->date_end;
+            $dados = Contagem::where('referer','>=',$date_beginning)->where('referer','<=',$date_end)->get();
+            $i =0;
+            
+            foreach($dados as $contagem){            
+                if(!empty($contagem)){
+                    $title1 = utf8_decode("Controle de Numerários (".$contagem->categors->nome.")");
+                    $title2 = utf8_decode('Mitra Diocesana de Teófilo Otoni - F17');            
+                    $title3 = utf8_decode('Data: '.date('d/m/Y',strtotime($contagem->referer)));
+                    $pdf = new Fpdf();       
+                    $pdf::SetFont('Arial','B',14);
+                    if($i%2 && $i!= 0){
+                        $pdf::setXY(133,10); 
+                        $pdf::SetMargins(133,10,0,0 );
+                    }else{
+                        $pdf::AddPage('L','A4');
+                        $pdf::SetMargins(10,10,0,0 );
+                        $pdf::setX(10);    
+                        $pdf::SetAutoPageBreak(40);
+                    }
+                    $pdf::Cell(120,10,$title1,1,1,'C');
+                    $pdf::Cell(120,10,$title2,1,1,'C');
+                    $pdf::Cell(120,10,$title3,1,1,'C');
+                    //Cabelçalho
+                    $pdf::Cell(30,10,"Valor",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,"Quant.",1,0,'C');
+                    $pdf::Cell(40,10,utf8_decode("(R$)"),1,1,'C');
+                    //Linha1 (Moedas de 0,05)
+                    $pdf::Cell(30,10,"R$ 0,05",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->coins->m5 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m5*0.05,2,',','.'),1,1,'C');
+                    //Linha2 (Moeda de 0,10)
+                    $pdf::Cell(30,10,"R$ 0,10",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->coins->m10 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m10*0.1,2,',','.'),1,1,'C');
+                    //Linha3 (Moeda de 0,25)
+                    $pdf::Cell(30,10,"R$ 0,25",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->coins->m25 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m25*0.1,2,',','.'),1,1,'C');
+                    //Linha4 (Moeda de 0,50)
+                    $pdf::Cell(30,10,"R$ 0,50",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->coins->m50 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m50*0.1,2,',','.'),1,1,'C');
+                    //Linha5 (Moeda de 1,00)
+                    $pdf::Cell(30,10,"R$ 1,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->coins->m100 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->coins->m100*0.1,2,',','.'),1,1,'C');
+                    //Linha6 ( Nota de 2,00)
+                    $pdf::Cell(30,10,"R$ 2,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n2 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n2*2,2,',','.'),1,1,'C');
+                    //Linha7 ( Nota de 5,00)
+                    $pdf::Cell(30,10,"R$ 5,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n5 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n5*5,2,',','.'),1,1,'C');
+                    //Linha8 ( Nota de 10,00)
+                    $pdf::Cell(30,10,"R$ 10,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n10 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n10*10,2,',','.'),1,1,'C');
+                    //Linha9 ( Nota de 20,00)
+                    $pdf::Cell(30,10,"R$ 20,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n20 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n20*20,2,',','.'),1,1,'C');
+                    //Linha10 ( Nota de 50,00)
+                    $pdf::Cell(30,10,"R$ 50,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n50 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n50*50,2,',','.'),1,1,'C');
+                    //Linha10 ( Nota de 100,00)
+                    $pdf::Cell(30,10,"R$ 100,00",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,str_pad($contagem->banknotes->n100 , 3 , '0' , STR_PAD_LEFT),1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->n100*100,2,',','.'),1,1,'C');
+                    //Linha10 ( Cheque )
+                    $pdf::Cell(30,10,"Cheque",1,0,'C');
+                    $pdf::Cell(10,10,"X",1,0,'C');
+                    $pdf::Cell(40,10,'-',1,0,'C');
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->check_paper,2,',','.'),1,1,'C');
+                    $pdf::setFont('Arial','',10);
+                    $pdf::Cell(120,5,"Impresso em ".date('d/m/Y - H:i:s',time()),0,1,'L');
+                    $pdf::Ln(2);
+                    $pdf::Cell(120,10,"",'B',1,'L');
+                    $pdf::Cell(120,10,"",'B',1,'L');
+                }
+                $i++;
+            }
+            $pdf::Output('I','Controles - de '.date('d-m-Y',strtotime($request->date_start)).' a '.date('d-m-Y',strtotime($request->date_end)),true);
+
+            exit();
+            
+        }else{
+            return "Não deu certo :(";
+        }
+        
+
+
     }
     private function header(){
         $totalIntentionsTODAY = DB::table('intention_scopes')->where('date_schedule','=',date('Y-m-d',time()))->count();        

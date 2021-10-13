@@ -71,6 +71,8 @@ Route::resource('/tithe/devolution','Painel\Tithe\Devolution\TitherDevolutionsCo
 Route::post('/address/seach/cep','Painel\Endereco\LogradouroController@search_cep')->name('search_cep');
 
 //Rotas Contagem
+Route::get('/contagem/interval/print','Painel\Contagem\ContagemController@printByinterval')->name('contagem.printByinterval');
+Route::get('/contagem/print/{id}','Painel\Contagem\ContagemController@generatePDF')->name('contagem.print');
 Route::resource('/contagem','Painel\Contagem\ContagemController');
 
 //Rotas Estacionamento
