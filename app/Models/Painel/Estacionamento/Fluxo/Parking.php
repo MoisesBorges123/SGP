@@ -18,12 +18,12 @@ class Parking extends Model
     ];
 
     public function payment_info(){
-        return $this->belongsTo(Payment::class);
+        return $this->belongsTo(Payment::class,'payment','id');
     }
     public function time_info(){
-        return $this->belongsTo(TimeParking::class);
+        return $this->belongsTo(TimeParking::class,'time','id');
     }
     public function vehicle_info(){
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class,'vehicle','id');
     }
 }

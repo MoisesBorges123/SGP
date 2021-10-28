@@ -2,6 +2,7 @@
 
 namespace App\Models\Painel\Estacionamento\Payment;
 
+use App\Models\Painel\Estacionamento\Fluxo\Parking;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -17,7 +18,9 @@ class Payment extends Model
         'modality',
         'date_payed'
     ];
+    public function park(){
+        return $this->hasOne(Parking::class,'payment','id');
+    }
     public $timestamps=true;
 
-    
 }

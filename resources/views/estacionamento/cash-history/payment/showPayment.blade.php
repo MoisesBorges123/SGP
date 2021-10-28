@@ -23,7 +23,7 @@
                         <div class="row">
                             
                             <div class="col-12">
-                                    <h3 class='text-center mb-3 '>Caixa Detalhado</h3>
+                                    <h3 class='text-center mb-3 '>Mais Informções</h3>
                                     <table class="table align-items-center table-flush table-full " >
                                         <thead class="thead-light">
                                             <tr>
@@ -47,10 +47,7 @@
                                                     <td>{{$payment->modality}}</td>
                                                     <td>{{date('H:i:s',strtotime($payment->created_at))}}</td>
                                                     <td>
-                                                        <button 
-                                                        data-owner='{{$payment->park->vehicle_info->person_info->nome ?? 'Não Cadastrado'}}'
-                                                        data-vehicle='{{$payment->park->vehicle_info->placa}}'
-                                                        ><i class='fas fa-eye'></i></button>
+                                                        <a  href="{{route('payment.show',$payment->id)}}"><i class='fas fa-eye'></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

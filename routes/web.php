@@ -85,6 +85,7 @@ Route::post('/time-parking','Painel\Estacionamento\Time\TimeParkingController@up
 Route::post('/parking/delete','Painel\Estacionamento\Fluxo\ParkingController@delete')->name('parking.delete');
 Route::resource('/parking','Painel\Estacionamento\Fluxo\ParkingController');
 Route::resource('/cash-history','Painel\Estacionamento\Payment\HistoryPaymentsContoller');
+Route::resource('/payment','Painel\Estacionamento\Payment\PaymentDetails');
 Route::resource('/monthly','Painel\Estacionamento\Monthly\MonthlyController');
 Route::get('/monthly-pay/printer','Painel\Estacionamento\Monthly\MonthlyPaysController@print')->name('monthly-pay.print');
 Route::resource('/monthly-pay','Painel\Estacionamento\Monthly\MonthlyPaysController');
