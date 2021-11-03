@@ -93,4 +93,6 @@ mix
 
     .sass('resources/sass/estacionamento/monthly/renew/form.scss','public/admin/estacionamento/monthly/renew/css/')
     .js('resources/js/estacionamento/monthly/renew/form.js','public/admin/estacionamento/monthly/renew/js/')
+
+    .js('resources/js/estacionamento/cash-history/details.js','public/admin/estacionamento/cash-history')
     .version();

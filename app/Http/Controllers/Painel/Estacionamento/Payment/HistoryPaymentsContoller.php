@@ -27,7 +27,7 @@ class HistoryPaymentsContoller extends Controller
     public function show($data){
         $payments = Payment::where('date_payed',$data)        
         ->get();
-        dd($payments[0]->park->vehicle_info);
+        //dd($payments[0]->park->vehicle_info);
         return view('estacionamento.cash-history.details',compact('payments'));
     }
 }

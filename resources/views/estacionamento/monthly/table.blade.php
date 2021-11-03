@@ -23,24 +23,26 @@
                     </div>
     
                     <div>
-                        <table class="table align-items-center table-flush table-full tables" id='certidoesTable'>
-                            <thead class="thead-light">
+                        <table class="table align-items-center table-flush table-full" id='certidoesTable'>
+                            <thead class="thead-light text-left">
                                 <tr>
+                                                                        
                                     <th scope="col">Responsável</th>                                    
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Placa</th>
                                     <th scope="col">Início</th>
                                     <th scope="col">Encerramento</th>
-                                    <th scope="col">Tempo P/ Encerramento</th>
+                                    <th scope="col">Temp. P/ Encer.</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class='text-left'>
                                 
                                 @foreach($dados as $dado)
                                     <tr>
+                                        
                                         <td class="budget">
-                                            <span>{{$dado['responsavel']}}</span>
+                                            <span data-tooltip="{{$dado['id']}}">{{$dado['responsavel']}}</span>
                                         </td>
                                         
                                         <td class="budget">
@@ -57,7 +59,7 @@
                                         </td>                                        
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="completion mr-2">{{$dado['intervalo']}} dias</span>
+                                                <span class="completion mr-2">{{$dado['intervalo']}}</span>
                                                 <div>
                                                     <div class="progress">
                                                         <div class="progress-bar {{$dado['classe']}}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{$dado['progresso']}}%;"></div>

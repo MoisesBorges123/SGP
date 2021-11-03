@@ -31,7 +31,8 @@ const myTable = $('#certidoesTable').DataTable({
     "ordering": true,
     'paging': true,
     "info": false,
-
+    "order": false,
+    "pageLength": 5,
     "language": {
         lengthMenu: "",
         zeroRecords: "Desculpe! Não há nenhum registro cadastrado.",

@@ -3,7 +3,7 @@
 namespace App\Models\Painel\Estacionamento\Vehicle;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Painel\Pessoa;
 class Vehicle extends Model
 {
     //

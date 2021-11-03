@@ -24,7 +24,7 @@
                             
                             <div class="col-12">
                                     <h3 class='text-center mb-3 '>Histórico</h3>
-                                    <table class="table align-items-center table-flush table-full " >
+                                    <table class="table align-items-center table-flush table-full text-center" >
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Data</th>                                    

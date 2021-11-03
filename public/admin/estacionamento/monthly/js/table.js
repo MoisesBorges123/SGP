@@ -50104,9 +50104,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var timepicki__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(timepicki__WEBPACK_IMPORTED_MODULE_5__);
 
 
+var _$$DataTable;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // @ts-ignore
 
@@ -50143,11 +50147,13 @@ var Toast = swal.mixin({
     toast.addEventListener('mouseleave', swal.resumeTimer);
   }
 });
-var myTable = $('#certidoesTable').DataTable({
+var myTable = $('#certidoesTable').DataTable((_$$DataTable = {
   "searching": true,
   "ordering": true,
   'paging': true,
   "info": false,
+  "order": false,
+  "pageLength": 5,
   "language": {
     lengthMenu: "",
     zeroRecords: "Desculpe! Não há nenhum registro cadastrado.",
@@ -50161,16 +50167,12 @@ var myTable = $('#certidoesTable').DataTable({
   },
   // @ts-ignore
   scrollX: "500px",
-  scrollCollapse: true,
-  pageLength: 50,
-  scroller: true,
-  "fnInitComplete": function fnInitComplete() {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
-  },
-  "fnDrawCallback": function fnDrawCallback(oSettings) {
-    var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
-  }
-});
+  scrollCollapse: true
+}, _defineProperty(_$$DataTable, "pageLength", 50), _defineProperty(_$$DataTable, "scroller", true), _defineProperty(_$$DataTable, "fnInitComplete", function fnInitComplete() {
+  var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
+}), _defineProperty(_$$DataTable, "fnDrawCallback", function fnDrawCallback(oSettings) {
+  var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_4__["default"]('.dataTables_scrollBody');
+}), _$$DataTable));
 $(document).on('click', '.print', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
   var dados, data;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {

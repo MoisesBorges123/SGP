@@ -135,8 +135,9 @@ class ParkingController extends Controller
         $dailyCashier = PaymentsController::show(date('Y-m-d',time()));
         $total_card1 = $dailyCashier->sum('value') - $dailyCashier->sum('discount');
         $total_card2 = sprintf("%02d",ParkingCar::all()->count());        
-        $total_card4 = sprintf("%02d",Monthly::all()->count());
-
+        $total_card4 = sprintf("%02d",Monthly::where('end','>',date('Y-m-d',time()))->count());
+        $motos = Monthly::where('end','>=',date('Y-m-d',time()))->where('typevehicle',2)->count();
+        $carros = Monthly::where('end','>=',date('Y-m-d',time()))->where('typevehicle',1)->count();
         $card =array(
             [
                 'headerText'=>'Faturamento do Dia',
@@ -173,7 +174,8 @@ class ParkingController extends Controller
                 'color'=>'bg-info',
                 'url'=>route('monthly.index'),
                 'identify'=>'avisos',
-                'footerText'=>'<a href="'.route('monthly.index').'" id="btn-detalhes-mensalista" class="btn btn-info btn-sm">Detalhes</a>'
+                'footerText'=>'<a href="'.route('monthly.index').'" id="btn-detalhes-mensalista" class="btn btn-info btn-sm">Detalhes</a>',
+                'footerNumber'=>'<span class="text-default">Carros <span id="num_car">'.$carros.'</span> / Motos <span id="num_motos">'.$motos.'</span></span>'
             ]           
             
         );

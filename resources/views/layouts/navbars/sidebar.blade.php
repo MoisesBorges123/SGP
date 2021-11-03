@@ -147,7 +147,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('cash-history.index') }}">
-                        <i class="ni ni-bus-front-12 text-primary"></i> <b class='text-primary'>{{ __('Histórioco Caixa') }}</b>
+                        <i class="fas fa-history text-primary"></i> <b class='text-primary'>{{ __('Histórioco Caixa') }}</b>
                     </a>
                 </li> 
 

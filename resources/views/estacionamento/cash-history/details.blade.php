@@ -24,7 +24,7 @@
                             
                             <div class="col-12">
                                     <h3 class='text-center mb-3 '>Caixa Detalhado</h3>
-                                    <table class="table align-items-center table-flush table-full " >
+                                    <table class="table align-items-center table-flush table-full text-center" >
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Código</th>                                    
@@ -46,11 +46,12 @@
                                                     <td>R$ {{number_format(($payment->value-$payment->discount),2,',','.')}}</td>
                                                     <td>{{$payment->modality}}</td>
                                                     <td>{{date('H:i:s',strtotime($payment->created_at))}}</td>
-                                                    <td>
-                                                        <button 
+                                                    <td class='text-center'>
+                                                        <span 
+                                                        class='btn-details'
                                                         data-owner='{{$payment->park->vehicle_info->person_info->nome ?? 'Não Cadastrado'}}'
-                                                        data-vehicle='{{$payment->park->vehicle_info->placa}}'
-                                                        ><i class='fas fa-eye'></i></button>
+                                                        data-vehicle='{{$payment->park->vehicle_info->placa}}'                                                        
+                                                        ><i class='fas fa-eye'></i></span>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -75,7 +76,7 @@
 @endsection
 
 @push('js')   
-    
+    <script src='{{mix('admin/estacionamento/cash-history/details.js')}}'></script>
 @endpush
 @push('css')
    <!-- <meta name="fetch-notice" content="{{ route('notice-intentions.index') }}">  
@@ -96,6 +97,9 @@
     <style>
         .col-12{
             margin-bottom: 20px;
+        }
+        .btn-details:hover{
+            cursor: pointer;
         }
     </style>
 @endpush

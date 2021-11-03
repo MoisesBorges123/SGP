@@ -55866,6 +55866,8 @@ function _fetchHeader() {
               $('#headerNumber2').html(response.card2);
               $('#headerNumber3').html(response.card3);
               $('#headerNumber4').html(response.card4);
+              $('#num_carros').html(response.carros);
+              $('#num_motos').html(response.motos);
             });
 
           case 2:

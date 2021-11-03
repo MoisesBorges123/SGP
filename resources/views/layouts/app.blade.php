@@ -26,6 +26,9 @@
                 height: 1%;
                 
             }
+            a:hover{
+                pointer:cursor;
+            }
         </style>
 
 @stack('css')

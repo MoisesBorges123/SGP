@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Painel\Estacionamento\Precos\TablePrice;
 use App\Models\Painel\Estacionamento\Precos\MotocyclePrice;
 use App\Models\Painel\Estacionamento\Precos\CarPrice;
+use App\Models\Painel\Estacionamento\Views\MonthlyActive;
 use App\Models\Painel\Estacionamento\Views\Monthly;
 use App\Models\Painel\Estacionamento\Views\ParkingCar;
 use App\Http\Controllers\Painel\Estacionamento\Payment\PaymentsController;
@@ -207,8 +208,13 @@ class FuncoesController extends Controller
         $dailyCashier = PaymentsController::show(date('Y-m-d',time()));
         $total_card1 = $dailyCashier->sum('value') - $dailyCashier->sum('discount');
         $total_card2 = sprintf("%02d",ParkingCar::all()->count());        
-        $total_card4 = sprintf("%02d",Monthly::all()->count());
+        $total_card4 = sprintf("%02d",MonthlyActive::count());
+
+        $motos = Monthly::where('end','>=',date('Y-m-d',time()))->where('typevehicle',2)->count();
+        $carros = Monthly::where('end','>=',date('Y-m-d',time()))->where('typevehicle',1)->count();
+
         $total_card3 = 0;
+        
         $carsParked = ParkingCar::all();
         foreach($carsParked as $dado){
             $values = FuncoesController::calc_estacionamento($dado);
@@ -221,7 +227,10 @@ class FuncoesController extends Controller
             'card2'=>$total_card2,
             'card3'=>'R$ '.number_format($total_card3,2,',','.'),
             'card4'=>$total_card4,
+            'motos'=>$motos,
+            'carros'=>$carros
         );
     }
+  
 
 }

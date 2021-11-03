@@ -7,22 +7,30 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PessoasController;
 use App\Models\Painel\Estacionamento\Fluxo\Parking;
 use App\Models\Painel\Estacionamento\Views\Monthly;
+use App\Models\Painel\Estacionamento\Views\MonthlyActive;
 use App\Http\Controllers\Painel\Estacionamento\Vehicles\VehiclesController;
 use App\Http\Controllers\Painel\Estacionamento\Time\TimeParkingController;
 use App\Http\Controllers\Painel\Estacionamento\Payment\PaymentsController;
+use App\Http\Controllers\Painel\Estacionamento\Suport\FuncoesController;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 
 class MonthlyController extends Controller
 {
  
+  
     public function index()
     {
         //
-        $monthlys = Monthly::all();
-        $dados=[];
+        $monthlys_inactives= Monthly::where('beginning','>',date('Y-m-d',strtotime('-60 days',time())))->where('end','<',date('Y-m-d',time()))->get();
+        $monthlys_actives= Monthly::where('end','>=',date('Y-m-d',time()))->orderBy('beginning','desc')->get();
         
-        foreach($monthlys as $monthly){
-            if($monthly->end > date('Y-m-d',time())){
+        
+        $dados=[];
+        foreach($monthlys_actives as $monthly){
+            $monthly_active= MonthlyActive::where('owner',$monthly->owner)->get();
+            if(count($monthly_active) > 0){              
+                
                 $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->orderBy('created_at','desc')->first();
                 $today = date('Y-m-d',time());
                 $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24));            
@@ -34,8 +42,9 @@ class MonthlyController extends Controller
                     $classe = 'bg-danger';
                 }
                 $progresso = (100*$intervalo) /30;
+                //dd($monthly->owner);
                 $dados[]= [
-                    'id'=>$monthly->parking_id,
+                    'id'=>$monthly->parking_id,                    
                     'responsavel'=>$monthly->owner,
                     'telefone'=>empty($telefone->telefone) ? '' :  $telefone->telefone,
                     'placa'=>$monthly->placa,
@@ -44,12 +53,45 @@ class MonthlyController extends Controller
                     'encerramento'=>date('d/m/Y',strtotime($monthly->end)),
                     'intervalo'=>$intervalo,
                     'classe'=>$classe,
-                    'progresso'=>$progresso
+                    'progresso'=>$progresso,
+                    
                 ];
+            }
                 
-            }
-            }
+                
+        }
         
+        foreach($monthlys_inactives as $monthly){
+            $monthly_active= MonthlyActive::where('owner',$monthly->owner)->get();
+            if(count($monthly_active) == 0){              
+                
+                $telefone = DB::table('telefone')->where('pessoa',$monthly->owner_id)->orderBy('created_at','desc')->first();
+                $today = date('Y-m-d',time());
+                $intervalo = (strtotime($monthly->end) - strtotime($today)) / ((60 * 60 * 24))*-1;            
+                $classe = 'bg-default';                          
+                $progresso =0;
+                //dd($monthly);
+                $dados[]= [
+                    'id'=>$monthly->parking_id,
+                    'responsavel'=>$monthly->owner,
+                    'telefone'=>empty($telefone->telefone) ? '' :  $telefone->telefone,
+                    'placa'=>$monthly->placa,
+                    'tipo_veiculo'=>$monthly->typevehicle == 1 ? 'Carro':'Moto',
+                    'inicio'=>date('d/m/Y',strtotime($monthly->beginning)),
+                    'encerramento'=>date('d/m/Y',strtotime($monthly->end)),
+                    'intervalo'=>'Ha '.number_format($intervalo,'0',',','.').' dias atrás.',
+                    'classe'=>$classe,
+                    'progresso'=>$progresso,
+                    
+                ];
+            }
+                
+                
+        }
+        
+           
+            //dd($dados);
+            
         return view('estacionamento.monthly.table',compact('dados'));
         
     }

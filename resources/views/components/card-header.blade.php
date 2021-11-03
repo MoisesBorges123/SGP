@@ -24,7 +24,7 @@
                 </div>
             </div>
             <p class="mt-3 mb-0 text-muted text-sm">
-            <span class="text-danger mr-2">{{$footerIcon ?? ''}} {{$footerNumber ?? ''}}</span>
+            <span class="text-danger mr-2">{{$footerIcon ?? ''}} {!! $footerNumber ?? ''!!}</span>
             <span class="text-nowrap">{!! $footerText ?? '' !!}</span>
             </p>
         </div>
