@@ -29,13 +29,22 @@
       />
     </div>
     <div class="col-9" v-if="intencao == 3" id="tempo_falecimento">
+      <label for="tempo_falecimento" class="form-control-label">Tempo falecimento</label>
       <input
         class="form-control"
-        type="text"
+        type="number"
         placeholder="Tempo de falecimento"
         name="tempo_falecimento"
         id="tempo_falecimento"
       />
+    </div>
+    <div class="col-3" v-if="intencao == 3">
+      <label for="typetime" class="form-control-label">Tempo em</label>
+      <select name="typetime" id="typetime" class="form-control" required="true">
+        <option value="">Mês/Ano</option>
+        <option value="a">anos</option>
+        <option value="m">meses</option>
+      </select>
     </div>
     <div class="col-12" v-if="intencao">
       <scheduling

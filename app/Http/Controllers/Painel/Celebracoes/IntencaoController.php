@@ -41,6 +41,7 @@ class IntencaoController extends Controller
         return view('celebrations.intentions.form',compact('header','intentionsToday'));
     }
     public function store(Request $request){
+        //dd($request->all());
        // dd($request->input('falecido'));
         if(!empty($request->input('falecido'))){
             $fn_people = new PessoasController;
@@ -55,7 +56,25 @@ class IntencaoController extends Controller
             $deceased = $fn_people->store($deadPerson);    
             $complement = $request->input('tempo_falecimento');
             $classification = $request->input('tipo_intencao');
-            $fn_scope = new ScopeController;            
+            $fn_scope = new ScopeController;
+            if(!empty($request->input('typetime'))){
+                if($request->input('typetime')=='a'){
+                    if($complement>1){
+                        $complement.=' anos';
+                    }else{
+                        $complement.=' ano';
+
+                    }
+                    
+                }else if($request->input('typetime')=='m'){
+                    if($complement>1){
+                        $complement.=' meses';
+                    }else{
+                        $complement.=' mes';
+
+                    }
+                }
+            }
             $escopo = array(                                
                 'date_schedule'=>$request->input('data_agendamento'),
                 'time_schedule'=>str_replace(' ','',$request->input('hora_agendamento')),
@@ -358,7 +377,7 @@ class IntencaoController extends Controller
                          $complement = !empty($value->complement) ? " - ".$value->complement." anos" : '';
                      }
                      else if($value->classification ==3){
-                         $complement = !empty($value->complement) ? " - ".$value->complement." anos de falecimento" : '';
+                         $complement = !empty($value->complement) ? " - ".$value->complement : '';
                      }
                      else{
                          $complement = !empty($value->complement) ? " - ".$value->complement : '';

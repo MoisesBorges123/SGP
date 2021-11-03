@@ -159,6 +159,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -1471,10 +1480,19 @@ var render = function() {
           "div",
           { staticClass: "col-9", attrs: { id: "tempo_falecimento" } },
           [
+            _c(
+              "label",
+              {
+                staticClass: "form-control-label",
+                attrs: { for: "tempo_falecimento" }
+              },
+              [_vm._v("Tempo falecimento")]
+            ),
+            _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
               attrs: {
-                type: "text",
+                type: "number",
                 placeholder: "Tempo de falecimento",
                 name: "tempo_falecimento",
                 id: "tempo_falecimento"
@@ -1482,6 +1500,18 @@ var render = function() {
             })
           ]
         )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.intencao == 3
+      ? _c("div", { staticClass: "col-3" }, [
+          _c(
+            "label",
+            { staticClass: "form-control-label", attrs: { for: "typetime" } },
+            [_vm._v("Tempo em")]
+          ),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
       : _vm._e(),
     _vm._v(" "),
     _vm.intencao
@@ -1527,7 +1557,27 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass: "form-control",
+        attrs: { name: "typetime", id: "typetime", required: "true" }
+      },
+      [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Mês/Ano")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "a" } }, [_vm._v("anos")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "m" } }, [_vm._v("meses")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

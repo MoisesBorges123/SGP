@@ -111,10 +111,10 @@ a.reset_time {
   vertical-align: -webkit-baseline-middle;
 }
 
-#tempo_falecimento input {
-  margin-top: 13%;
-  margin-left: 0px;
-}
+/*#tempo_falecimento input{
+    margin-top: 13%;
+    margin-left: 0px;    
+}*/
 
 .box-time {
   background: #6772e5 !important;
