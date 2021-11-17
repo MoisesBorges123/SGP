@@ -62,7 +62,7 @@
                                 
                                 <div class="col-6">                                    
                                     <label for="valor">Valor</label>
-                                    <input type="text" name='valor' id='id_valor' class='form-control' disabled='true' value="{{$dados->valor ?? ''}}">                                    
+                                    <input type="text" name='valor' id='id_valor' class='form-control' readonly value="{{$dados->valor ?? ''}}">                                    
                                     <input type="hidden" name='preco' id='id_preco' value="{{$dados->valor ?? ''}}">                                    
                                 </div>
                                 <div class="col-6">
@@ -72,7 +72,7 @@
                                 <!-- Campo apenas informativo para o usuário -->
                                 <div class="col-6 valor_pagar">
                                     <label for="valor">Valor a Pagar</label>
-                                    <input type="text" name='total' id='id_total' class='form-control' disabled='true' value="{{$dados->valor ?? ''}}">
+                                    <input type="text" name='total' id='id_total' class='form-control' readonly  value="{{$dados->valor ?? ''}}">
                                 </div>
                                 <div class="col-6 dinheiro">
                                     <label for="id_cash">Dinheiro</label>

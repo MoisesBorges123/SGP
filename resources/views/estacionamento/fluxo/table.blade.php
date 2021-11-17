@@ -7,7 +7,7 @@
     <div class="container-fluid mt--7">
         
         <div class="row">
-            <div class="col">
+            <div class="col-12">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row ">
@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-7">
                                     <h3 class='text-center mb-3 '>Carros Estacionados</h3>
-                                    <table class="table align-items-center table-flush table-full tables table-responsive" id='minha_tabela'>
+                                    <table class="table align-items-center table-flush table-full tables table-responsive fs-2" id='minha_tabela'>
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Carro</th>                                    

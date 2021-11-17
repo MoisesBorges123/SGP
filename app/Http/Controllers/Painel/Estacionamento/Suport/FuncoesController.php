@@ -16,7 +16,8 @@ class FuncoesController extends Controller
 {
     //Calcula Preço
     public static function calc_estacionamento($carro){
-            
+        //date_default_timezone_set('America/Sao_Paulo');
+
         //=============================================ENTRADAS=========================================||
         /*||*/    $hora_saida = empty($carro['hour_out']) ? date('H',time()) : intval($carro['hour_out']);/*||*/
         /*||*/    $min_saida = empty($carro['min_out']) ? date('i',time()) : intval($carro['min_out']);/*   ||*/

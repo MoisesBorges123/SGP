@@ -77,7 +77,7 @@ class MonthlyPaysController extends Controller
             $discount = !empty($request->discount) ? floatval(str_replace(',','.',str_replace('.','',$request->discount))) : 0;
             $justify = empty($request->justify) ? '' :  $request->justify;
             $value = floatval(str_replace(',','.',str_replace('.','',str_replace('R$ ','',$request->preco))));        
-
+            //dd($value);
             $timeParking=TimeParkingController::store(['date_in'=>$date_beginning,'date_out'=>date('Y-m-d',strtotime("+30 days",strtotime($date_beginning))), 'hour_out'=>23,'min_out'=>59]);
             $payment = PaymentsController::store(['modality'=>'Mensalidade','value'=>$value,'discount'=>$discount,'justify_discount'=>$justify,'table_price'=>$request->table_price,'payed'=>$cash,'date_payed'=>date('Y-m-d',time())]);
     
