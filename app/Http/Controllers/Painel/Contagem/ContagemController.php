@@ -234,7 +234,7 @@ class ContagemController extends Controller
             //Linha11 ( Total )
             $pdf::Cell(80,10,"Total",1,0,'C');          
             $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->total+$contagem->coins->total,2,',','.'),1,1,'C');
-            $pdf::setFont('Arial','',10);
+            //$pdf::setFont('Arial','',10);
             $pdf::setFont('Arial','',9);
             $pdf::Cell(120,5,"Impresso em ".date('d/m/Y - H:i:s',time()),0,0,'L');            
             $pdf::Ln(2);
@@ -338,7 +338,10 @@ class ContagemController extends Controller
                     $pdf::Cell(10,10,"X",1,0,'C');
                     $pdf::Cell(40,10,'-',1,0,'C');
                     $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->check_paper,2,',','.'),1,1,'C');
-                    $pdf::setFont('Arial','',10);
+                    //Linha11 ( Total )
+                    $pdf::Cell(80,10,"Total",1,0,'C');          
+                    $pdf::Cell(40,10,"R$ ".number_format($contagem->banknotes->total+$contagem->coins->total,2,',','.'),1,1,'C');
+                    $pdf::setFont('Arial','',9);
                     $pdf::Cell(120,5,"Impresso em ".date('d/m/Y - H:i:s',time()),0,1,'L');
                     $pdf::Ln(2);
                     $pdf::Cell(120,10,"",'B',1,'L');
