@@ -212,8 +212,9 @@ class TitherDevolutionsController extends Controller
         
         if(!empty($firstDevolution)){ // CASO EXISTA ALGUMA DEVOLUÇÃO
             $lastDevolution=$Devolutions[$totalRegister-1];
+            //dd($lastDevolution->year)
             $firstYear = $firstDevolution->year;
-            if(($lastDevolution->year) < ((date('Y',time())))){            
+            if(($lastDevolution->year) < ( (date('Y',time())) -1 ) ){            
                 $intervalo = (date('Y',time())) - ($lastDevolution->year) ;
             }else{
                 $intervalo = ($lastDevolution->year) - ($firstDevolution->year);
