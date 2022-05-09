@@ -40,7 +40,7 @@
     </div>
     <div class="col-3" v-if="intencao == 3">
       <label for="typetime" class="form-control-label">Tempo em</label>
-      <select name="typetime" id="typetime" class="form-control" required="true">
+      <select name="typetime" id="typetime" class="form-control">
         <option value="">Mês/Ano</option>
         <option value="a">anos</option>
         <option value="m">meses</option>
