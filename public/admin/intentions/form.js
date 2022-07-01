@@ -1566,7 +1566,7 @@ var staticRenderFns = [
       "select",
       {
         staticClass: "form-control",
-        attrs: { name: "typetime", id: "typetime", required: "true" }
+        attrs: { name: "typetime", id: "typetime", required: "false" }
       },
       [
         _c("option", { attrs: { value: "" } }, [_vm._v("Mês/Ano")]),

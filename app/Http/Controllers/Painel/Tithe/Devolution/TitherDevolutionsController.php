@@ -173,7 +173,7 @@ class TitherDevolutionsController extends Controller
                 'headerNumber'=>$onTither,
                 'bodyIcon'=>'<i class="ni ni-satisfied"></i>',
                 'color'=>'bg-warning',
-                'url'=>'',
+                'url'=>route('tither.actives'),
                 
                 
             ],
