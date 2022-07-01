@@ -12,7 +12,7 @@ class TithReportController extends Controller
 {
     public function actives(){
         $totalRegisterTither = DB::table('tithers')->get()->count();      
-        $tithers = DB::table('tithers')->get();
+        $tithers = DB::table('tithers')->orderBy('data_nascimento')->get();
         $offTither = 0;
         $pdf = new Fpdf();       
         $pdf::AddPage('P','A4');
