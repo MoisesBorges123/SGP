@@ -21,10 +21,11 @@ class MonthlyController extends Controller
   
     public function index()
     {
+        
         //
         $monthlys_inactives= Monthly::where('beginning','>',date('Y-m-d',strtotime('-60 days',time())))->where('end','<',date('Y-m-d',time()))->get();
+        //dd($monthlys_inactives);
         $monthlys_actives= Monthly::where('end','>=',date('Y-m-d',time()))->orderBy('beginning','desc')->get();
-        
         
         $dados=[];
         foreach($monthlys_actives as $monthly){

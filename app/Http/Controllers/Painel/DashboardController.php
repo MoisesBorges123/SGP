@@ -7,6 +7,7 @@ use App\Http\Controllers\Painel\Celebracoes\IntencaoController;
 use App\Models\Painel\Celevracoes\Intencao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+USE App\Models\Painel\Estacionamento\Views\MonthlyActive;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,7 @@ class DashboardController extends Controller
     }
     public function index(){
         $dados = array(
-            'intentions'=>$this->tableIntentions()
+            'mensalistas_ativos'=>MonthlyActive::where('day_left','<',7)->orderBy('day_left')->get()
         );
         
         return view('dashboard',compact('dados'));

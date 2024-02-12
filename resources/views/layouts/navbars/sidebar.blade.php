@@ -152,6 +152,7 @@
                 </li> 
 
             </ul>
+            {{--
             @if(auth()->user()->name != 'Estacionamento')
             <h6 class="navbar-heading text-muted">Registros</h6>
             
@@ -332,6 +333,7 @@
                 
             </ul>
             @endif
+            --}}
         </div>
     </div>
 </nav>

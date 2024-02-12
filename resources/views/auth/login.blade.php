@@ -6,32 +6,12 @@
     <div class="container mt--8 pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-3"><small>{{ __('Entrar com...') }}</small></div>
-                        <div class="btn-wrapper text-center">
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/facebook.png"></span>
-                                <span class="btn-inner--text">{{ __('Facebook') }}</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">{{ __('Google') }}</span>
-                            </a>
-                        </div>
-                    </div>
+                <div class="card bg-secondary shadow border-0">                    
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
-                            <small>
-                                <a href="{{ route('register') }}">{{ __('Registre-se ') }}</a> {{ __('ou Entre com suas credenciais:') }}
-                            </small>
+                        <div class="text-center text-muted mb-4"> 
+                            <h1>MB PARKING</h1>
                             <br>
-                            <!--
-                            <small>
-                                {{ __('Username') }} <strong>admin@argon.com</strong>
-                                {{ __('Password') }} <strong>secret</strong>
-                            </small>
-                        -->
+                           
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
@@ -77,7 +57,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
+                   {{-- <div class="col-6">
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-light">
                                 <small>{{ __('Esqueci minha senha?') }}</small>
@@ -88,7 +68,7 @@
                         <a href="{{ route('register') }}" class="text-light">
                             <small>{{ __('Registrar-se') }}</small>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

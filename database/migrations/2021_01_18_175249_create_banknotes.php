@@ -21,7 +21,7 @@ class CreateBanknotes extends Migration
             $table->integer('n20');
             $table->integer('n50');
             $table->integer('n100');
-            $table->float('check');
+            $table->float('check_paper');
             $table->timestamps();
         });
     }
